@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2017 Matt Harris <mdh34@users.noreply.github.com> -->
+<component type="desktop">
+  <id>com.github.mdh34.quickDocs.desktop</id>
+  <metadata_license>CC0</metadata_license>
+  <name>quickDocs</name>
+  <summary>Quickly Read Docs</summary>
+  <description>
+    <p>Quickly Read Valadoc, DevDocs and Github</p>
+  </description>
+</component>

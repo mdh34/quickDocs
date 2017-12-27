@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=quickDocs
+GenericName=quickDocs
+Comment=Read Docs
+Categories=Education;
+Exec=com.github.mdh34.quickDocs
+Icon=application-default-icon
+Terminal=false
+Type=Application
+X-GNOME-Gettext-Domain=quickDocs
+Keywords=docs;quickDocs;dev
