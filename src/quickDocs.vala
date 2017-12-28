@@ -43,14 +43,9 @@ int main(string[] args) {
         vala.load_uri("https://valadoc.org/");;
         stack.add_titled(vala, "vala", "Valadoc");
 
-
         var dev = new WebView();
         dev.load_uri("http://devdocs.io/");
         stack.add_titled(dev, "dev", "DevDocs");
-
-        var git = new WebView();
-        git.load_uri("https://github.com/");
-        stack.add_titled(git, "git", "GitHub");
 
         window.add(stack);
         window.show_all ();
