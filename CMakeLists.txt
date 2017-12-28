@@ -18,12 +18,15 @@
     set (RELEASE_NAME "")
     set (VERSION "0.1")
     set (VERSION_INFO "")
-
+    set (DEPS_PKG
+      gtk+-3.0
+      webkit2gtk-4.0
+    )
     # we're about to use pkgconfig to make sure dependencies are installed so let's find pkgconfig first
     find_package(PkgConfig)
 
     # now let's actually check for the required dependencies
-    pkg_check_modules(DEPS REQUIRED gtk+-3.0)
+    pkg_check_modules(DEPS REQUIRED ${DEPS_PKG})
 
     add_definitions(${DEPS_CFLAGS})
     link_libraries(${DEPS_LIBRARIES})
@@ -44,6 +47,7 @@
     # tell what libraries to use when compiling
     PACKAGES
         gtk+-3.0
+        webkit2gtk-4.0
     )
 
     # tell cmake what to call the executable we just made
