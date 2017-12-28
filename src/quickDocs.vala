@@ -21,39 +21,39 @@
 using Gtk;
 using WebKit;
 int main(string[] args) {
-  Gtk.init (ref args);
-  var x = 1000;
-  var y = 700;
-  var window = new Gtk.Window ();
-  var header = new HeaderBar();
-  header.set_show_close_button(true);
-  window.set_titlebar(header);
-  window.set_border_width (12);
-  window.set_position (WindowPosition.CENTER);
-  window.set_default_size (x, y);
-  window.destroy.connect (Gtk.main_quit);
-  var stack = new Stack();
-  stack.set_transition_type(StackTransitionType.SLIDE_LEFT_RIGHT);
+        Gtk.init (ref args);
+        var x = 1000;
+        var y = 700;
+        var window = new Gtk.Window ();
+        var header = new HeaderBar();
+        header.set_show_close_button(true);
+        window.set_titlebar(header);
+        window.set_border_width (12);
+        window.set_position (WindowPosition.CENTER);
+        window.set_default_size (x, y);
+        window.destroy.connect (Gtk.main_quit);
+        var stack = new Stack();
+        stack.set_transition_type(StackTransitionType.SLIDE_LEFT_RIGHT);
 
-  var stackSwitcher = new StackSwitcher();
-  stackSwitcher.set_stack(stack);
-  header.set_custom_title(stackSwitcher);
+        var stackSwitcher = new StackSwitcher();
+        stackSwitcher.set_stack(stack);
+        header.set_custom_title(stackSwitcher);
 
-  var vala = new WebView();
-  vala.load_uri("https://valadoc.org/");;
-  stack.add_titled(vala, "vala", "Valadoc");
+        var vala = new WebView();
+        vala.load_uri("https://valadoc.org/");;
+        stack.add_titled(vala, "vala", "Valadoc");
 
 
-  var dev = new WebView();
-  dev.load_uri("http://devdocs.io/");
-  stack.add_titled(dev, "dev", "DevDocs");
+        var dev = new WebView();
+        dev.load_uri("http://devdocs.io/");
+        stack.add_titled(dev, "dev", "DevDocs");
 
-  var git = new WebView();
-  git.load_uri("https://github.com/");
-  stack.add_titled(git, "git", "GitHub");
+        var git = new WebView();
+        git.load_uri("https://github.com/");
+        stack.add_titled(git, "git", "GitHub");
 
-  window.add(stack);
-  window.show_all ();
-  Gtk.main();
-  return 0;
- }
+        window.add(stack);
+        window.show_all ();
+        Gtk.main();
+        return 0;
+}
