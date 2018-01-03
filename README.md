@@ -1,10 +1,16 @@
 # quickDocs
-> Quickly read developer documentation for a variety of languages
 
-![Screenshot](https://imgur.com/1P74uzA.png)
+
+quickDocs is a simple, fast docs reader designed for elementary
+![Screenshot](https://imgur.com/tcgt86G.png)
+
+## Sources:
+ - Valadoc
+ - DevDocs
 
 ## Dependencies:
  - libwebkit2gtk-4.0-dev
+
 
 ## Installation:
 ```
