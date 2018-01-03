@@ -1,6 +1,7 @@
 # quickDocs
 > Quickly read developer documentation for a variety of languages
 
+![Screenshot](https://imgur.com/1P74uzA.png)
 
 ## Dependencies:
  - libwebkit2gtk-4.0-dev
