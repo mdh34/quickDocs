@@ -47,7 +47,7 @@ int main(string[] args) {
         dev.load_uri("http://devdocs.io/");
         stack.add_titled(dev, "dev", "DevDocs");
 
-        var back = new Button.with_label("Back");
+        var back = new Button.from_icon_name("go-previous-symbolic", Gtk.IconSize.LARGE_TOOLBAR);
         back.clicked.connect (() => {
           if (stack.get_visible_child_name() == "vala"){
             vala.go_back();
@@ -56,7 +56,7 @@ int main(string[] args) {
           }
           });
         header.add(back);
-        
+
         window.add(stack);
         window.show_all ();
         Gtk.main();
