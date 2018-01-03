@@ -57,6 +57,16 @@ int main(string[] args) {
           });
         header.add(back);
 
+        var forward = new Button.from_icon_name("go-next-symbolic", Gtk.IconSize.LARGE_TOOLBAR);
+        forward.clicked.connect (() => {
+          if (stack.get_visible_child_name() == "vala"){
+            vala.go_forward();
+          } else {
+            dev.go_forward();
+          }
+          });
+        header.add(forward);
+
         window.add(stack);
         window.show_all ();
         Gtk.main();
