@@ -47,6 +47,16 @@ int main(string[] args) {
         dev.load_uri("http://devdocs.io/");
         stack.add_titled(dev, "dev", "DevDocs");
 
+        var back = new Button.with_label("Back");
+        back.clicked.connect (() => {
+          if (stack.get_visible_child_name() == "vala"){
+            vala.go_back();
+          } else {
+            dev.go_back();
+          }
+          });
+        header.add(back);
+        
         window.add(stack);
         window.show_all ();
         Gtk.main();
