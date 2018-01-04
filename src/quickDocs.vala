@@ -47,7 +47,7 @@ int main(string[] args) {
         dev.load_uri("http://devdocs.io/");
         stack.add_titled(dev, "dev", "DevDocs");
 
-        var back = new Button.from_icon_name("go-previous-symbolic", Gtk.IconSize.LARGE_TOOLBAR);
+        var back = new Button.from_icon_name("go-previous-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         back.clicked.connect (() => {
           if (stack.get_visible_child_name() == "vala"){
             vala.go_back();
@@ -57,11 +57,11 @@ int main(string[] args) {
           });
         header.add(back);
 
-        var forward = new Button.from_icon_name("go-next-symbolic", Gtk.IconSize.LARGE_TOOLBAR);
+        var forward = new Button.from_icon_name("go-next-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         forward.clicked.connect (() => {
           if (stack.get_visible_child_name() == "vala"){
             vala.go_forward();
-          } else {
+          } else if (stack.get_visible_child_name() == "dev") {
             dev.go_forward();
           }
           });
