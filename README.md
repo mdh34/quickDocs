@@ -2,7 +2,7 @@
 
 
 quickDocs is a simple, fast docs reader designed for elementary
-![Screenshot](https://imgur.com/tcgt86G.png)
+![Screenshot](https://imgur.com/0t2mmmy.png)
 
 ## Sources:
  - Valadoc
