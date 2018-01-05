@@ -43,7 +43,26 @@ int main(string[] args) {
         vala.load_uri("https://valadoc.org/");;
         stack.add_titled(vala, "vala", "Valadoc");
 
-        var dev = new WebView();
+
+        var context = new WebContext();
+        var cookies = context.get_cookie_manager();
+        cookies.set_accept_policy(CookieAcceptPolicy.ALWAYS);
+
+
+        var path = (Environment.get_home_dir() + "/.config/com.github.mdh34.quickDocs/cookies");
+        var folder = (Environment.get_home_dir() + "/.config/com.github.mdh34.quickDocs/");
+        var file = File.new_for_path(folder);
+        if(!file.query_exists()){
+          try{
+            file.make_directory();
+          } catch(Error e){
+            print("Unable to create config directory");
+          }
+        }
+
+        cookies.set_persistent_storage(path, CookiePersistentStorage.SQLITE);
+
+        var dev = new WebView.with_context(context);
         dev.load_uri("http://devdocs.io/");
         stack.add_titled(dev, "dev", "DevDocs");
 
