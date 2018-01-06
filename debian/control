@@ -1,4 +1,4 @@
-Source: com.github.mdh34.quickDocs
+Source: com.github.mdh34.quickdocs
 Section: x11
 Priority: extra
 Maintainer: Matt Harris <mdh34@users.noreply.github.com>
@@ -9,7 +9,7 @@ Build-Depends: cmake (>= 2.8),
                valac (>= 0.16)
 Standards-Version: 3.9.3
 
-Package: com.github.mdh34.quickDocs
+Package: com.github.mdh34.quickdocs
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}, libwebkit2gtk-4.0
 Description: Quickly read developer docs
