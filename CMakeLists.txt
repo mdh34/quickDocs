@@ -14,7 +14,7 @@
     # what to call that directory where we install data too
     set (PKGDATADIR "${DATADIR}/com.github.mdh34.quickDocs")
 
-    set (EXEC_NAME "com.github.mdh34.quickDocs")
+    set (EXEC_NAME "com.github.mdh34.quickdocs")
     set (RELEASE_NAME "")
     set (VERSION "0.1")
     set (VERSION_INFO "")
@@ -61,7 +61,7 @@
     install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/48/com.github.mdh34.quickDocs.svg DESTINATION share/icons/hicolor/48x48/apps)
     install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/64/com.github.mdh34.quickDocs.svg DESTINATION share/icons/hicolor/64x64/apps)
     install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/128/com.github.mdh34.quickDocs.svg DESTINATION share/icons/hicolor/128x128/apps)
-    
+
     # install our .desktop file so the Applications menu will see it
     install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/com.github.mdh34.quickDocs.desktop DESTINATION ${DATADIR}/applications/)
 
