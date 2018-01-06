@@ -16,7 +16,7 @@
  * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301 USA
  *
- * Authored by: Matt Harris <mdh34@users.noreply.github.com>
+ * Authored by: Matt Harris <matth281@outlook.com>
  */
 using Gtk;
 using WebKit;
