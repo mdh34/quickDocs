@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=quickDocs
 GenericName=quickDocs
-Comment=Read Docs
+Comment=A fast developer docs reader that supports Valadoc and DevDocs
 Categories=Development;
 Exec=com.github.mdh34.quickDocs
 Icon=com.github.mdh34.quickDocs

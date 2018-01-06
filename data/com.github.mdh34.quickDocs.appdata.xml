@@ -4,8 +4,18 @@
   <id>com.github.mdh34.quickDocs.desktop</id>
   <metadata_license>CC0</metadata_license>
   <name>quickDocs</name>
-  <summary>Quickly Read Docs</summary>
+  <summary>Quickly Read Developer Docs</summary>
   <description>
-    <p>Simple, fast docs reader designed for elementary</p>
+    <p>A fast developer docs reader</p>
+    <p>Read developer docs from:</p>
+    <ul>
+      <li>Valadoc</li>
+      <li>DevDocs (Works offline)</li>
+    </ul>
   </description>
+  <custom>
+    <value key="x-appcenter-color-primary">#b972b7</value>
+    <value key="x-appcenter-color-primary-text">rgb(255, 255, 255)</value>
+    <value key="x-appcenter-suggested-price">2</value>
+  </custom>
 </component>
