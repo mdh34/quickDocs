@@ -2,9 +2,9 @@
 Name=quickDocs
 GenericName=quickDocs
 Comment=Read Docs
-Categories=Education;
+Categories=Development;
 Exec=com.github.mdh34.quickDocs
-Icon=application-default-icon
+Icon=com.github.mdh34.quickDocs
 Terminal=false
 Type=Application
 X-GNOME-Gettext-Domain=quickDocs

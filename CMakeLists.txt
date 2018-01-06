@@ -56,6 +56,12 @@
     # install the binaries we just made
     install (TARGETS ${EXEC_NAME} RUNTIME DESTINATION bin)
 
+    #install icons
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/32/com.github.mdh34.quickDocs.svg DESTINATION share/icons/hicolor/32x32/apps)
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/48/com.github.mdh34.quickDocs.svg DESTINATION share/icons/hicolor/48x48/apps)
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/64/com.github.mdh34.quickDocs.svg DESTINATION share/icons/hicolor/64x64/apps)
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/128/com.github.mdh34.quickDocs.svg DESTINATION share/icons/hicolor/128x128/apps)
+    
     # install our .desktop file so the Applications menu will see it
     install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/com.github.mdh34.quickDocs.desktop DESTINATION ${DATADIR}/applications/)
 
