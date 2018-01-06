@@ -1,12 +1,12 @@
 # quickDocs
 
 
-quickDocs is a simple, fast docs reader designed for elementary
+quickDocs is a developer docs reader designed for elementary
 ![Screenshot](https://imgur.com/0t2mmmy.png)
 
 ## Sources:
  - Valadoc
- - DevDocs
+ - DevDocs (supports viewing docs offline)
 
 ## Dependencies:
  - libwebkit2gtk-4.0-dev
