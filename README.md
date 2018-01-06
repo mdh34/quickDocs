@@ -1,4 +1,5 @@
-# quickDocs
+
+# quickDocs ![Icon](https://github.com/mdh34/quickDocs/raw/master/data/icons/64/com.github.mdh34.quickDocs.svg?sanitize=true)
 
 
 quickDocs is a developer docs reader designed for elementary
