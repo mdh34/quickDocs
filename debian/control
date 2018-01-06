@@ -13,3 +13,4 @@ Package: com.github.mdh34.quickdocs
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}, libwebkit2gtk-4.0
 Description: Quickly read developer docs
+  Allows quick reading of Valadoc and DevDocs
