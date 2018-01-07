@@ -1,5 +1,6 @@
-com.github.mdh34.quickdocs (0.1) xenial; urgency=low
+com.github.mdh34.quickdocs (1.0.0) xenial; urgency=low
 
-  * Initial Release.
+  * Initial Release
+  * Support for Valadoc and DevDocs
 
- -- Matt Harris <matth281@outlook.com>  Sat, 6 Jan 2017 13:23:00 +0000
+ -- Matt Harris <matth281@outlook.com>  Sun, 7 Jan 2017 12:00:00 +0000
