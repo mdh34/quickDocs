@@ -5,7 +5,7 @@
 ![build](https://travis-ci.org/mdh34/quickDocs.svg?branch=master)
 
 A fast developer docs reader
-![Screenshot](https://imgur.com/0t2mmmy.png)
+![Screenshot](https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-1.png)
 
 ## Sources:
  - Valadoc
