@@ -13,6 +13,20 @@
       <li>DevDocs (Works offline)</li>
     </ul>
   </description>
+  <provides>
+    <binary>com.github.mdh34.quickdocs</binary>
+  </provides>
+  <developer_name>Matt Harris</developer_name>
+  <url type="homepage">https://github.com/mdh34/quickDocs/</url>
+  <url type="bugtracker">https://github.com/mdh34/quickDocs/issues</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-1.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-2.png</image>
+    </screenshot>
+  </screenshots>
   <custom>
     <value key="x-appcenter-color-primary">#b972b7</value>
     <value key="x-appcenter-color-primary-text">rgb(255, 255, 255)</value>
