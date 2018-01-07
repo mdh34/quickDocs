@@ -20,6 +20,22 @@
  */
 using Gtk;
 using WebKit;
+
+void set_cookies (CookieManager cookies){
+    var path = (Environment.get_home_dir () + "/.config/com.github.mdh34.quickdocs/cookies");
+    var folder = (Environment.get_home_dir () + "/.config/com.github.mdh34.quickdocs/");
+    var file = File.new_for_path (folder);
+    if (!file.query_exists ()){
+        try{
+            file.make_directory ();
+        } catch (Error e){
+            print("Unable to create config directory");
+            return;
+        }
+    }
+    cookies.set_accept_policy (CookieAcceptPolicy.ALWAYS);
+    cookies.set_persistent_storage (path, CookiePersistentStorage.SQLITE);
+}
 int main(string[] args) {
     Gtk.init (ref args);
     var x = 1000;
@@ -39,28 +55,13 @@ int main(string[] args) {
     stack_switcher.set_stack (stack);
     header.set_custom_title (stack_switcher);
 
+    var context = new WebContext ();
+    var cookies = context.get_cookie_manager ();
+    set_cookies (cookies);
+
     var vala = new WebView ();
     vala.load_uri ("https://valadoc.org/");;
     stack.add_titled (vala, "vala", "Valadoc");
-
-
-    var context = new WebContext ();
-    var cookies = context.get_cookie_manager ();
-    cookies.set_accept_policy (CookieAcceptPolicy.ALWAYS);
-
-
-    var path = (Environment.get_home_dir () + "/.config/com.github.mdh34.quickdocs/cookies");
-    var folder = (Environment.get_home_dir () + "/.config/com.github.mdh34.quickdocs/");
-    var file = File.new_for_path (folder);
-    if (!file.query_exists ()){
-        try{
-            file.make_directory ();
-        } catch (Error e){
-            print("Unable to create config directory");
-        }
-    }
-
-    cookies.set_persistent_storage (path, CookiePersistentStorage.SQLITE);
 
     var dev = new WebView.with_context (context);
     dev.load_uri ("http://devdocs.io/");
