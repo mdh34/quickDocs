@@ -1,5 +1,5 @@
 # project name
-    project (com.github.mdh34.quickDocs)
+    project (com.github.mdh34.quickdocs)
 
     # the oldest stable cmake version we support
     cmake_minimum_required (VERSION 2.6)
@@ -12,7 +12,7 @@
     set (DATADIR "${CMAKE_INSTALL_PREFIX}/share")
 
     # what to call that directory where we install data too
-    set (PKGDATADIR "${DATADIR}/com.github.mdh34.quickDocs")
+    set (PKGDATADIR "${DATADIR}/com.github.mdh34.quickdocs")
 
     set (EXEC_NAME "com.github.mdh34.quickdocs")
     set (RELEASE_NAME "")
@@ -57,13 +57,13 @@
     install (TARGETS ${EXEC_NAME} RUNTIME DESTINATION bin)
 
     #install icons
-    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/32/com.github.mdh34.quickDocs.svg DESTINATION share/icons/hicolor/32x32/apps)
-    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/48/com.github.mdh34.quickDocs.svg DESTINATION share/icons/hicolor/48x48/apps)
-    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/64/com.github.mdh34.quickDocs.svg DESTINATION share/icons/hicolor/64x64/apps)
-    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/128/com.github.mdh34.quickDocs.svg DESTINATION share/icons/hicolor/128x128/apps)
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/32/com.github.mdh34.quickdocs.svg DESTINATION share/icons/hicolor/32x32/apps)
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/48/com.github.mdh34.quickdocs.svg DESTINATION share/icons/hicolor/48x48/apps)
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/64/com.github.mdh34.quickdocs.svg DESTINATION share/icons/hicolor/64x64/apps)
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/128/com.github.mdh34.quickdocs.svg DESTINATION share/icons/hicolor/128x128/apps)
 
     # install our .desktop file so the Applications menu will see it
-    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/com.github.mdh34.quickDocs.desktop DESTINATION ${DATADIR}/applications/)
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/com.github.mdh34.quickdocs.desktop DESTINATION ${DATADIR}/applications/)
 
     # install our .appdata.xml file so AppCenter will see it
-    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/com.github.mdh34.quickDocs.appdata.xml DESTINATION ${DATADIR}/metainfo/)
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/com.github.mdh34.quickdocs.appdata.xml DESTINATION ${DATADIR}/metainfo/)

@@ -1,5 +1,5 @@
 
-# quickDocs ![Icon](https://github.com/mdh34/quickDocs/raw/master/data/icons/64/com.github.mdh34.quickDocs.svg?sanitize=true)
+# quickDocs ![Icon](https://github.com/mdh34/quickDocs/raw/master/data/icons/64/com.github.mdh34.quickdocs.svg?sanitize=true)
 
 
 ![build](https://travis-ci.org/mdh34/quickDocs.svg?branch=master)

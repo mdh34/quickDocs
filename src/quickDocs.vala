@@ -49,8 +49,8 @@ int main(string[] args) {
     cookies.set_accept_policy (CookieAcceptPolicy.ALWAYS);
 
 
-    var path = (Environment.get_home_dir () + "/.config/com.github.mdh34.quickDocs/cookies");
-    var folder = (Environment.get_home_dir () + "/.config/com.github.mdh34.quickDocs/");
+    var path = (Environment.get_home_dir () + "/.config/com.github.mdh34.quickdocs/cookies");
+    var folder = (Environment.get_home_dir () + "/.config/com.github.mdh34.quickdocs/");
     var file = File.new_for_path (folder);
     if (!file.query_exists ()){
         try{
