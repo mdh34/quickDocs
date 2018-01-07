@@ -29,13 +29,14 @@ void set_cookies (CookieManager cookies){
         try{
             file.make_directory ();
         } catch (Error e){
-            print("Unable to create config directory");
+            print ("Unable to create config directory");
             return;
         }
     }
     cookies.set_accept_policy (CookieAcceptPolicy.ALWAYS);
     cookies.set_persistent_storage (path, CookiePersistentStorage.SQLITE);
 }
+
 int main(string[] args) {
     Gtk.init (ref args);
     var x = 1000;
