@@ -72,7 +72,7 @@ int main(string[] args) {
     back.clicked.connect (() => {
         if (stack.get_visible_child_name () == "vala"){
             vala.go_back ();
-        } else {
+        } else if (stack.get_visible_child_name () == "dev") {
             dev.go_back ();
         }
     });
