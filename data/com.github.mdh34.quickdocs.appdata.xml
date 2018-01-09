@@ -20,6 +20,19 @@
   <developer_name>Matt Harris</developer_name>
   <url type="homepage">https://github.com/mdh34/quickDocs</url>
   <url type="bugtracker">https://github.com/mdh34/quickDocs/issues</url>
+  <releases>
+    <release version="1.0.4" date="2018-01-09">
+      <description>
+        <p>Initial Release</p>
+        <ul>
+          <li>Support for Valadoc</li>
+          <li>Support for DevDocs</li>
+          <li>New Icon!</li>
+          <li>Fix some AppCenter issues</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-1.png</image>
@@ -33,16 +46,4 @@
     <value key="x-appcenter-color-primary-text">rgb(255, 255, 255)</value>
     <value key="x-appcenter-suggested-price">2</value>
   </custom>
-  <releases>
-    <release version="1.0.3" date="2018-01-09">
-      <description>
-        <p>Initial Release</p>
-        <ul>
-          <li>Support for Valadoc</li>
-          <li>Support for DevDocs</li>
-          <li>New Icon!</li>
-          <li>Fix some AppCenter issues</li>
-        </ul>
-      </description>
-    </release>
 </component>
