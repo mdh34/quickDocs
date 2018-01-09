@@ -1,4 +1,4 @@
-com.github.mdh34.quickdocs (1.0.2) xenial; urgency=low
+com.github.mdh34.quickdocs (1.0.3) xenial; urgency=low
 
   * Initial Release
   * Support for Valadoc and DevDocs
