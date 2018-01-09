@@ -8,4 +8,4 @@ Icon=com.github.mdh34.quickdocs
 Terminal=false
 Type=Application
 X-GNOME-Gettext-Domain=quickDocs
-Keywords=docs;quickDocs;dev
+Keywords=docs;quickDocs;dev;
