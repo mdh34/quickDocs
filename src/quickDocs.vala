@@ -38,13 +38,13 @@ void set_cookies (CookieManager cookies){
 }
 
 void toggle_theme (bool dark){
-  var settings = Gtk.Settings.get_default ();
-  if (dark) {
-    settings.set ("gtk-application-prefer-dark-theme", false);
-  }
-  else {
-    settings.set ("gtk-application-prefer-dark-theme", true);
-  }
+    var settings = Gtk.Settings.get_default ();
+    if (dark) {
+        settings.set ("gtk-application-prefer-dark-theme", false);
+    }
+    else {
+        settings.set ("gtk-application-prefer-dark-theme", true);
+    }
 }
 
 int main(string[] args) {
