@@ -37,6 +37,16 @@ void set_cookies (CookieManager cookies){
     cookies.set_persistent_storage (path, CookiePersistentStorage.SQLITE);
 }
 
+void toggle_theme (bool dark){
+  var settings = Gtk.Settings.get_default ();
+  if (dark) {
+    settings.set ("gtk-application-prefer-dark-theme", false);
+  }
+  else {
+    settings.set ("gtk-application-prefer-dark-theme", true);
+  }
+}
+
 int main(string[] args) {
     Gtk.init (ref args);
     var x = 1000;
@@ -56,6 +66,19 @@ int main(string[] args) {
     stack_switcher.set_stack (stack);
     header.set_custom_title (stack_switcher);
 
+    var dark = false;
+    var theme_button = new Button.from_icon_name ("weather-few-clouds-symbolic");
+    theme_button.clicked.connect( () => {
+      toggle_theme (dark);
+      if (dark == true){
+        dark = false;
+      }
+      else {
+        dark = true;
+      }
+    });
+
+    header.pack_end(theme_button);
     var context = new WebContext ();
     var cookies = context.get_cookie_manager ();
     set_cookies (cookies);
