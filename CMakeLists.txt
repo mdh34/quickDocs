@@ -64,6 +64,9 @@
     install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/64/com.github.mdh34.quickdocs.svg DESTINATION share/icons/hicolor/64x64/apps)
     install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/icons/128/com.github.mdh34.quickdocs.svg DESTINATION share/icons/hicolor/128x128/apps)
 
+    # install gschema
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/com.github.mdh34.quickdocs.gschema.xml DESTINATION ${DATADIR}/glib-2.0/schemas/)
+    install (CODE "execute_process (COMMAND glib-compile-schemas ${DATADIR}/glib-2.0/schemas/)")
     # install our .desktop file so the Applications menu will see it
     install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/com.github.mdh34.quickdocs.desktop DESTINATION ${DATADIR}/applications/)
 

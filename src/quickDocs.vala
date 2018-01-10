@@ -36,14 +36,29 @@ void set_cookies (CookieManager cookies){
     cookies.set_accept_policy (CookieAcceptPolicy.ALWAYS);
     cookies.set_persistent_storage (path, CookiePersistentStorage.SQLITE);
 }
-
-void toggle_theme (bool dark){
-    var settings = Gtk.Settings.get_default ();
-    if (dark) {
-        settings.set ("gtk-application-prefer-dark-theme", false);
+void init_theme (){
+    var window_settings = Gtk.Settings.get_default ();
+    var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
+    var dark = user_settings.get_int ("dark");
+    if (dark == 1) {
+        window_settings.set ("gtk-application-prefer-dark-theme", true);
     }
     else {
-        settings.set ("gtk-application-prefer-dark-theme", true);
+        window_settings.set ("gtk-application-prefer-dark-theme", false);
+    }
+}
+
+void toggle_theme (){
+    var window_settings = Gtk.Settings.get_default ();
+    var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
+    var dark = user_settings.get_int ("dark");
+    if (dark == 1) {
+        window_settings.set ("gtk-application-prefer-dark-theme", false);
+        user_settings.set_int ("dark", 0);
+    }
+    else {
+        window_settings.set ("gtk-application-prefer-dark-theme", true);
+        user_settings.set_int ("dark", 1);
     }
 }
 
@@ -66,16 +81,9 @@ int main(string[] args) {
     stack_switcher.set_stack (stack);
     header.set_custom_title (stack_switcher);
 
-    var dark = false;
     var theme_button = new Button.from_icon_name ("weather-few-clouds-symbolic");
-    theme_button.clicked.connect( () => {
-      toggle_theme (dark);
-      if (dark == true){
-        dark = false;
-      }
-      else {
-        dark = true;
-      }
+    theme_button.clicked.connect(() => {
+        toggle_theme ();
     });
 
     header.pack_end(theme_button);
@@ -112,6 +120,7 @@ int main(string[] args) {
     header.add (forward);
 
     window.add (stack);
+    init_theme();
     window.show_all ();
     Gtk.main ();
     return 0;

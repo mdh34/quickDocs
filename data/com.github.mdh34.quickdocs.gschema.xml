@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema path="/com/github/mdh34/quickdocs/"
+  id="com.github.mdh34.quickdocs"
+  gettext-domain="com.github.mdh34.quickdocs">
+    <key name="dark" type="i">
+      <default>0</default>
+      <summary>Dark Mode</summary>
+      <description>Sets dark mode status</description>
+    </key>
+  </schema>
+</schemalist>
