@@ -21,6 +21,18 @@
 using Gtk;
 using WebKit;
 
+void init_theme (){
+    var window_settings = Gtk.Settings.get_default ();
+    var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
+    var dark = user_settings.get_int ("dark");
+    if (dark == 1) {
+        window_settings.set ("gtk-application-prefer-dark-theme", true);
+    }
+    else {
+        window_settings.set ("gtk-application-prefer-dark-theme", false);
+    }
+}
+
 void set_cookies (CookieManager cookies){
     var path = (Environment.get_home_dir () + "/.config/com.github.mdh34.quickdocs/cookies");
     var folder = (Environment.get_home_dir () + "/.config/com.github.mdh34.quickdocs/");
@@ -36,16 +48,11 @@ void set_cookies (CookieManager cookies){
     cookies.set_accept_policy (CookieAcceptPolicy.ALWAYS);
     cookies.set_persistent_storage (path, CookiePersistentStorage.SQLITE);
 }
-void init_theme (){
-    var window_settings = Gtk.Settings.get_default ();
+
+void set_tab (Stack stack){
     var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
-    var dark = user_settings.get_int ("dark");
-    if (dark == 1) {
-        window_settings.set ("gtk-application-prefer-dark-theme", true);
-    }
-    else {
-        window_settings.set ("gtk-application-prefer-dark-theme", false);
-    }
+    var tab = user_settings.get_string ("tab");
+    stack.set_visible_child_name (tab);
 }
 
 void toggle_theme (){
@@ -62,11 +69,6 @@ void toggle_theme (){
     }
 }
 
-void set_tab (Stack stack){
-    var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
-    var tab = user_settings.get_string ("tab");
-    stack.set_visible_child_name(tab);
-}
 int main(string[] args) {
     Gtk.init (ref args);
     var x = 1000;
@@ -133,7 +135,7 @@ int main(string[] args) {
     window.add (stack);
     init_theme();
     window.show_all ();
-    set_tab(stack);
+    set_tab (stack);
     Gtk.main ();
     return 0;
 }
