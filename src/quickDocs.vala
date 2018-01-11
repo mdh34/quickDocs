@@ -62,6 +62,11 @@ void toggle_theme (){
     }
 }
 
+void set_tab (Stack stack){
+    var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
+    var tab = user_settings.get_string ("tab");
+    stack.set_visible_child_name(tab);
+}
 int main(string[] args) {
     Gtk.init (ref args);
     var x = 1000;
@@ -73,8 +78,14 @@ int main(string[] args) {
     window.set_border_width (12);
     window.set_position (WindowPosition.CENTER);
     window.set_default_size (x, y);
-    window.destroy.connect (Gtk.main_quit);
     var stack = new Stack ();
+
+    window.destroy.connect (() => {
+      var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
+      user_settings.set_string ("tab", stack.get_visible_child_name());
+      Gtk.main_quit ();
+    });
+
     stack.set_transition_type (StackTransitionType.SLIDE_LEFT_RIGHT);
 
     var stack_switcher = new StackSwitcher ();
@@ -122,6 +133,7 @@ int main(string[] args) {
     window.add (stack);
     init_theme();
     window.show_all ();
+    set_tab(stack);
     Gtk.main ();
     return 0;
 }

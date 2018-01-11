@@ -8,5 +8,10 @@
       <summary>Dark Mode</summary>
       <description>Sets dark mode status</description>
     </key>
+    <key name="tab" type="s">
+      <default>"vala"</default>
+      <summary>Last opened tab</summary>
+      <description>Saves the last opened tab</description>
+    </key>
   </schema>
 </schemalist>
