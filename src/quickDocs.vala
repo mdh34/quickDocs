@@ -74,7 +74,7 @@ void toggle_theme (WebView view){
     if (dark == 1) {
         window_settings.set ("gtk-application-prefer-dark-theme", false);
         user_settings.set_int ("dark", 0);
-        view.run_javascript ("document.cookie = 'dark=0';", null);
+        view.run_javascript ("document.cookie = 'dark=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';", null);
         view.reload_bypass_cache ();
     }
     else {
