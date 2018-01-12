@@ -67,17 +67,21 @@ void set_tab (Stack stack){
     stack.set_visible_child_name (tab);
 }
 
-void toggle_theme (){
+void toggle_theme (WebView view){
     var window_settings = Gtk.Settings.get_default ();
     var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
     var dark = user_settings.get_int ("dark");
     if (dark == 1) {
         window_settings.set ("gtk-application-prefer-dark-theme", false);
         user_settings.set_int ("dark", 0);
+        view.run_javascript ("document.cookie = 'dark=0';", null);
+        view.reload_bypass_cache ();
     }
     else {
         window_settings.set ("gtk-application-prefer-dark-theme", true);
         user_settings.set_int ("dark", 1);
+        view.run_javascript ("document.cookie = 'dark=1';", null);
+        view.reload_bypass_cache ();
     }
 }
 
@@ -106,12 +110,6 @@ int main(string[] args) {
     stack_switcher.set_stack (stack);
     header.set_custom_title (stack_switcher);
 
-    var theme_button = new Button.from_icon_name ("weather-few-clouds-symbolic");
-    theme_button.clicked.connect(() => {
-        toggle_theme ();
-    });
-
-    header.pack_end(theme_button);
     var context = new WebContext ();
     var cookies = context.get_cookie_manager ();
     set_cookies (cookies);
@@ -144,6 +142,12 @@ int main(string[] args) {
         }
     });
     header.add (forward);
+
+    var theme_button = new Button.from_icon_name ("weather-few-clouds-symbolic");
+    theme_button.clicked.connect(() => {
+        toggle_theme (dev);
+    });
+    header.pack_end(theme_button);
 
     window.add (stack);
     init_theme();
