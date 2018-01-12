@@ -21,6 +21,18 @@
 using Gtk;
 using WebKit;
 
+void set_appcache (WebView view){
+    var host = "elementary.io";
+    var settings = view.get_settings ();
+    try {
+      var resolve = Resolver.get_default ();
+      resolve.lookup_by_name (host, null);
+      settings.enable_offline_web_application_cache = false;
+    } catch (Error e) {
+      print("Using application cache");
+    }
+}
+
 void init_theme (){
     var window_settings = Gtk.Settings.get_default ();
     var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
@@ -109,6 +121,7 @@ int main(string[] args) {
     stack.add_titled (vala, "vala", "Valadoc");
 
     var dev = new WebView.with_context (context);
+    set_appcache(dev);
     dev.load_uri ("http://devdocs.io/");
     stack.add_titled (dev, "dev", "DevDocs");
 
