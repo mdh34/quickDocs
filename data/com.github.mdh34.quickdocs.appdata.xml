@@ -21,6 +21,15 @@
   <url type="homepage">https://github.com/mdh34/quickDocs</url>
   <url type="bugtracker">https://github.com/mdh34/quickDocs/issues</url>
   <releases>
+    <release version="1.1.0" date="2018-01-13">
+      <description>
+        <p>1.1.0</p>
+        <ul>
+          <li>New dark mode support!</li>
+          <li>quickDocs remembers which tab you were last using</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.4" date="2018-01-09">
       <description>
         <p>Initial Release</p>

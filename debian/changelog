@@ -1,3 +1,9 @@
+com.github.mdh34.quickdocs (1.1.0) xenial; urgency=low
+
+  * New mode support!
+  * quickDocs remembers which tab you were last using
+ -- Matt Harris <matth281@outlook.com>  Sat, 13 Jan 2017 09:00:00 +0000
+
 com.github.mdh34.quickdocs (1.0.4) xenial; urgency=low
 
   * Initial Release
