@@ -3,7 +3,7 @@ using WebKit;
 
 public class App : Gtk.Application {
 
-    public Application () {
+    public App () {
         Object (
             application_id: "com.github.mdh34.quickdocs",
             flags: ApplicationFlags.FLAGS_NONE
@@ -31,7 +31,7 @@ public class App : Gtk.Application {
 
         var stack_switcher = new StackSwitcher ();
         stack_switcher.set_stack (stack);
-        header.set_custom_title (stack);
+        header.set_custom_title (stack_switcher);
 
         var context = new WebContext ();
         var cookies = context.get_cookie_manager ();
@@ -70,8 +70,8 @@ public class App : Gtk.Application {
             //toggle_theme (dev);
         });
 
-        header.add (foward);
         header.add (back);
+        header.add (forward);
         header.pack_end(theme_button);
 
         window.add (stack);
@@ -84,3 +84,4 @@ public class App : Gtk.Application {
         var app = new App();
         return app.run (args);
     }
+}
