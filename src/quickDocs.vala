@@ -26,7 +26,7 @@ public class App : Gtk.Application {
         window.destroy.connect (() => {
             var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
             user_settings.set_string ("tab", stack.get_visible_child_name());
-            Gtk.main_quit ();
+            //Gtk.main_quit ();
         });
 
         var stack_switcher = new StackSwitcher ();
