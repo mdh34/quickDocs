@@ -26,7 +26,6 @@ public class App : Gtk.Application {
         window.destroy.connect (() => {
             var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
             user_settings.set_string ("tab", stack.get_visible_child_name());
-            //Gtk.main_quit ();
         });
 
         var stack_switcher = new StackSwitcher ();
@@ -37,7 +36,7 @@ public class App : Gtk.Application {
         var cookies = context.get_cookie_manager ();
         set_cookies (cookies);
 
-        var vala = new WebView(); //todo put this in a class
+        var vala = new WebView();
         vala.load_uri ("https://valadoc.org");
 
         var dev = new WebView.with_context (context);
