@@ -35,17 +35,17 @@ public class App : Gtk.Application {
 
         var context = new WebContext ();
         var cookies = context.get_cookie_manager ();
-        //set_cookies (cookies);
+        set_cookies (cookies);
 
         var vala = new WebView(); //todo put this in a class
         vala.load_uri ("https://valadoc.org");
 
         var dev = new WebView.with_context (context);
-        //set_appcache(dev);
+        set_appcache(dev);
         dev.load_uri ("https://devdocs.io");
 
-        stack.add_titled (dev, "dev", "DevDocs");
         stack.add_titled (vala, "vala", "Valadoc");
+        stack.add_titled (dev, "dev", "DevDocs");
 
         var back = new Button.from_icon_name ("go-previous-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         back.clicked.connect (() => {
@@ -67,7 +67,7 @@ public class App : Gtk.Application {
 
         var theme_button = new Button.from_icon_name ("weather-few-clouds-symbolic");
         theme_button.clicked.connect(() => {
-            //toggle_theme (dev);
+            toggle_theme (dev);
         });
 
         header.add (back);
@@ -75,9 +75,74 @@ public class App : Gtk.Application {
         header.pack_end(theme_button);
 
         window.add (stack);
-        //init_theme ();
-        //set_tab (stack);
+        init_theme ();
         window.show_all();
+        set_tab (stack);
+    }
+
+    private void init_theme () {
+        var window_settings = Gtk.Settings.get_default ();
+        var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
+        var dark = user_settings.get_int ("dark");
+
+        if (dark == 1) {
+            window_settings.set ("gtk-application-prefer-dark-theme", true);
+        }
+        else {
+            window_settings.set ("gtk-application-prefer-dark-theme", false);
+        }
+    }
+
+
+    private void set_appcache (WebView view) {
+        var host = "elementary.io";
+        var settings = view.get_settings ();
+        try {
+            var resolve = Resolver.get_default ();
+            resolve.lookup_by_name (host, null);
+            settings.enable_offline_web_application_cache = false;
+        } catch (Error e) {
+            print("Using offline mode");
+        }
+    }
+
+    private void set_cookies (CookieManager cookies) {
+        var path = (Environment.get_home_dir () + "/.config/com.github.mdh34.quickdocs/cookies");
+        var folder = (Environment.get_home_dir () + "/.config/com.github.mdh34.quickdocs/");
+        var file = File.new_for_path (folder);
+        if (!file.query_exists ()) {
+            try {
+                file.make_directory ();
+            } catch (Error e) {
+                print("Unable to create config directory");
+                return;
+            }
+        }
+        cookies.set_accept_policy (CookieAcceptPolicy.ALWAYS);
+        cookies.set_persistent_storage (path, CookiePersistentStorage.SQLITE);
+    }
+
+    private void set_tab (Stack stack) {
+        var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
+        var tab = user_settings.get_string ("tab");
+        stack.set_visible_child_name (tab);
+    }
+
+    private void toggle_theme (WebView view) {
+        var window_settings = Gtk.Settings.get_default ();
+        var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
+        var dark = user_settings.get_int ("dark");
+        if (dark == 1) {
+            window_settings.set ("gtk-application-prefer-dark-theme", false);
+            user_settings.set_int ("dark", 0);
+            view.run_javascript ("document.cookie = 'dark=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';", null);
+            view.reload_bypass_cache ();
+        } else {
+            window_settings.set ("gtk-application-prefer-dark-theme", true);
+            user_settings.set_int ("dark", 1);
+            view.run_javascript ("document.cookie = 'dark=1; expires=01 Jan 2020 00:00:00 UTC';", null);
+            view.reload_bypass_cache ();
+        }
     }
 
     public static int main (string[] args) {
