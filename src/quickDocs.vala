@@ -78,6 +78,14 @@ public class App : Gtk.Application {
         init_theme ();
         window.show_all();
         set_tab (stack);
+
+        var tab_switch = new SimpleAction ("switch", null);
+        add_action (tab_switch);
+        add_accelerator ("<Control>Tab", "app.switch", null);
+
+        tab_switch.activate.connect (() => {
+            change_tab (stack);
+        });
     }
 
     private void init_theme () {
@@ -93,6 +101,14 @@ public class App : Gtk.Application {
         }
     }
 
+    private void change_tab (Stack stack) {
+        var current = stack.get_visible_child_name ();
+        if (current == "vala") {
+            stack.set_visible_child_name ("dev");
+        } else {
+            stack.set_visible_child_name ("vala");
+        }
+    }
 
     private void set_appcache (WebView view) {
         var host = "elementary.io";
