@@ -21,6 +21,13 @@
   <url type="homepage">https://github.com/mdh34/quickDocs</url>
   <url type="bugtracker">https://github.com/mdh34/quickDocs/issues</url>
   <releases>
+    <release version="1.1.1" date="2018-01-15">
+      <description>
+        <ul>
+          <li>New keyboard shortcut! Press ctrl+tab to switch tabs</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.1.0" date="2018-01-13">
       <description>
         <p>1.1.0</p>

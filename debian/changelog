@@ -1,6 +1,11 @@
+com.github.mdh34.quickdocs (1.1.1) xenial; urgency=low
+
+  * New keyboard shortcut! Press ctrl+tab to switch tabs
+ -- Matt Harris <matth281@outlook.com>  Sat, 13 Jan 2017 09:00:00 +0000
+
 com.github.mdh34.quickdocs (1.1.0) xenial; urgency=low
 
-  * New mode support!
+  * New dark mode support!
   * quickDocs remembers which tab you were last using
  -- Matt Harris <matth281@outlook.com>  Sat, 13 Jan 2017 09:00:00 +0000
 
