@@ -35,7 +35,6 @@ public class App : Gtk.Application {
     protected override void activate () {
         var window = new ApplicationWindow (this);
         window.set_default_size (1000, 700);
-        window.set_border_width (12);
         window.set_position (WindowPosition.CENTER);
         var header = new HeaderBar ();
         header.set_show_close_button (true);
