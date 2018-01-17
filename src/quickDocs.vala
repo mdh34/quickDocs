@@ -18,7 +18,7 @@
  *
  * Authored by: Matt Harris <matth281@outlook.com>
  */
- 
+
 using Gtk;
 using WebKit;
 
@@ -84,7 +84,7 @@ public class App : Gtk.Application {
             }
         });
 
-        var theme_button = new Button.from_icon_name ("weather-few-clouds-symbolic");
+        var theme_button = new Button.from_icon_name ("object-inverse");
         theme_button.clicked.connect(() => {
             toggle_theme (dev);
         });
