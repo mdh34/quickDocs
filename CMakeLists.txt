@@ -16,7 +16,7 @@
 
     set (EXEC_NAME "com.github.mdh34.quickdocs")
     set (RELEASE_NAME "")
-    set (VERSION "1.1.2")
+    set (VERSION "1.1.3")
     set (VERSION_INFO "")
     set (DEPS_PKG
       gtk+-3.0
