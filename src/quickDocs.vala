@@ -60,7 +60,7 @@ public class App : Gtk.Application {
         vala.load_uri ("https://valadoc.org");
 
         var dev = new WebView.with_context (context);
-        set_appcache(dev);
+        set_appcache (dev);
         dev.load_uri ("https://devdocs.io");
 
         stack.add_titled (vala, "vala", "Valadoc");
@@ -91,11 +91,11 @@ public class App : Gtk.Application {
 
         header.add (back);
         header.add (forward);
-        header.pack_end(theme_button);
+        header.pack_end (theme_button);
 
         window.add (stack);
         init_theme ();
-        window.show_all();
+        window.show_all ();
         set_tab (stack);
 
         var tab_switch = new SimpleAction ("switch", null);
@@ -105,6 +105,16 @@ public class App : Gtk.Application {
         tab_switch.activate.connect (() => {
             change_tab (stack);
         });
+    }
+
+
+    private void change_tab (Stack stack) {
+        var current = stack.get_visible_child_name ();
+        if (current == "vala") {
+            stack.set_visible_child_name ("dev");
+        } else {
+            stack.set_visible_child_name ("vala");
+        }
     }
 
     private void init_theme () {
@@ -117,15 +127,6 @@ public class App : Gtk.Application {
         }
         else {
             window_settings.set ("gtk-application-prefer-dark-theme", false);
-        }
-    }
-
-    private void change_tab (Stack stack) {
-        var current = stack.get_visible_child_name ();
-        if (current == "vala") {
-            stack.set_visible_child_name ("dev");
-        } else {
-            stack.set_visible_child_name ("vala");
         }
     }
 
@@ -149,7 +150,7 @@ public class App : Gtk.Application {
             try {
                 file.make_directory ();
             } catch (Error e) {
-                print("Unable to create config directory");
+                print ("Unable to create config directory");
                 return;
             }
         }
@@ -181,7 +182,7 @@ public class App : Gtk.Application {
     }
 
     public static int main (string[] args) {
-        var app = new App();
+        var app = new App ();
         return app.run (args);
     }
 }
