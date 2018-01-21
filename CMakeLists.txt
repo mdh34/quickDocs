@@ -70,5 +70,6 @@
     # install our .desktop file so the Applications menu will see it
     install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/com.github.mdh34.quickdocs.desktop DESTINATION ${DATADIR}/applications/)
 
+    install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/offline.sh DESTINATION share/com.github.mdh34.quickdocs/)
     # install our .appdata.xml file so AppCenter will see it
     install (FILES ${CMAKE_CURRENT_SOURCE_DIR}/data/com.github.mdh34.quickdocs.appdata.xml DESTINATION ${DATADIR}/metainfo/)
