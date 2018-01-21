@@ -18,7 +18,7 @@
  *
  * Authored by: Matt Harris <matth281@outlook.com>
  */
- 
+
 using Gtk;
 using WebKit;
 
@@ -56,11 +56,18 @@ public class App : Gtk.Application {
         var cookies = context.get_cookie_manager ();
         set_cookies (cookies);
 
+        var online = check_online ();
         var vala = new WebView();
-        vala.load_uri ("https://valadoc.org");
+        if (online) {
+            vala.load_uri ("https://valadoc.org");
+        } else {
+            var path = ("file://" + Environment.get_home_dir () + "/.local/share/devhelp/books/");
+            vala.load_uri (path);
+        }
+
 
         var dev = new WebView.with_context (context);
-        set_appcache(dev);
+        set_appcache(dev, online);
         dev.load_uri ("https://devdocs.io");
 
         stack.add_titled (vala, "vala", "Valadoc");
@@ -129,15 +136,21 @@ public class App : Gtk.Application {
         }
     }
 
-    private void set_appcache (WebView view) {
+    private bool check_online () {
         var host = "elementary.io";
-        var settings = view.get_settings ();
         try {
             var resolve = Resolver.get_default ();
             resolve.lookup_by_name (host, null);
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    private void set_appcache (WebView view, bool online) {
+        var settings = view.get_settings ();
+        if (online) {
             settings.enable_offline_web_application_cache = false;
-        } catch (Error e) {
-            print("Using offline mode");
         }
     }
 
