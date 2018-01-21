@@ -92,8 +92,8 @@ public class App : Gtk.Application {
             }
         });
 
-        var theme_button = new Button.from_icon_name ("weather-few-clouds-symbolic");
-        theme_button.clicked.connect (() => {
+        var theme_button = new Button.from_icon_name ("object-inverse");
+        theme_button.clicked.connect(() => {
             toggle_theme (dev);
         });
 
