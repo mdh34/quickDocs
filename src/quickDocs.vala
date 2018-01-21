@@ -61,7 +61,8 @@ public class App : Gtk.Application {
         if (online) {
             vala.load_uri ("https://valadoc.org");
         } else {
-            var path = ("file://" + Environment.get_home_dir () + "/.local/share/devhelp/books/");
+            //todo sidebar or searching thing
+            var path = ("file://" + Environment.get_home_dir () + "/.local/share/com.github.mdh34.quickdocs/offline");
             vala.load_uri (path);
         }
 
