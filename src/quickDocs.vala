@@ -97,14 +97,19 @@ public class App : Gtk.Application {
             toggle_theme (dev);
         });
 
-        var download_button = new Button.with_label ("Download");
+        var download_button = new Button.from_icon_name ("go-down-symbolic");
         download_button.clicked.connect (() => {
-            GLib.Process.spawn_command_line_async("sh /usr/share/com.github.mdh34.quickdocs/offline.sh");
+            try {
+                GLib.Process.spawn_command_line_async("sh /usr/share/com.github.mdh34.quickdocs/offline.sh");
+            } catch (SpawnError e) {
+                print ("error downloading");
+                print (e.message);
+            }
         });
         header.add (back);
         header.add (forward);
-        header.add (download_button);
-        header.pack_end(theme_button);
+        header.pack_end (download_button);
+        header.pack_end (theme_button);
 
         window.add (stack);
         init_theme ();
