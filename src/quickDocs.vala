@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Matt Harris
+ * Copyright (c) 2018 Matt Harris
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -68,7 +68,7 @@ public class App : Gtk.Application {
 
 
         var dev = new WebView.with_context (context);
-        set_appcache(dev, online);
+        set_appcache (dev, online);
         dev.load_uri ("https://devdocs.io");
 
         stack.add_titled (vala, "vala", "Valadoc");
@@ -113,7 +113,7 @@ public class App : Gtk.Application {
 
         window.add (stack);
         init_theme ();
-        window.show_all();
+        window.show_all ();
         set_tab (stack);
 
         var tab_switch = new SimpleAction ("switch", null);
@@ -123,6 +123,16 @@ public class App : Gtk.Application {
         tab_switch.activate.connect (() => {
             change_tab (stack);
         });
+    }
+
+
+    private void change_tab (Stack stack) {
+        var current = stack.get_visible_child_name ();
+        if (current == "vala") {
+            stack.set_visible_child_name ("dev");
+        } else {
+            stack.set_visible_child_name ("vala");
+        }
     }
 
     private void init_theme () {
@@ -173,7 +183,7 @@ public class App : Gtk.Application {
             try {
                 file.make_directory ();
             } catch (Error e) {
-                print("Unable to create config directory");
+                print ("Unable to create config directory");
                 return;
             }
         }
@@ -205,7 +215,7 @@ public class App : Gtk.Application {
     }
 
     public static int main (string[] args) {
-        var app = new App();
+        var app = new App ();
         return app.run (args);
     }
 }

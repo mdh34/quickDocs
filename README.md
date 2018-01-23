@@ -13,15 +13,16 @@ A fast developer docs reader
 
 ## Dependencies:
  - libwebkit2gtk-4.0-dev
+ - meson
 
 
 ## Installation:
 ```
-sudo apt install elementary-sdk libwebkit2gtk-4.0-dev
+sudo apt install elementary-sdk libwebkit2gtk-4.0-dev meson
 git clone https://github.com/mdh34/quickDocs.git
-mkdir ./quickDocs/build
-cd ./quickDocs/build
-cmake -DCMAKE_INSTALL_PREFIX=/usr ../
-make
-sudo make install
+cd ./quickDocs/
+meson build --prefix=/usr
+cd build
+ninja
+sudo ninja install
 ```

@@ -2,8 +2,8 @@ Format: http://dep.debian.net/deps/dep5
 Upstream-Name: com.github.mdh34.quickdocs
 Source: https://github.com/mdh34/quickDocs
 
-Files: src/* data/* cmake/* debian/*
-Copyright: 2017 Matt Harris
+Files: src/* data/* meson/* debian/*
+Copyright: 2018 Matt Harris
 License: GPL-3.0+
 
 License: GPL-3.0+
