@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Matt Harris
+ * Copyright (c) 2018 Matt Harris
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
