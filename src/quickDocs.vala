@@ -126,15 +126,6 @@ public class App : Gtk.Application {
     }
 
 
-    private void change_tab (Stack stack) {
-        var current = stack.get_visible_child_name ();
-        if (current == "vala") {
-            stack.set_visible_child_name ("dev");
-        } else {
-            stack.set_visible_child_name ("vala");
-        }
-    }
-
     private void init_theme () {
         var window_settings = Gtk.Settings.get_default ();
         var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
