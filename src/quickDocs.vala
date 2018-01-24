@@ -98,6 +98,7 @@ public class App : Gtk.Application {
         });
 
         var download_button = new Button.from_icon_name ("go-down-symbolic");
+        download_button.tooltip_text = (_("Download Valadoc for offline use"));
         download_button.clicked.connect (() => {
             try {
                 GLib.Process.spawn_command_line_async("sh /usr/share/com.github.mdh34.quickdocs/offline.sh");
@@ -106,6 +107,8 @@ public class App : Gtk.Application {
                 print (e.message);
             }
         });
+
+
         header.add (back);
         header.add (forward);
         header.pack_end (download_button);
