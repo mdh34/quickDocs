@@ -56,11 +56,19 @@ public class App : Gtk.Application {
         var cookies = context.get_cookie_manager ();
         set_cookies (cookies);
 
+        var online = check_online ();
         var vala = new WebView();
-        vala.load_uri ("https://valadoc.org");
+        if (online) {
+            vala.load_uri ("https://valadoc.org");
+        } else {
+            //todo sidebar or searching thing
+            var path = ("file://" + Environment.get_home_dir () + "/.local/share/com.github.mdh34.quickdocs/offline");
+            vala.load_uri (path);
+        }
+
 
         var dev = new WebView.with_context (context);
-        set_appcache (dev);
+        set_appcache (dev, online);
         dev.load_uri ("https://devdocs.io");
 
         stack.add_titled (vala, "vala", "Valadoc");
@@ -89,9 +97,23 @@ public class App : Gtk.Application {
             toggle_theme (dev);
         });
 
+        var download_button = new Button.from_icon_name ("go-down-symbolic");
+        download_button.tooltip_text = (_("Download Valadoc for offline use"));
+        download_button.clicked.connect (() => {
+            try {
+                GLib.Process.spawn_command_line_async("sh /usr/share/com.github.mdh34.quickdocs/offline.sh");
+            } catch (SpawnError e) {
+                print ("error downloading");
+                print (e.message);
+            }
+        });
+        download_button.sensitive = online;
+
+
         header.add (back);
         header.add (forward);
         header.pack_end (theme_button);
+        header.pack_end (download_button);
 
         window.add (stack);
         init_theme ();
@@ -108,15 +130,6 @@ public class App : Gtk.Application {
     }
 
 
-    private void change_tab (Stack stack) {
-        var current = stack.get_visible_child_name ();
-        if (current == "vala") {
-            stack.set_visible_child_name ("dev");
-        } else {
-            stack.set_visible_child_name ("vala");
-        }
-    }
-
     private void init_theme () {
         var window_settings = Gtk.Settings.get_default ();
         var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
@@ -130,15 +143,30 @@ public class App : Gtk.Application {
         }
     }
 
-    private void set_appcache (WebView view) {
+    private void change_tab (Stack stack) {
+        var current = stack.get_visible_child_name ();
+        if (current == "vala") {
+            stack.set_visible_child_name ("dev");
+        } else {
+            stack.set_visible_child_name ("vala");
+        }
+    }
+
+    private bool check_online () {
         var host = "elementary.io";
-        var settings = view.get_settings ();
         try {
             var resolve = Resolver.get_default ();
             resolve.lookup_by_name (host, null);
+            return true;
+        } catch {
+            return false;
+        }
+    }
+
+    private void set_appcache (WebView view, bool online) {
+        var settings = view.get_settings ();
+        if (online) {
             settings.enable_offline_web_application_cache = false;
-        } catch (Error e) {
-            print("Using offline mode");
         }
     }
 
