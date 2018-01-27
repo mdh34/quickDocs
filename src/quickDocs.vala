@@ -112,8 +112,8 @@ public class App : Gtk.Application {
 
         header.add (back);
         header.add (forward);
-        header.pack_end (download_button);
         header.pack_end (theme_button);
+        header.pack_end (download_button);
 
         window.add (stack);
         init_theme ();
