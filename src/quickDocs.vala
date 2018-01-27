@@ -107,6 +107,7 @@ public class App : Gtk.Application {
                 print (e.message);
             }
         });
+        download_button.sensitive = online;
 
 
         header.add (back);
