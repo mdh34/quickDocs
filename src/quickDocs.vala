@@ -101,7 +101,8 @@ public class App : Gtk.Application {
         download_button.tooltip_text = (_("Download Valadoc for offline use"));
         download_button.clicked.connect (() => {
             try {
-                GLib.Process.spawn_command_line_async("sh /usr/share/com.github.mdh34.quickdocs/offline.sh");
+                Pid pid;
+                GLib.Process.spawn_async (null, {"/usr/share/com.github.mdh34.quickdocs/offline.sh"}, null, SpawnFlags.FILE_AND_ARGV_ZERO,null, out pid);
             } catch (SpawnError e) {
                 print ("error downloading");
                 print (e.message);
