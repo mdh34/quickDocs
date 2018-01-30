@@ -60,10 +60,6 @@ public class App : Gtk.Application {
         var vala = new WebView();
         if (online) {
             vala.load_uri ("https://valadoc.org");
-        } else {
-            //todo sidebar or searching thing
-            var path = ("file://" + Environment.get_home_dir () + "/.local/share/com.github.mdh34.quickdocs/offline");
-            vala.load_uri (path);
         }
 
 
@@ -97,24 +93,9 @@ public class App : Gtk.Application {
             toggle_theme (dev);
         });
 
-        var download_button = new Button.from_icon_name ("go-down-symbolic");
-        download_button.tooltip_text = (_("Download Valadoc for offline use"));
-        download_button.clicked.connect (() => {
-            try {
-                Pid pid;
-                GLib.Process.spawn_async (null, {"/usr/share/com.github.mdh34.quickdocs/offline.sh"}, null, SpawnFlags.FILE_AND_ARGV_ZERO,null, out pid);
-            } catch (SpawnError e) {
-                print ("error downloading");
-                print (e.message);
-            }
-        });
-        download_button.sensitive = online;
-
-
         header.add (back);
         header.add (forward);
         header.pack_end (theme_button);
-        header.pack_end (download_button);
 
         window.add (stack);
         init_theme ();
