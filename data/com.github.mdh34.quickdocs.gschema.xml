@@ -13,5 +13,10 @@
       <summary>Last opened tab</summary>
       <description>Saves the last opened tab</description>
     </key>
+    <key name="first" type="i">
+      <default>0</default>
+      <summary>First run</summary>
+      <description>Sets if the application has been initialised yet</description>
+    </key>
   </schema>
 </schemalist>

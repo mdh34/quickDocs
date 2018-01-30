@@ -64,6 +64,7 @@ public class App : Gtk.Application {
 
 
         var dev = new WebView.with_context (context);
+        first_run(dev);
         set_appcache (dev, online);
         dev.load_uri ("https://devdocs.io");
 
@@ -142,6 +143,14 @@ public class App : Gtk.Application {
             return true;
         } catch {
             return false;
+        }
+    }
+
+    private void first_run (WebView view) {
+        var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
+        if (user_settings.get_int("first") == 0) {
+            view.load_uri("https://devdocs.io");
+            user_settings.set_int ("first", 1);
         }
     }
 
