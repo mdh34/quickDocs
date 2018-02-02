@@ -7,18 +7,23 @@
 A fast developer docs reader
 ![Screenshot](https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-1.png)
 
-## Sources:
+## Doc Sources:
  - Valadoc
  - DevDocs (supports viewing docs offline)
 
-## Dependencies:
+## Build Dependencies:
+ - libgtk-3-dev
  - libwebkit2gtk-4.0-dev
  - meson
+ - valac
 
+## Run Dependencies:
+ - libwebkit2gtk-4.0
 
-## Installation:
+## Install From Source:
+The following instructions should work on most debian-based systems:
 ```
-sudo apt install elementary-sdk libwebkit2gtk-4.0-dev meson
+sudo apt install libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev meson valac
 git clone https://github.com/mdh34/quickDocs.git
 cd ./quickDocs/
 meson build --prefix=/usr
