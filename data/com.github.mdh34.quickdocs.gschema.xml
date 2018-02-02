@@ -28,5 +28,15 @@
       <summary>Window Y position</summary>
       <description>Stores the window's last Y position</description>
     </key>
+    <key name="width" type="i">
+      <default>1000</default>
+      <summary>Window width</summary>
+      <description>Stores the windows last width</description>
+    </key>
+    <key name="height" type="i">
+      <default>1000</default>
+      <summary>Window height</summary>
+      <description>Stores the windows last height</description>
+    </key>
   </schema>
 </schemalist>

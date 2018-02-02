@@ -34,7 +34,6 @@ public class App : Gtk.Application {
 
     protected override void activate () {
         var window = new ApplicationWindow (this);
-        window.set_default_size (1000, 700);
         window.set_position (WindowPosition.CENTER);
         var header = new HeaderBar ();
         header.set_show_close_button (true);
@@ -107,15 +106,22 @@ public class App : Gtk.Application {
             window.move(window_x, window_y);
         }
 
+        var window_width = user_settings.get_int ("width");
+        var window_height = user_settings.get_int ("height");
+        window.set_default_size (window_width, window_height);
+
         window.show_all ();
         set_tab (stack);
 
 
         window.delete_event.connect (() => {
-            int current_x, current_y;
+            int current_x, current_y, width, height;
             window.get_position (out current_x, out current_y);
+            window.get_size (out width, out height);
             user_settings.set_int ("window-x", current_x);
             user_settings.set_int ("window-y", current_y);
+            user_settings.set_int ("width", width);
+            user_settings.set_int ("height", height);
             return false;
         });
 
