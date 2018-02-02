@@ -1,23 +1,28 @@
+com.github.mdh34.quickdocs (1.1.5) xenial; urgency=low
+
+  * quickDocs now remembers its last size and location!
+ -- Matt Harris <matth281@outlook.com>  Fri, 2 Feb 2018 18:30:00 +0000
+
 com.github.mdh34.quickdocs (1.1.4) xenial; urgency=low
 
   * Fixed a bug where DevDocs wouldn't work offline
- -- Matt Harris <matth281@outlook.com>  Tue, 30 Jan 2017 19:00:00 +0000
+ -- Matt Harris <matth281@outlook.com>  Tue, 30 Jan 2018 19:00:00 +0000
 
 com.github.mdh34.quickdocs (1.1.3) xenial; urgency=low
 
   * Minor UI tweaks
- -- Matt Harris <matth281@outlook.com>  Sat, 20 Jan 2017 09:00:00 +0000
+ -- Matt Harris <matth281@outlook.com>  Sat, 20 Jan 2018 09:00:00 +0000
 
 com.github.mdh34.quickdocs (1.1.1) xenial; urgency=low
 
   * New keyboard shortcut! Press ctrl+tab to switch tabs
- -- Matt Harris <matth281@outlook.com>  Sat, 13 Jan 2017 09:00:00 +0000
+ -- Matt Harris <matth281@outlook.com>  Sat, 13 Jan 2018 09:00:00 +0000
 
 com.github.mdh34.quickdocs (1.1.0) xenial; urgency=low
 
   * New dark mode support!
   * quickDocs remembers which tab you were last using
- -- Matt Harris <matth281@outlook.com>  Sat, 13 Jan 2017 09:00:00 +0000
+ -- Matt Harris <matth281@outlook.com>  Sat, 13 Jan 2018 09:00:00 +0000
 
 com.github.mdh34.quickdocs (1.0.4) xenial; urgency=low
 

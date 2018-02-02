@@ -21,6 +21,13 @@
   <url type="homepage">https://github.com/mdh34/quickDocs</url>
   <url type="bugtracker">https://github.com/mdh34/quickDocs/issues</url>
   <releases>
+    <release version="1.1.5" date="2018-02-02">
+      <description>
+        <ul>
+          <li>quickDocs now remembers its last size and location!</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.1.4" date="2018-01-30">
       <description>
         <ul>
