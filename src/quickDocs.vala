@@ -43,8 +43,8 @@ public class App : Gtk.Application {
         var stack = new Stack ();
         stack.set_transition_type (StackTransitionType.SLIDE_LEFT_RIGHT);
 
+        var user_settings = new GLib.Settings("com.github.mdh34.quickdocs");
         window.destroy.connect (() => {
-            var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
             user_settings.set_string ("tab", stack.get_visible_child_name());
         });
 
@@ -100,8 +100,24 @@ public class App : Gtk.Application {
 
         window.add (stack);
         init_theme ();
+
+        var window_x = user_settings.get_int ("window-x");
+        var window_y = user_settings.get_int ("window-y");
+        if (window_x != -1 ||  window_y != -1) {
+            window.move(window_x, window_y);
+        }
+
         window.show_all ();
         set_tab (stack);
+
+
+        window.delete_event.connect (() => {
+            int current_x, current_y;
+            window.get_position (out current_x, out current_y);
+            user_settings.set_int ("window-x", current_x);
+            user_settings.set_int ("window-y", current_y);
+            return false;
+        });
 
         var tab_switch = new SimpleAction ("switch", null);
         add_action (tab_switch);
