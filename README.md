@@ -20,6 +20,9 @@ A fast developer docs reader
 ## Run Dependencies:
  - libwebkit2gtk-4.0
 
+## Install:
+ - For Debian / Ubuntu based systems, install the latest .deb from [here](https://github.com/mdh34/quickDocs/releases) (64-bit only)
+
 ## Install From Source:
 The following instructions should work on most debian-based systems:
 ```
