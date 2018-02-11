@@ -28,7 +28,7 @@ public class App : Gtk.Application {
         Object (
             application_id: "com.github.mdh34.quickdocs",
             flags: ApplicationFlags.FLAGS_NONE
-            );
+        );
     }
 
 
@@ -42,7 +42,7 @@ public class App : Gtk.Application {
         var stack = new Stack ();
         stack.set_transition_type (StackTransitionType.SLIDE_LEFT_RIGHT);
 
-        var user_settings = new GLib.Settings("com.github.mdh34.quickdocs");
+        var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
         window.destroy.connect (() => {
             user_settings.set_string ("tab", stack.get_visible_child_name());
         });
@@ -61,9 +61,8 @@ public class App : Gtk.Application {
             vala.load_uri ("https://valadoc.org");
         }
 
-
         var dev = new WebView.with_context (context);
-        first_run(dev);
+        first_run (dev);
         set_appcache (dev, online);
         dev.load_uri ("https://devdocs.io");
 
@@ -72,7 +71,7 @@ public class App : Gtk.Application {
 
         var back = new Button.from_icon_name ("go-previous-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         back.clicked.connect (() => {
-            if (stack.get_visible_child_name () == "vala"){
+            if (stack.get_visible_child_name () == "vala") {
                 vala.go_back ();
             } else if (stack.get_visible_child_name () == "dev") {
                 dev.go_back ();
@@ -81,7 +80,7 @@ public class App : Gtk.Application {
 
         var forward = new Button.from_icon_name ("go-next-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         forward.clicked.connect (() => {
-            if (stack.get_visible_child_name () == "vala"){
+            if (stack.get_visible_child_name () == "vala") {
                 vala.go_forward ();
             } else if (stack.get_visible_child_name () == "dev") {
                 dev.go_forward ();
@@ -103,7 +102,7 @@ public class App : Gtk.Application {
         var window_x = user_settings.get_int ("window-x");
         var window_y = user_settings.get_int ("window-y");
         if (window_x != -1 ||  window_y != -1) {
-            window.move(window_x, window_y);
+            window.move (window_x, window_y);
         }
 
         var window_width = user_settings.get_int ("width");
@@ -142,8 +141,7 @@ public class App : Gtk.Application {
 
         if (dark == 1) {
             window_settings.set ("gtk-application-prefer-dark-theme", true);
-        }
-        else {
+        } else {
             window_settings.set ("gtk-application-prefer-dark-theme", false);
         }
     }
@@ -170,8 +168,8 @@ public class App : Gtk.Application {
 
     private void first_run (WebView view) {
         var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
-        if (user_settings.get_int("first") == 0) {
-            view.load_uri("https://devdocs.io");
+        if (user_settings.get_int ("first") == 0) {
+            view.load_uri ("https://devdocs.io");
             user_settings.set_int ("first", 1);
         }
     }
