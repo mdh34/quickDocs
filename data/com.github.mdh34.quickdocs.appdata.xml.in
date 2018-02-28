@@ -13,6 +13,7 @@
       <li>Valadoc</li>
       <li>DevDocs (Works offline)</li>
     </ul>
+    <p>Includes dark mode support to suit your workflow</p>
   </description>
   <provides>
     <binary>com.github.mdh34.quickdocs</binary>
@@ -21,6 +22,13 @@
   <url type="homepage">https://github.com/mdh34/quickDocs</url>
   <url type="bugtracker">https://github.com/mdh34/quickDocs/issues</url>
   <releases>
+    <release version="1.1.6" date="2018-02-28">
+      <description>
+        <ul>
+          <li>quickDocs now restores the last page you were on</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.1.5" date="2018-02-02">
       <description>
         <ul>

@@ -1,3 +1,8 @@
+com.github.mdh34.quickdocs (1.1.6) xenial; urgency=low
+
+  * quickDocs now restores the last page you were on
+ -- Matt Harris <matth281@outlook.com>  Wed, 28 Feb 2018 17:00:00 +0000
+
 com.github.mdh34.quickdocs (1.1.5) xenial; urgency=low
 
   * quickDocs now remembers its last size and location!
