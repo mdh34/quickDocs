@@ -58,13 +58,13 @@ public class App : Gtk.Application {
         var online = check_online ();
         var vala = new WebView();
         if (online) {
-            vala.load_uri ("https://valadoc.org");
+            vala.load_uri (user_settings.get_string ("last-vala"));
         }
 
         var dev = new WebView.with_context (context);
         first_run (dev);
         set_appcache (dev, online);
-        dev.load_uri ("https://devdocs.io");
+        dev.load_uri (user_settings.get_string ("last-dev"));
 
         stack.add_titled (vala, "vala", "Valadoc");
         stack.add_titled (dev, "dev", "DevDocs");
@@ -121,6 +121,8 @@ public class App : Gtk.Application {
             user_settings.set_int ("window-y", current_y);
             user_settings.set_int ("width", width);
             user_settings.set_int ("height", height);
+            user_settings.set_string ("last-dev", dev.uri);
+            user_settings.set_string ("last-vala", vala.uri);
             return false;
         });
 

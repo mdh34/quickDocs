@@ -38,5 +38,15 @@
       <summary>Window height</summary>
       <description>Stores the windows last height</description>
     </key>
+    <key name="last-vala" type="s">
+      <default>"https://valadoc.org"</default>
+      <summary>Last visited valadoc page</summary>
+      <description>Stores the address of the last visisted valadoc page</description>
+    </key>
+    <key name="last-dev" type="s">
+      <default>"https://devdocs.io"</default>
+      <summary>Last visited devdocs page</summary>
+      <description>Stores the address of the last visisted devdocs page</description>
+    </key>
   </schema>
 </schemalist>
