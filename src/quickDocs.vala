@@ -130,7 +130,11 @@ public class App : Gtk.Application {
             user_settings.set_int ("width", width);
             user_settings.set_int ("height", height);
             user_settings.set_string ("last-dev", dev.uri);
-            user_settings.set_string ("last-vala", vala.uri);
+            
+            if (online) {
+                user_settings.set_string ("last-vala", vala.uri);
+            }
+            
             return false;
         });
 
