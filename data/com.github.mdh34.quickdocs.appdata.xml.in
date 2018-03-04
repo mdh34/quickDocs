@@ -11,9 +11,13 @@
     <p>Read developer docs from:</p>
     <ul>
       <li>Valadoc</li>
-      <li>DevDocs (Works offline)</li>
+      <li>DevDocs</li>
     </ul>
-    <p>Includes dark mode support to suit your workflow</p>
+    <p>Includes:</p>
+    <ul>
+      <li>Offline support for both Valadoc and Devdocs</li>
+      <li>Dark mode toggle to suit your workflow</li>
+    </ul>
   </description>
   <provides>
     <binary>com.github.mdh34.quickdocs</binary>
@@ -22,6 +26,13 @@
   <url type="homepage">https://github.com/mdh34/quickDocs</url>
   <url type="bugtracker">https://github.com/mdh34/quickDocs/issues</url>
   <releases>
+  <release version="1.2.0" date="2018-03-04">
+      <description>
+        <ul>
+          <li>Added the ability to use Valadoc offline</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.1.6" date="2018-02-28">
       <description>
         <ul>
