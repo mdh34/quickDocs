@@ -170,7 +170,7 @@ public class App : Gtk.Application {
     }
 
     private bool check_online () {
-        var host = "elementary.io";
+        var host = "valadoc.org";
         try {
             var resolve = Resolver.get_default ();
             resolve.lookup_by_name (host, null);
