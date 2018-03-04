@@ -59,6 +59,8 @@ public class App : Gtk.Application {
         var vala = new WebView();
         if (online) {
             vala.load_uri (user_settings.get_string ("last-vala"));
+        } else {
+            vala.load_uri ("file://" + Environment.get_home_dir () + "/.local/share/com.github.mdh34.quickdocs/");
         }
 
         var dev = new WebView.with_context (context);
