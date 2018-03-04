@@ -91,10 +91,16 @@ public class App : Gtk.Application {
         theme_button.clicked.connect(() => {
             toggle_theme (dev);
         });
+        
+        var offline_button = new Button.from_icon_name ("folder-download-symbolic");
+        offline_button.clicked.connect(() => {
+            download_docs ();
+        });
 
         header.add (back);
         header.add (forward);
         header.pack_end (theme_button);
+        header.pack_end (offline_button);        
 
         window.add (stack);
         init_theme ();
@@ -165,6 +171,14 @@ public class App : Gtk.Application {
             return true;
         } catch {
             return false;
+        }
+    }
+
+    private void download_docs () {
+        try {
+            Process.spawn_command_line_async ("x-terminal-emulator -e /usr/share/com.github.mdh34.quickdocs/offline.sh");
+        } catch (SpawnError e) {
+            print (e.message);
         }
     }
 
