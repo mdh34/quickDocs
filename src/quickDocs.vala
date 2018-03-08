@@ -37,6 +37,7 @@ public class App : Gtk.Application {
         window.set_position (WindowPosition.CENTER);
         var header = new HeaderBar ();
         header.set_show_close_button (true);
+        header.get_style_context ().add_class ("default-decoration");
         window.set_titlebar (header);
 
         var stack = new Stack ();
