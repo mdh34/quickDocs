@@ -6,6 +6,7 @@
 
 A fast developer docs reader
 ![Screenshot](https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-1.png)
+![Screenshot](https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-3.png)
 
 ## Doc Sources:
  - Valadoc
