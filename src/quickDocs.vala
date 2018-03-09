@@ -39,11 +39,24 @@ public class App : Gtk.Application {
         header.set_show_close_button (true);
         var header_context = header.get_style_context ();
         header_context.add_class ("default-decoration");
-        header_context.add_class (Gtk.STYLE_CLASS_FLAT);
         window.set_titlebar (header);
 
         var stack = new Stack ();
         stack.set_transition_type (StackTransitionType.SLIDE_LEFT_RIGHT);
+
+        string style = "@define-color colorPrimary #403757;";
+        var provider = new Gtk.CssProvider ();
+
+        try {
+            provider.load_from_data (style, -1);
+        } catch {
+            print ("Couldn't load CSS");
+        }
+        
+
+        stack.notify["visible-child"].connect (() => {
+            colour_change(stack, provider);
+        });
 
         var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
         window.destroy.connect (() => {
@@ -94,7 +107,9 @@ public class App : Gtk.Application {
 
         var theme_button = new Button.from_icon_name ("object-inverse");
         theme_button.clicked.connect(() => {
-            toggle_theme (dev);
+            if (stack.get_visible_child_name () == "dev") {
+                toggle_theme (dev);   
+            }
         });
         
         var offline_button = new Button.from_icon_name ("folder-download-symbolic");
@@ -151,18 +166,6 @@ public class App : Gtk.Application {
     }
 
 
-    private void init_theme () {
-        var window_settings = Gtk.Settings.get_default ();
-        var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
-        var dark = user_settings.get_int ("dark");
-
-        if (dark == 1) {
-            window_settings.set ("gtk-application-prefer-dark-theme", true);
-        } else {
-            window_settings.set ("gtk-application-prefer-dark-theme", false);
-        }
-    }
-
     private void change_tab (Stack stack) {
         var current = stack.get_visible_child_name ();
         if (current == "vala") {
@@ -183,6 +186,15 @@ public class App : Gtk.Application {
         }
     }
 
+    private void colour_change (Stack stack, CssProvider provider) {
+        if (stack.get_visible_child_name () == "vala") {
+            Gtk.Settings.get_default ().set ("gtk-application-prefer-dark-theme", true);
+            Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        } else {
+            Gtk.StyleContext.remove_provider_for_screen (Gdk.Screen.get_default (), provider);
+            init_theme ();
+        }
+    }
     private void download_docs () {
         try {
             Process.spawn_command_line_async ("x-terminal-emulator -e /usr/share/com.github.mdh34.quickdocs/offline.sh");
@@ -196,6 +208,19 @@ public class App : Gtk.Application {
         if (user_settings.get_int ("first") == 0) {
             view.load_uri ("https://devdocs.io");
             user_settings.set_int ("first", 1);
+        }
+    }
+
+
+    private void init_theme () {
+        var window_settings = Gtk.Settings.get_default ();
+        var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
+        var dark = user_settings.get_int ("dark");
+
+        if (dark == 1) {
+            window_settings.set ("gtk-application-prefer-dark-theme", true);
+        } else {
+            window_settings.set ("gtk-application-prefer-dark-theme", false);
         }
     }
 
@@ -215,7 +240,7 @@ public class App : Gtk.Application {
                 file.make_directory ();
             } catch (Error e) {
                 print ("Unable to create config directory");
-                return;
+                print (e.message);
             }
         }
         cookies.set_accept_policy (CookieAcceptPolicy.ALWAYS);
