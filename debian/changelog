@@ -1,3 +1,8 @@
+com.github.mdh34.quickdocs (1.2.1) xenial; urgency=low
+
+  * UI Updates
+ -- Matt Harris <matth281@outlook.com>  Fri, 9 Mar 2018 19:00:00 +0000
+
 com.github.mdh34.quickdocs (1.2.0) xenial; urgency=low
 
   * Added the ability to use Valadoc offline

@@ -26,6 +26,13 @@
   <url type="homepage">https://github.com/mdh34/quickDocs</url>
   <url type="bugtracker">https://github.com/mdh34/quickDocs/issues</url>
   <releases>
+  <release version="1.2.1" date="2018-03-09">
+      <description>
+        <ul>
+          <li>UI Updates</li>
+        </ul>
+      </description>
+    </release>
   <release version="1.2.0" date="2018-03-04">
       <description>
         <ul>
@@ -98,9 +105,6 @@
     </screenshot>
     <screenshot>
       <image>https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-3.png</image>
-    </screenshot>
-    <screenshot>
-      <image>https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-4.png</image>
     </screenshot>
   </screenshots>
   <custom>
