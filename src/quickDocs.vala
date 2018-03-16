@@ -44,20 +44,6 @@ public class App : Gtk.Application {
         var stack = new Stack ();
         stack.set_transition_type (StackTransitionType.SLIDE_LEFT_RIGHT);
 
-        string style = "@define-color colorPrimary #403757;";
-        var provider = new Gtk.CssProvider ();
-
-        try {
-            provider.load_from_data (style, -1);
-        } catch {
-            print ("Couldn't load CSS");
-        }
-        
-
-        stack.notify["visible-child"].connect (() => {
-            colour_change(stack, provider);
-        });
-
         var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
         window.destroy.connect (() => {
             user_settings.set_string ("tab", stack.get_visible_child_name ());
@@ -107,9 +93,7 @@ public class App : Gtk.Application {
 
         var theme_button = new Button.from_icon_name ("object-inverse");
         theme_button.clicked.connect(() => {
-            if (stack.get_visible_child_name () == "dev") {
-                toggle_theme (dev);   
-            }
+            toggle_theme (dev);   
         });
         
         var offline_button = new Button.from_icon_name ("folder-download-symbolic");
@@ -120,11 +104,24 @@ public class App : Gtk.Application {
         header.add (back);
         header.add (forward);
         header.pack_end (theme_button);
-        header.pack_end (offline_button);        
-
+        header.pack_end (offline_button);
+        
         window.add (stack);
         init_theme ();
 
+        string style = "@define-color colorPrimary #403757;";
+        var provider = new Gtk.CssProvider ();
+
+        try {
+            provider.load_from_data (style, -1);
+        } catch {
+            print ("Couldn't load CSS");
+        }
+
+        stack.notify["visible-child"].connect (() => {
+            stack_change(stack, provider, theme_button, offline_button);
+        });
+        
         var window_x = user_settings.get_int ("window-x");
         var window_y = user_settings.get_int ("window-y");
         if (window_x != -1 ||  window_y != -1) {
@@ -136,6 +133,8 @@ public class App : Gtk.Application {
         window.set_default_size (window_width, window_height);
 
         window.show_all ();
+        
+        theme_button.set_visible (false);
         set_tab (stack);
 
 
@@ -186,13 +185,17 @@ public class App : Gtk.Application {
         }
     }
 
-    private void colour_change (Stack stack, CssProvider provider) {
+    private void stack_change (Stack stack, CssProvider provider, Button theme_button, Button offline_button) {
         if (stack.get_visible_child_name () == "vala") {
             Gtk.Settings.get_default ().set ("gtk-application-prefer-dark-theme", true);
             Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            theme_button.set_visible (false);
+            offline_button.set_visible (true);
         } else {
             Gtk.StyleContext.remove_provider_for_screen (Gdk.Screen.get_default (), provider);
             init_theme ();
+            theme_button.set_visible (true);
+            offline_button.set_visible (false);
         }
     }
     private void download_docs () {
