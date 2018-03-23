@@ -26,13 +26,20 @@
   <url type="homepage">https://github.com/mdh34/quickDocs</url>
   <url type="bugtracker">https://github.com/mdh34/quickDocs/issues</url>
   <releases>
+  <release version="1.2.2" date="2018-03-23">
+      <description>
+        <ul>
+          <li>Simplify UI</li>
+        </ul>
+      </description>
+  </release>
   <release version="1.2.1" date="2018-03-09">
       <description>
         <ul>
           <li>UI Updates</li>
         </ul>
       </description>
-    </release>
+  </release>
   <release version="1.2.0" date="2018-03-04">
       <description>
         <ul>
