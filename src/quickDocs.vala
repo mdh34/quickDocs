@@ -157,7 +157,7 @@ public class App : Gtk.Application {
 
         var tab_switch = new SimpleAction ("switch", null);
         add_action (tab_switch);
-        add_accelerator ("<Control>Tab", "app.switch", null);
+        set_accels_for_action ("app.switch", {"<Control>Tab"});
 
         tab_switch.activate.connect (() => {
             change_tab (stack);
