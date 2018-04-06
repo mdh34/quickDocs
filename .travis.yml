@@ -30,3 +30,4 @@ install:
 script:
   - houston ci
     --distribution $DIST
+    --name-domain com.github.mdh34.quickdocs
