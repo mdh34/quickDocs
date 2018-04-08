@@ -14,6 +14,7 @@ A fast developer docs reader
  
  Both are avalibale to use offline
 ## Build Dependencies:
+ - libarchive-dev
  - libgtk-3-dev
  - libwebkit2gtk-4.0-dev
  - meson
@@ -22,6 +23,7 @@ A fast developer docs reader
 ## Run Dependencies:
  - curl
  - wget
+ - libarchive
  - libwebkit2gtk-4.0
 
 ## Install:

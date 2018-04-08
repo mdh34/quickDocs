@@ -48,5 +48,10 @@
       <summary>Last visited devdocs page</summary>
       <description>Stores the address of the last visisted devdocs page</description>
     </key>
+    <key name="packages" type="as">
+      <default>[]</default>
+      <summary>Downloaded packages</summary>
+      <description>Stores a list of offline downloaded packages</description>
+    </key>
   </schema>
 </schemalist>

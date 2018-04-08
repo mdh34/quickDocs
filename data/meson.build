@@ -15,10 +15,6 @@ install_data(
     meson.project_name() + '.gschema.xml',
     install_dir: join_paths(get_option('datadir'), 'glib-2.0', 'schemas')
 )
-install_data (
-    'offline.sh',
-    install_dir: join_paths(get_option('datadir'), meson.project_name())
-)
 
 i18n.merge_file(
     input: meson.project_name() + '.desktop.in',

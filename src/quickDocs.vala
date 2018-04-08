@@ -22,6 +22,302 @@
 using Gtk;
 using WebKit;
 
+const string[] PACKAGES = {
+    "gee-0.8",
+    "gio-2.0",
+    "gio-unix-2.0",
+    "glib-2.0",
+    "gmodule-2.0",
+    "gobject-2.0",
+    "libpeas-gtk-1.0",
+    "champlain-gtk-0.12",
+    "clutter-1.0",
+    "clutter-gtk-1.0",
+    "gtk+-3.0",
+    "gtksourceview-3.0",
+    "libdazzle-1.0",
+    "libgda-ui-5.0",
+    "libgnome-menu-3.0",
+    "vte-2.90",
+    "vte-2.91",
+    "webkit-1.0",
+    "webkit2gtk-4.0",
+    "webkit2gtk-web-extension-4.0",
+    "clutter-gst-2.0",
+    "clutter-gst-3.0",
+    "grilo-0.2",
+    "grilo-net-0.2",
+    "gssdp-1.0",
+    "gstreamer-1.0",
+    "gstreamer-allocators-1.0",
+    "gstreamer-app-1.0",
+    "gstreamer-audio-1.0",
+    "gstreamer-base-1.0",
+    "gstreamer-check-1.0",
+    "gstreamer-controller-1.0",
+    "gstreamer-fft-1.0",
+    "gstreamer-net-1.0",
+    "gstreamer-pbutils-1.0",
+    "gstreamer-player-1.0",
+    "gstreamer-riff-1.0",
+    "gstreamer-rtp-1.0",
+    "gstreamer-rtsp-1.0",
+    "gstreamer-rtsp-server-1.0",
+    "gstreamer-sdp-1.0",
+    "gstreamer-tag-1.0",
+    "gstreamer-video-1.0",
+    "gupnp-1.0",
+    "gupnp-av-1.0",
+    "gupnp-dlna-1.0",
+    "gupnp-dlna-2.0",
+    "gupnp-dlna-gst-2.0",
+    "libcanberra",
+    "libcanberra-gtk",
+    "atk",
+    "atspi-2",
+    "cairo",
+    "ccss-1",
+    "cogl-1.0",
+    "cogl-pango-1.0",
+    "gdk-3.0",
+    "gdk-pixbuf-2.0",
+    "gdk-x11-3.0",
+    "ibus-1.0",
+    "librsvg-2.0",
+    "pango",
+    "pangocairo",
+    "camel-1.2",
+    "dconf",
+    "folks",
+    "folks-eds",
+    "folks-libsocialweb",
+    "folks-telepathy",
+    "gnome-keyring-1",
+    "libaccounts-glib",
+    "libebook-1.2",
+    "libebook-contacts-1.2",
+    "libecalendar-1.2",
+    "libedataserver-1.2",
+    "libgda-5.0",
+    "libgeoclue-2.0",
+    "libmediaart-1.0",
+    "libsecret-1",
+    "sqlite3",
+    "tracker-control-1.0",
+    "tracker-indexer-module-1.0",
+    "tracker-miner-0.16",
+    "tracker-sparql-0.16",
+    "tracker-sparql-1.0",
+    "gnutls",
+    "goa-1.0",
+    "gsignond",
+    "gweather-3.0",
+    "libgdata",
+    "libgsignon-glib",
+    "libsoup-2.4",
+    "libuhttpmock-0.0",
+    "mock-service-0",
+    "rest-0.6",
+    "rest-0.7",
+    "rest-extras-0.6",
+    "telepathy-glib",
+    "twitter-glib-1.0",
+    "valum-0.3",
+    "vsgi-0.3",
+    "gxml-0.14",
+    "json-glib-1.0",
+    "libxml-2.0",
+    "gtk-vnc-2.0",
+    "gvnc-1.0",
+    "gvncpulse-1.0",
+    "libvirt-gconfig-1.0",
+    "libvirt-glib-1.0",
+    "libvirt-gobject-1.0",
+    "spice-client-glib-2.0",
+    "spice-client-gtk-3.0",
+    "spice-protocol",
+    "accountsservice",
+    "appstream",
+    "avahi-client",
+    "avahi-gobject",
+    "champlain-0.12",
+    "colord",
+    "colord-gtk",
+    "dbus-glib-1",
+    "enchant",
+    "gck-1",
+    "gcr-3",
+    "gcr-ui-3",
+    "gdl-1.0",
+    "gdl-3.0",
+    "gdu",
+    "gdu-gtk",
+    "gedit",
+    "geocode-glib-1.0",
+    "ggit-1.0",
+    "gobject-introspection-1.0",
+    "gudev-1.0",
+    "javascriptcoregtk-3.0",
+    "jsonrpc-glib-1.0",
+    "libarchive",
+    "libdmapsharing-3.0",
+    "libepc-1.0",
+    "libgitg-ext-1.0",
+    "libgsf-1",
+    "libide-1.0",
+    "libnm-glib",
+    "libnm-util",
+    "libnotify",
+    "liboobs-1",
+    "libosinfo-1.0",
+    "libpeas-1.0",
+    "libwnck-3.0",
+    "packagekit-glib2",
+    "pkcs11",
+    "poppler-glib",
+    "udisks2",
+    "unique-1.0",
+    "dbusmenu-glib-0.4",
+    "dbusmenu-gtk3-0.4",
+    "dee-1.0",
+    "snapd-glib",
+    "unity",
+    "unity-trace",
+    "zeitgeist-1.0",
+    "zeitgeist-datamodel-2.0",
+    "granite",
+    "switchboard-2.0",
+    "sdl",
+    "sdl-gfx",
+    "sdl-image",
+    "sdl-mixer",
+    "sdl-net",
+    "sdl-ttf",
+    "libpq",
+    "mysql",
+    "raptor",
+    "rasqal",
+    "tokyocabinet",
+    "alsa",
+    "atasmart",
+    "curses",
+    "fuse",
+    "gusb",
+    "hal",
+    "libftdi",
+    "libmm-glib",
+    "libnl-1",
+    "libnl-2.0",
+    "libnl-3.0",
+    "libpulse",
+    "libpulse-mainloop-glib",
+    "libpulse-simple",
+    "libusb",
+    "libusb-1.0",
+    "libxklavier",
+    "linux",
+    "posix",
+    "readline",
+    "v4l2",
+    "x11",
+    "xtst",
+    "libgvc",
+    "libmagic",
+    "pixman-1",
+    "taglib_c",
+    "tiff",
+    "bzlib",
+    "gsl",
+    "gtkmozembed",
+    "hildon-1",
+    "hildon-fm-2",
+    "libdaemon",
+    "libesmtp",
+    "libosso",
+    "libproxy-1.0",
+    "loudmouth-1.0",
+    "lua",
+    "mx-1.0",
+    "mx-2.0",
+    "orc-0.4",
+    "purple",
+    "zlib",
+    "aubio",
+    "augeas",
+    "cairo-xcb",
+    "cairosdl",
+    "cpufreq",
+    "ctpl",
+    "cups",
+    "fcgi",
+    "gcrypt",
+    "gles2",
+    "glfw3",
+    "gpg-error",
+    "gpgme",
+    "kiss_fft",
+    "leveldb",
+    "libcolumbus",
+    "libcouchbase",
+    "libcurl",
+    "libevent",
+    "libgsasl",
+    "libmarkdown",
+    "libmatheval",
+    "libmemcached",
+    "libmemcachedutil",
+    "libqpid-proton",
+    "librabbitmq",
+    "libserialport",
+    "libstemmer",
+    "libsystemd-id128",
+    "libsystemd-journal",
+    "libzmq",
+    "magic",
+    "oniguruma",
+    "OpenCL",
+    "opencv",
+    "pa_ringbuffer",
+    "portaudio",
+    "portmidi",
+    "pwquality",
+    "qrencode",
+    "samplerate",
+    "sane-backends",
+    "sdl2",
+    "sdl2-android",
+    "sdl2-gfx",
+    "sdl2-image",
+    "sdl2-ios",
+    "sdl2-mixer",
+    "sdl2-net",
+    "sdl2-ttf",
+    "sdl2-windows",
+    "sensors",
+    "snappy",
+    "sndfile",
+    "tcc",
+    "uchardet",
+    "uuid",
+    "xcb",
+    "xcb-composite",
+    "xcb-damage",
+    "xcb-dri2",
+    "xcb-dri3",
+    "xcb-icccm",
+    "xcb-present",
+    "xcb-randr",
+    "xcb-render",
+    "xcb-res",
+    "xcb-shape",
+    "xcb-shm",
+    "xcb-sync",
+    "xcb-xfixes",
+    "xcb-xinerama",
+    "xcb-xtest",
+    "xcb-xv"
+};
+
 public class App : Gtk.Application {
 
     public App () {
@@ -62,7 +358,7 @@ public class App : Gtk.Application {
         if (online) {
             vala.load_uri (user_settings.get_string ("last-vala"));
         } else {
-            vala.load_uri ("file://" + Environment.get_home_dir () + "/.local/share/com.github.mdh34.quickdocs/");
+            vala.load_uri ("file://" + GLib.Environment.get_user_data_dir () + "/com.github.mdh34.quickdocs/");
         }
 
         var dev = new WebView.with_context (context);
@@ -72,7 +368,9 @@ public class App : Gtk.Application {
 
         stack.add_titled (vala, "vala", "Valadoc");
         stack.add_titled (dev, "dev", "DevDocs");
+        
 
+        
         var back = new Button.from_icon_name ("go-previous-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         back.clicked.connect (() => {
             if (stack.get_visible_child_name () == "vala") {
@@ -95,11 +393,30 @@ public class App : Gtk.Application {
         theme_button.clicked.connect(() => {
             toggle_theme (dev);   
         });
+                
         
-        var offline_button = new Button.from_icon_name ("folder-download-symbolic");
-        offline_button.clicked.connect(() => {
-            download_docs ();
-        });
+        var package_list = new ListBox ();
+        package_list.set_selection_mode(Gtk.SelectionMode.NONE);
+        var group = new SizeGroup (Gtk.SizeGroupMode.BOTH);
+        foreach (string item in PACKAGES) {
+            package_list.add(new Downloader.Package (item, group));
+        }
+        
+        var package_view = new ScrolledWindow (null,null);
+        package_view.hscrollbar_policy = Gtk.PolicyType.NEVER;
+        package_view.max_content_height = 512;
+        package_view.propagate_natural_height = true;
+        package_view.add (package_list);
+        package_view.show_all ();
+      
+
+        var offline_popover = new Popover (null);
+        offline_popover.add (package_view);
+
+        var offline_button = new MenuButton ();
+        offline_button.image = new Gtk.Image.from_icon_name ("folder-download-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
+        offline_button.popover = offline_popover;
+        offline_button.valign = Gtk.Align.CENTER;
 
         header.add (back);
         header.add (forward);
@@ -115,7 +432,7 @@ public class App : Gtk.Application {
         try {
             provider.load_from_data (style, -1);
         } catch {
-            print ("Couldn't load CSS");
+            warning ("Couldn't load CSS");
         }
 
         stack.notify["visible-child"].connect (() => {
@@ -198,13 +515,6 @@ public class App : Gtk.Application {
             offline_button.set_visible (false);
         }
     }
-    private void download_docs () {
-        try {
-            Process.spawn_command_line_async ("x-terminal-emulator -e /usr/share/com.github.mdh34.quickdocs/offline.sh");
-        } catch (SpawnError e) {
-            print (e.message);
-        }
-    }
 
     private void first_run (WebView view) {
         var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
@@ -235,15 +545,16 @@ public class App : Gtk.Application {
     }
 
     private void set_cookies (CookieManager cookies) {
-        var path = (Environment.get_home_dir () + "/.config/com.github.mdh34.quickdocs/cookies");
-        var folder = (Environment.get_home_dir () + "/.config/com.github.mdh34.quickdocs/");
-        var file = File.new_for_path (folder);
-        if (!file.query_exists ()) {
+        string path = Path.build_filename (Environment.get_home_dir (), ".config", "com.github.mdh34.quickdocs", "cookies");
+        string folder = Path.build_filename (Environment.get_home_dir (), ".config", "com.github.mdh34.quickdocs");
+        
+        if (!GLib.FileUtils.test (folder, GLib.FileTest.IS_DIR)) {
+            var file = File.new_for_path (folder);
             try {
                 file.make_directory ();
             } catch (Error e) {
-                print ("Unable to create config directory");
-                print (e.message);
+                warning ("Unable to create config directory");
+                warning (e.message);
             }
         }
         cookies.set_accept_policy (CookieAcceptPolicy.ALWAYS);
@@ -263,12 +574,12 @@ public class App : Gtk.Application {
         if (dark == 1) {
             window_settings.set ("gtk-application-prefer-dark-theme", false);
             user_settings.set_int ("dark", 0);
-            view.run_javascript ("document.cookie = 'dark=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';", null);
+            view.run_javascript.begin ("document.cookie = 'dark=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';", null);
             view.reload_bypass_cache ();
         } else {
             window_settings.set ("gtk-application-prefer-dark-theme", true);
             user_settings.set_int ("dark", 1);
-            view.run_javascript ("document.cookie = 'dark=1; expires=01 Jan 2020 00:00:00 UTC';", null);
+            view.run_javascript.begin ("document.cookie = 'dark=1; expires=01 Jan 2100 00:00:00 UTC';", null);
             view.reload_bypass_cache ();
         }
     }
