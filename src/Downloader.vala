@@ -10,13 +10,15 @@ namespace Downloader {
 		reader.support_filter_all ();
 		reader.support_format_all ();
 		string path = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs", item + ".tar.bz2");
+		string destination = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs/");
 		disk.set_standard_lookup ();
 		reader.open_filename (path, 4096);
 		unowned Archive.Entry entry;
-		while (reader.next_header (out entry) == Archive.Result.OK) {
+		
+while (reader.next_header (out entry) == Archive.Result.OK) {			
+			entry.set_pathname (destination + entry.pathname ());
 			disk.write_header (entry);
 			if (entry.size () > 0) {
-				//copy data (read, disk);
 				while (reader.read_data_block(out buff, out size, out offset) != Archive.Result.EOF) {
 					disk.write_data_block(buff, size, offset);
 				}
