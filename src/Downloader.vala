@@ -1,14 +1,16 @@
 namespace Downloader {
 
 	public void decompress (string item) {
-		
 		var reader = new Archive.Read ();
 		var disk = new Archive.WriteDisk ();
+
 		unowned void* buff;
 		unowned size_t size;
 		unowned Posix.off_t offset;
-		reader.support_filter_all ();
+
+		reader.support_filter_bzip2 ();
 		reader.support_format_all ();
+
 		string path = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs", item + ".tar.bz2");
 		string destination = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs/");
 		disk.set_standard_lookup ();
