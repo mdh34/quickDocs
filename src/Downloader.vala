@@ -1,5 +1,4 @@
 namespace Downloader {
-    
 	public void download (string item) {
 		string folder_path = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs");
 		var folder = File.new_for_path (folder_path);
@@ -13,15 +12,11 @@ namespace Downloader {
             }
         }
 
-		
-
 		File target = File.new_for_uri ("https://valadoc.org/" + item + "/" + item + ".tar.bz2");
 		string dest_path = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs", item + ".tar.bz2");
 
 		File destination = File.new_for_path (dest_path);
 		target.copy_async.begin (destination, 0, Priority.DEFAULT, null, null);
-		
-		
     }
 
 	public void remove (string item) {
@@ -49,7 +44,5 @@ namespace Downloader {
 			this.add (box);
 			show_all ();
 		}
-		
-		
 	}
 }
