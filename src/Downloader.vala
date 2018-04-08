@@ -11,8 +11,8 @@ namespace Downloader {
 		reader.support_filter_bzip2 ();
 		reader.support_format_all ();
 
-		string path = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs", item + ".tar.bz2");
-		string destination = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs/");
+		string path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item + ".tar.bz2");
+		string destination = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs/");
 		disk.set_standard_lookup ();
 		reader.open_filename (path, 4096);
 		unowned Archive.Entry entry;
@@ -31,7 +31,7 @@ while (reader.next_header (out entry) == Archive.Result.OK) {
 	
 public void download (string item) {
 		var loop = new MainLoop ();
-		string folder_path = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs");
+		string folder_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs");
 		
 		
 		if (!GLib.FileUtils.test (folder_path, GLib.FileTest.IS_DIR)) {
@@ -45,7 +45,7 @@ public void download (string item) {
         }
 
 		File target = File.new_for_uri ("https://valadoc.org/" + item + "/" + item + ".tar.bz2");
-		string dest_path = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs", item + ".tar.bz2");
+		string dest_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item + ".tar.bz2");
 
 		File destination = File.new_for_path (dest_path);
 		target.copy_async.begin (destination, 0, Priority.DEFAULT, null, () => {}, (obj, res) => {
@@ -63,7 +63,7 @@ public void download (string item) {
 	public void remove (string item) {
 		var loop = new MainLoop ();
 
-		string folder_path = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs", item);
+		string folder_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item);
 		File folder = File.new_for_path (folder_path);
 
 		folder.trash_async.begin (0, null, (obj, res) => {
@@ -76,7 +76,7 @@ public void download (string item) {
 		});
 		loop.run ();
 
-		string file_path = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs", item + ".tar.bz2");
+		string file_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item + ".tar.bz2");
 		File file = File.new_for_path (file_path);
 		
 		file.delete_async.begin (0, null, (obj, res) => {
