@@ -1,5 +1,11 @@
 namespace Downloader {
+
+	public void decompress (string item) {
+		
+		
+	}
 	public void download (string item) {
+		var loop = new MainLoop ();
 		string folder_path = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs");
 		
 		
@@ -17,13 +23,44 @@ namespace Downloader {
 		string dest_path = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs", item + ".tar.bz2");
 
 		File destination = File.new_for_path (dest_path);
-		target.copy_async.begin (destination, 0, Priority.DEFAULT, null, null);
+		target.copy_async.begin (destination, 0, Priority.DEFAULT, null, () => {}, (obj, res) => {
+			try {
+				//bool tmp = target.copy_async.end (res);
+				target.copy_async.end (res);
+			} catch (Error e) {
+				warning (e.message);
+			}
+			loop.quit ();
+		});
+		loop.run ();
     }
 
+	
 	public void remove (string item) {
-		string path = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs", item + ".tar.bz2");
-		File folder = File.new_for_path (path);
-		folder.delete_async.begin (0, null);
+		var loop = new MainLoop ();
+		string folder_path = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs", item);
+		File folder = File.new_for_path (folder_path);
+		folder.trash_async.begin (0, null, (obj, res) => {
+			try {
+				folder.trash_async.end (res);
+			} catch (Error e) {
+				warning (e.message);
+			}
+			loop.quit ();
+		});
+		loop.run ();
+
+		string file_path = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs", item + ".tar.bz2");
+		File file = File.new_for_path (file_path);
+		file.delete_async.begin (0, null, (obj, res) => {
+			try {
+				file.delete_async.end (res);
+			} catch (Error e) {
+				warning (e.message);
+			}
+			loop.quit ();
+		});
+		loop.run ();
 	}
 	
 	public void toggled (Gtk.Button button, string name, GLib.Settings user_settings) {
@@ -41,6 +78,8 @@ namespace Downloader {
 			user_settings.set_strv ("packages", installed);
 		} else {
 			download (name);
+			
+			decompress (name);
 			button.image = new Gtk.Image.from_icon_name ("edit-delete-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
 			button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 			installed += name;

@@ -14,7 +14,9 @@ executable(
     'src/Downloader.vala',
     dependencies: [
         dependency('gtk+-3.0'),
-        dependency('webkit2gtk-4.0')
+        dependency('libarchive'),
+        dependency('webkit2gtk-4.0'),
+        
     ],
     install: true
 )
