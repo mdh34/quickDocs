@@ -39,12 +39,11 @@ namespace Downloader {
 				Downloader.remove (name);
 			});
 			var label = new Gtk.Label (name);
+			label.xalign = 0;
 			box.pack_start (label);
 			box.pack_start (download_button);
 			box.pack_start (remove_button);
 			group.add_widget (label);
-			group.add_widget (download_button);
-			group.add_widget (remove_button);
 			this.add (box);
 			show_all ();
 		}
