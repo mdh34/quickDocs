@@ -397,9 +397,9 @@ public class App : Gtk.Application {
         
         var package_list = new ListBox ();
         package_list.set_selection_mode(Gtk.SelectionMode.NONE);
- 
+        var group = new SizeGroup (Gtk.SizeGroupMode.BOTH);
         foreach (string item in PACKAGES) {
-            package_list.add(new Downloader.Package (item));
+            package_list.add(new Downloader.Package (item, group));
         }
         
         var package_view = new ScrolledWindow (null,null);

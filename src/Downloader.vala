@@ -26,14 +26,15 @@ namespace Downloader {
 	}
 
 	public class Package : Gtk.ListBoxRow {
-		public Package (string name) {
-			var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL,20);
+		public Package (string name, Gtk.SizeGroup group) {
+			var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL,10);
 			box.border_width = 10;
-			var download_button = new Gtk.Button.with_label ("Download");
+			var download_button = new Gtk.Button.from_icon_name ("browser-download-symbolic");
 			download_button.clicked.connect(() => {
 				Downloader.download (name);
 			});
-			var remove_button = new Gtk.Button.with_label ("Delete");
+			var remove_button = new Gtk.Button.from_icon_name ("edit-delete-symbolic");
+			remove_button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 			remove_button.clicked.connect(() => {
 				Downloader.remove (name);
 			});
@@ -41,6 +42,9 @@ namespace Downloader {
 			box.pack_start (label);
 			box.pack_start (download_button);
 			box.pack_start (remove_button);
+			group.add_widget (label);
+			group.add_widget (download_button);
+			group.add_widget (remove_button);
 			this.add (box);
 			show_all ();
 		}
