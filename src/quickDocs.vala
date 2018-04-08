@@ -547,8 +547,9 @@ public class App : Gtk.Application {
     private void set_cookies (CookieManager cookies) {
         string path = Path.build_filename (Environment.get_home_dir (), ".config", "com.github.mdh34.quickdocs", "cookies");
         string folder = Path.build_filename (Environment.get_home_dir (), ".config", "com.github.mdh34.quickdocs");
-        var file = File.new_for_path (folder);
-        if (!file.query_exists ()) {
+        
+        if (!GLib.FileUtils.test (folder, GLib.FileTest.IS_DIR)) {
+            var file = File.new_for_path (folder);
             try {
                 file.make_directory ();
             } catch (Error e) {

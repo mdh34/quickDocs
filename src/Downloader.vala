@@ -1,9 +1,10 @@
 namespace Downloader {
 	public void download (string item) {
 		string folder_path = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs");
-		var folder = File.new_for_path (folder_path);
 		
-		if (!folder.query_exists ()) {
+		
+		if (!GLib.FileUtils.test (folder_path, GLib.FileTest.IS_DIR)) {
+			var folder = File.new_for_path (folder_path);
             try {
                 folder.make_directory ();
             } catch (Error e) {
