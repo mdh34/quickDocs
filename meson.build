@@ -11,6 +11,7 @@ add_global_arguments('-DGETTEXT_PACKAGE="@0@"'.format (meson.project_name()), la
 executable(
     meson.project_name(),
     'src/quickDocs.vala',
+    'src/Downloader.vala',
     dependencies: [
         dependency('gtk+-3.0'),
         dependency('webkit2gtk-4.0')
