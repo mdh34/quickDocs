@@ -2,7 +2,27 @@ namespace Downloader {
 
 	public void decompress (string item) {
 		
-		
+		var reader = new Archive.Read ();
+		var disk = new Archive.WriteDisk ();
+		unowned void* buff;
+		unowned size_t size;
+		unowned Posix.off_t offset;
+		reader.support_filter_all ();
+		reader.support_format_all ();
+		string path = Path.build_filename (Environment.get_home_dir (), ".local", "share", "com.github.mdh34.quickdocs", item + ".tar.bz2");
+		disk.set_standard_lookup ();
+		reader.open_filename (path, 4096);
+		unowned Archive.Entry entry;
+		while (reader.next_header (out entry) == Archive.Result.OK) {
+			disk.write_header (entry);
+			if (entry.size () > 0) {
+				//copy data (read, disk);
+				while (reader.read_data_block(out buff, out size, out offset) != Archive.Result.EOF) {
+					disk.write_data_block(buff, size, offset);
+				}
+			}
+		}
+	
 	}
 	
 public void download (string item) {
