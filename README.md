@@ -15,6 +15,7 @@ A fast developer docs reader
  Both are avalibale to use offline
 ## Build Dependencies:
  - libarchive-dev
+ - libdevhelp-dev
  - libgtk-3-dev
  - libwebkit2gtk-4.0-dev
  - meson
@@ -24,6 +25,7 @@ A fast developer docs reader
  - curl
  - wget
  - libarchive
+ - libdevhelp
  - libwebkit2gtk-4.0
 
 ## Install:
@@ -32,7 +34,7 @@ A fast developer docs reader
 ## Install From Source:
 The following instructions should work on most debian-based systems:
 ```
-sudo apt install libgtk-3-dev libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev meson valac
+sudo apt install libgtk-3-dev libdevhelp-dev libdevhelp libwebkit2gtk-4.0 libwebkit2gtk-4.0-dev meson valac
 git clone https://github.com/mdh34/quickDocs.git
 cd ./quickDocs/
 meson build --prefix=/usr

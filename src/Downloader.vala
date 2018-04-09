@@ -29,8 +29,8 @@ namespace Downloader {
 		var disk = new Archive.WriteDisk ();
 		disk.set_standard_lookup ();
 
-		string path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item + ".tar.bz2");
-		string destination = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs/");
+		string path = Path.build_filename (GLib.Environment.get_user_data_dir (), "devhelp", "books", item + ".tar.bz2");
+		string destination = Path.build_filename (GLib.Environment.get_user_data_dir (), "devhelp", "books/");
 
 		reader.open_filename (path, 4096);
 		unowned Archive.Entry entry;
@@ -56,7 +56,7 @@ namespace Downloader {
 	
 public void download (string item) {
 		var loop = new MainLoop ();
-		string folder_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs");
+		string folder_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "devhelp", "books");
 		
 		
 		if (!GLib.FileUtils.test (folder_path, GLib.FileTest.IS_DIR)) {
@@ -70,7 +70,7 @@ public void download (string item) {
         }
 
 		File target = File.new_for_uri ("https://valadoc.org/" + item + "/" + item + ".tar.bz2");
-		string dest_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item + ".tar.bz2");
+		string dest_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "devhelp", "books", item + ".tar.bz2");
 
 		File destination = File.new_for_path (dest_path);
 		target.copy_async.begin (destination, 0, Priority.DEFAULT, null, () => {}, (obj, res) => {
@@ -88,7 +88,7 @@ public void download (string item) {
 	public void remove (string item, bool cleanup) {
 		var loop = new MainLoop ();
 		if (!cleanup) {
-			string folder_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item);
+			string folder_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "devhelp", "books", item);
 			File folder = File.new_for_path (folder_path);
 
 			folder.trash_async.begin (0, null, (obj, res) => {
@@ -103,7 +103,7 @@ public void download (string item) {
 		}
 		
 		else {
-			string file_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item + ".tar.bz2");
+			string file_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "devhelp", "books", item + ".tar.bz2");
 			File file = File.new_for_path (file_path);
 			
 			file.delete_async.begin (0, null, (obj, res) => {

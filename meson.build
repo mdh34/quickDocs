@@ -4,6 +4,7 @@ project('com.github.mdh34.quickdocs', 'vala', 'c')
 # Include the translations module
 i18n = import('i18n')
 
+add_project_arguments(['--vapidir', join_paths(meson.current_source_dir(), 'vapi')], language: 'vala')
 # Set our translation domain
 add_global_arguments('-DGETTEXT_PACKAGE="@0@"'.format (meson.project_name()), language:'c')
 
@@ -15,6 +16,7 @@ executable(
     dependencies: [
         dependency('gtk+-3.0'),
         dependency('libarchive'),
+        dependency('libdevhelp-3.0'),
         dependency('webkit2gtk-4.0'),
         
     ],

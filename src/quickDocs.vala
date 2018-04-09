@@ -355,21 +355,28 @@ public class App : Gtk.Application {
 
         var online = check_online ();
         var vala = new WebView();
+
         if (online) {
             vala.load_uri (user_settings.get_string ("last-vala"));
+            stack.add_titled (vala, "vala", "Valadoc");
         } else {
-            vala.load_uri ("file://" + GLib.Environment.get_user_data_dir () + "/com.github.mdh34.quickdocs/");
+            var manager = Dh.BookManager.get_singleton ();
+            var sidebar = new Dh.Sidebar (manager);
+            sidebar.link_selected.connect ((source, link) => {
+                vala.load_uri (link.get_uri ());
+            });
+            var pane = new Paned(Gtk.Orientation.HORIZONTAL);
+            pane.add1 (sidebar);
+            pane.add2 (vala);
+            pane.set_position (300);
+            stack.add_titled (pane, "vala", "Valadoc");
         }
 
         var dev = new WebView.with_context (context);
         first_run (dev);
         set_appcache (dev, online);
         dev.load_uri (user_settings.get_string ("last-dev"));
-
-        stack.add_titled (vala, "vala", "Valadoc");
         stack.add_titled (dev, "dev", "DevDocs");
-        
-
         
         var back = new Button.from_icon_name ("go-previous-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         back.clicked.connect (() => {
@@ -394,7 +401,6 @@ public class App : Gtk.Application {
             toggle_theme (dev);   
         });
                 
-        
         var package_list = new ListBox ();
         package_list.set_selection_mode(Gtk.SelectionMode.NONE);
         var group = new SizeGroup (Gtk.SizeGroupMode.BOTH);
@@ -409,15 +415,14 @@ public class App : Gtk.Application {
         package_view.add (package_list);
         package_view.show_all ();
       
-
         var offline_popover = new Popover (null);
         offline_popover.add (package_view);
 
         var offline_button = new MenuButton ();
         offline_button.image = new Gtk.Image.from_icon_name ("folder-download-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         offline_button.popover = offline_popover;
+        offline_button.sensitive = online;
         offline_button.valign = Gtk.Align.CENTER;
-
         header.add (back);
         header.add (forward);
         header.pack_end (theme_button);
@@ -454,7 +459,6 @@ public class App : Gtk.Application {
         theme_button.set_visible (false);
         set_tab (stack);
 
-
         window.delete_event.connect (() => {
             int current_x, current_y, width, height;
             window.get_position (out current_x, out current_y);
@@ -480,7 +484,6 @@ public class App : Gtk.Application {
             change_tab (stack);
         });
     }
-
 
     private void change_tab (Stack stack) {
         var current = stack.get_visible_child_name ();
