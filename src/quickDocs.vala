@@ -327,7 +327,6 @@ public class App : Gtk.Application {
         );
     }
 
-
     protected override void activate () {
         var window = new ApplicationWindow (this);
         window.set_position (WindowPosition.CENTER);
@@ -377,7 +376,7 @@ public class App : Gtk.Application {
         set_appcache (dev, online);
         dev.load_uri (user_settings.get_string ("last-dev"));
         stack.add_titled (dev, "dev", "DevDocs");
-        
+
         var back = new Button.from_icon_name ("go-previous-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         back.clicked.connect (() => {
             if (stack.get_visible_child_name () == "vala") {
@@ -398,23 +397,23 @@ public class App : Gtk.Application {
 
         var theme_button = new Button.from_icon_name ("object-inverse-symbolic");
         theme_button.clicked.connect(() => {
-            toggle_theme (dev);   
+            toggle_theme (dev);
         });
-                
+
         var package_list = new ListBox ();
         package_list.set_selection_mode(Gtk.SelectionMode.NONE);
         var group = new SizeGroup (Gtk.SizeGroupMode.BOTH);
         foreach (string item in PACKAGES) {
             package_list.add(new Downloader.Package (item, group));
         }
-        
+
         var package_view = new ScrolledWindow (null,null);
         package_view.hscrollbar_policy = Gtk.PolicyType.NEVER;
         package_view.max_content_height = 512;
         package_view.propagate_natural_height = true;
         package_view.add (package_list);
         package_view.show_all ();
-      
+
         var offline_popover = new Popover (null);
         offline_popover.add (package_view);
 
@@ -427,7 +426,7 @@ public class App : Gtk.Application {
         header.add (forward);
         header.pack_end (theme_button);
         header.pack_end (offline_button);
-        
+
         window.add (stack);
         init_theme ();
 
@@ -443,7 +442,7 @@ public class App : Gtk.Application {
         stack.notify["visible-child"].connect (() => {
             stack_change(stack, provider, theme_button, offline_button);
         });
-        
+
         var window_x = user_settings.get_int ("window-x");
         var window_y = user_settings.get_int ("window-y");
         if (window_x != -1 ||  window_y != -1) {
@@ -455,7 +454,7 @@ public class App : Gtk.Application {
         window.set_default_size (window_width, window_height);
 
         window.show_all ();
-        
+
         theme_button.set_visible (false);
         set_tab (stack);
 
@@ -468,11 +467,11 @@ public class App : Gtk.Application {
             user_settings.set_int ("width", width);
             user_settings.set_int ("height", height);
             user_settings.set_string ("last-dev", dev.uri);
-            
+
             if (online) {
                 user_settings.set_string ("last-vala", vala.uri);
             }
-            
+
             return false;
         });
 
@@ -550,7 +549,7 @@ public class App : Gtk.Application {
     private void set_cookies (CookieManager cookies) {
         string path = Path.build_filename (Environment.get_home_dir (), ".config", "com.github.mdh34.quickdocs", "cookies");
         string folder = Path.build_filename (Environment.get_home_dir (), ".config", "com.github.mdh34.quickdocs");
-        
+
         if (!GLib.FileUtils.test (folder, GLib.FileTest.IS_DIR)) {
             var file = File.new_for_path (folder);
             try {
