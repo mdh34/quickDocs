@@ -85,55 +85,60 @@ public void download (string item) {
     }
 
 	
-	public void remove (string item) {
+	public void remove (string item, bool cleanup) {
 		var loop = new MainLoop ();
+		if (!cleanup) {
+			string folder_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item);
+			File folder = File.new_for_path (folder_path);
 
-		string folder_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item);
-		File folder = File.new_for_path (folder_path);
-
-		folder.trash_async.begin (0, null, (obj, res) => {
-			try {
-				folder.trash_async.end (res);
-			} catch (Error e) {
-				warning (e.message);
-			}
-			loop.quit ();
-		});
-		loop.run ();
-
-		string file_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item + ".tar.bz2");
-		File file = File.new_for_path (file_path);
+			folder.trash_async.begin (0, null, (obj, res) => {
+				try {
+					folder.trash_async.end (res);
+				} catch (Error e) {
+					warning (e.message);
+				}
+				loop.quit ();
+			});
+			loop.run ();
+		}
 		
-		file.delete_async.begin (0, null, (obj, res) => {
-			try {
-				file.delete_async.end (res);
-			} catch (Error e) {
-				warning (e.message);
-			}
-			loop.quit ();
-		});
-		loop.run ();
+		else {
+			string file_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item + ".tar.bz2");
+			File file = File.new_for_path (file_path);
+			
+			file.delete_async.begin (0, null, (obj, res) => {
+				try {
+					file.delete_async.end (res);
+				} catch (Error e) {
+					warning (e.message);
+				}
+				loop.quit ();
+			});
+			loop.run ();
+		}
 	}
 	
 	public void toggled (Gtk.Button button, string name, GLib.Settings user_settings) {
 		string [] installed = user_settings.get_strv ("packages");
 		if (name in installed) {
-			remove (name);
+			remove (name, false);
 			button.image = new Gtk.Image.from_icon_name ("browser-download-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
 			button.get_style_context ().remove_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+			
 			for (int i =0; i < installed.length; i++) {
 				if (installed[i] == name) {
 					installed[i] = null;
 				}
 			}
-
 			user_settings.set_strv ("packages", installed);
 		} else {
 			download (name);
-			
 			decompress (name);
+			remove (name, true);
+
 			button.image = new Gtk.Image.from_icon_name ("edit-delete-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
 			button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+	
 			installed += name;
 			user_settings.set_strv ("packages", installed);
 		}
