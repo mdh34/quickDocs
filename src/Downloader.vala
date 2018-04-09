@@ -23,27 +23,31 @@ namespace Downloader {
 
 	public void decompress (string item) {
 		var reader = new Archive.Read ();
-		var disk = new Archive.WriteDisk ();
-
-		unowned void* buff;
-		unowned size_t size;
-		unowned Posix.off_t offset;
-
 		reader.support_filter_bzip2 ();
 		reader.support_format_all ();
 
+		var disk = new Archive.WriteDisk ();
+		disk.set_standard_lookup ();
+
 		string path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item + ".tar.bz2");
 		string destination = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs/");
-		disk.set_standard_lookup ();
+
 		reader.open_filename (path, 4096);
 		unowned Archive.Entry entry;
 		
-while (reader.next_header (out entry) == Archive.Result.OK) {			
+		while (reader.next_header (out entry) == Archive.Result.OK) {			
 			entry.set_pathname (destination + entry.pathname ());
-			disk.write_header (entry);
+			if(disk.write_header (entry) != Archive.Result.OK) {
+				continue;
+			};
+			
+			void* buffer = null;
+			size_t buffer_length;
+			Posix.off_t offset;
+
 			if (entry.size () > 0) {
-				while (reader.read_data_block(out buff, out size, out offset) != Archive.Result.EOF) {
-					disk.write_data_block(buff, size, offset);
+				while (reader.read_data_block(out buffer, out buffer_length, out offset) != Archive.Result.EOF) {
+					disk.write_data_block(buffer, buffer_length, offset);
 				}
 			}
 		}
