@@ -1,28 +1,53 @@
+/*
+ * Copyright (c) 2018 Matt Harris
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301 USA
+ *
+ * Authored by: Matt Harris <matth281@outlook.com>
+ */
+
 namespace Downloader {
 
 	public void decompress (string item) {
 		var reader = new Archive.Read ();
-		var disk = new Archive.WriteDisk ();
-
-		unowned void* buff;
-		unowned size_t size;
-		unowned Posix.off_t offset;
-
 		reader.support_filter_bzip2 ();
 		reader.support_format_all ();
 
+		var disk = new Archive.WriteDisk ();
+		disk.set_standard_lookup ();
+
 		string path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item + ".tar.bz2");
 		string destination = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs/");
-		disk.set_standard_lookup ();
+
 		reader.open_filename (path, 4096);
 		unowned Archive.Entry entry;
 		
-while (reader.next_header (out entry) == Archive.Result.OK) {			
+		while (reader.next_header (out entry) == Archive.Result.OK) {			
 			entry.set_pathname (destination + entry.pathname ());
-			disk.write_header (entry);
+			if(disk.write_header (entry) != Archive.Result.OK) {
+				continue;
+			};
+			
+			void* buffer = null;
+			size_t buffer_length;
+			Posix.off_t offset;
+
 			if (entry.size () > 0) {
-				while (reader.read_data_block(out buff, out size, out offset) != Archive.Result.EOF) {
-					disk.write_data_block(buff, size, offset);
+				while (reader.read_data_block(out buffer, out buffer_length, out offset) != Archive.Result.EOF) {
+					disk.write_data_block(buffer, buffer_length, offset);
 				}
 			}
 		}
@@ -60,55 +85,60 @@ public void download (string item) {
     }
 
 	
-	public void remove (string item) {
+	public void remove (string item, bool cleanup) {
 		var loop = new MainLoop ();
+		if (!cleanup) {
+			string folder_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item);
+			File folder = File.new_for_path (folder_path);
 
-		string folder_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item);
-		File folder = File.new_for_path (folder_path);
-
-		folder.trash_async.begin (0, null, (obj, res) => {
-			try {
-				folder.trash_async.end (res);
-			} catch (Error e) {
-				warning (e.message);
-			}
-			loop.quit ();
-		});
-		loop.run ();
-
-		string file_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item + ".tar.bz2");
-		File file = File.new_for_path (file_path);
+			folder.trash_async.begin (0, null, (obj, res) => {
+				try {
+					folder.trash_async.end (res);
+				} catch (Error e) {
+					warning (e.message);
+				}
+				loop.quit ();
+			});
+			loop.run ();
+		}
 		
-		file.delete_async.begin (0, null, (obj, res) => {
-			try {
-				file.delete_async.end (res);
-			} catch (Error e) {
-				warning (e.message);
-			}
-			loop.quit ();
-		});
-		loop.run ();
+		else {
+			string file_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "com.github.mdh34.quickdocs", item + ".tar.bz2");
+			File file = File.new_for_path (file_path);
+			
+			file.delete_async.begin (0, null, (obj, res) => {
+				try {
+					file.delete_async.end (res);
+				} catch (Error e) {
+					warning (e.message);
+				}
+				loop.quit ();
+			});
+			loop.run ();
+		}
 	}
 	
 	public void toggled (Gtk.Button button, string name, GLib.Settings user_settings) {
 		string [] installed = user_settings.get_strv ("packages");
 		if (name in installed) {
-			remove (name);
+			remove (name, false);
 			button.image = new Gtk.Image.from_icon_name ("browser-download-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
 			button.get_style_context ().remove_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+			
 			for (int i =0; i < installed.length; i++) {
 				if (installed[i] == name) {
 					installed[i] = null;
 				}
 			}
-
 			user_settings.set_strv ("packages", installed);
 		} else {
 			download (name);
-			
 			decompress (name);
+			remove (name, true);
+
 			button.image = new Gtk.Image.from_icon_name ("edit-delete-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
 			button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
+	
 			installed += name;
 			user_settings.set_strv ("packages", installed);
 		}
