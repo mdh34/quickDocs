@@ -115,7 +115,7 @@
     </screenshot>
   </screenshots>
   <custom>
-    <value key="x-appcenter-color-primary">#b972b7</value>
+    <value key="x-appcenter-color-primary">#4c158a</value>
     <value key="x-appcenter-color-primary-text">rgb(255, 255, 255)</value>
     <value key="x-appcenter-suggested-price">2</value>
   </custom>
