@@ -396,7 +396,7 @@ public class App : Gtk.Application {
             }
         });
 
-        var theme_button = new Button.from_icon_name ("object-inverse");
+        var theme_button = new Button.from_icon_name ("object-inverse-symbolic");
         theme_button.clicked.connect(() => {
             toggle_theme (dev);   
         });
