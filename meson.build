@@ -14,9 +14,9 @@ executable(
     'src/quickDocs.vala',
     'src/Downloader.vala',
     dependencies: [
-        dependency('gtk+-3.0'),
+        dependency('gtk+-3.0', version: '>=3.22'),
         dependency('libarchive'),
-        dependency('libdevhelp-3.0'),
+        dependency('libdevhelp-3.0', version :  '>=3.26'),
         dependency('webkit2gtk-4.0'),
         
     ],
