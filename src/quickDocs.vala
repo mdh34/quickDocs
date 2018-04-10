@@ -360,6 +360,7 @@ public class App : Gtk.Application {
             stack.add_titled (vala, "vala", "Valadoc");
         } else {
             var manager = new Dh.BookManager ();
+            manager.populate ();
             var sidebar = new Dh.Sidebar (manager);
             sidebar.link_selected.connect ((source, link) => {
                 vala.load_uri (link.get_uri ());
