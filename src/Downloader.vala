@@ -55,7 +55,18 @@ namespace Downloader {
 
     public void download (string item) {
         var loop = new MainLoop ();
+        string parent_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "devhelp");
         string folder_path = Path.build_filename (GLib.Environment.get_user_data_dir (), "devhelp", "books");
+
+        if (!GLib.FileUtils.test (parent_path, GLib.FileTest.IS_DIR)) {
+            var folder = File.new_for_path (parent_path);
+            try {
+                folder.make_directory ();
+            } catch (Error e) {
+                warning ("Unable to create download directory");
+                warning (e.message);
+            }
+        }
 
         if (!GLib.FileUtils.test (folder_path, GLib.FileTest.IS_DIR)) {
             var folder = File.new_for_path (folder_path);
