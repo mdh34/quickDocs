@@ -26,6 +26,15 @@
   <url type="homepage">https://github.com/mdh34/quickDocs</url>
   <url type="bugtracker">https://github.com/mdh34/quickDocs/issues</url>
   <releases>
+  <release version="2.0.0" date="2018-04-10">
+      <description>
+        <p>Major update:</p>
+        <ul>
+          <li>Brand new UI for downloading offline docs natively</li>
+          <li>Brand new offline docs UI that allows for searching and easier viewing</li>
+        </ul>
+      </description>
+  </release>
   <release version="1.2.2" date="2018-03-23">
       <description>
         <ul>
@@ -112,6 +121,12 @@
     </screenshot>
     <screenshot>
       <image>https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-3.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-4.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-5.png</image>
     </screenshot>
   </screenshots>
   <custom>

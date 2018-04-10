@@ -5,13 +5,13 @@
 ![build](https://travis-ci.org/mdh34/quickDocs.svg?branch=master) [![Get it on AppCenter](https://appcenter.elementary.io/badge.svg)](https://appcenter.elementary.io/com.github.mdh34.quickdocs)
 
 A fast developer docs reader
-![Screenshot](https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-1.png)
-![Screenshot](https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-3.png)
+![Screenshot](https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-2.png)
+![Screenshot](https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-5.png)
 
 ## Doc Sources:
  - Valadoc
  - DevDocs
- 
+
  Both are avalibale to use offline
 ## Build Dependencies:
  - libarchive-dev
