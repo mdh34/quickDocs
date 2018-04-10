@@ -359,7 +359,7 @@ public class App : Gtk.Application {
             vala.load_uri (user_settings.get_string ("last-vala"));
             stack.add_titled (vala, "vala", "Valadoc");
         } else {
-            var manager = Dh.BookManager.get_singleton ();
+            var manager = new Dh.BookManager ();
             var sidebar = new Dh.Sidebar (manager);
             sidebar.link_selected.connect ((source, link) => {
                 vala.load_uri (link.get_uri ());
@@ -395,7 +395,7 @@ public class App : Gtk.Application {
             }
         });
 
-        var theme_button = new Button.from_icon_name ("object-inverse-symbolic");
+        var theme_button = new Button.from_icon_name ("object-inverse");
         theme_button.clicked.connect(() => {
             toggle_theme (dev);
         });
@@ -409,8 +409,7 @@ public class App : Gtk.Application {
 
         var package_view = new ScrolledWindow (null,null);
         package_view.hscrollbar_policy = Gtk.PolicyType.NEVER;
-        package_view.max_content_height = 512;
-        package_view.propagate_natural_height = true;
+        package_view.min_content_height = 512;
         package_view.add (package_list);
         package_view.show_all ();
 

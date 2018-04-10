@@ -21,6 +21,7 @@ cache:
 
 matrix:
   include:
+    - env: DIST=loki
     - env: DIST=juno
 
 install:
