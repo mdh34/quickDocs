@@ -1,5 +1,10 @@
 com.github.mdh34.quickdocs (2.0.0) xenial; urgency=low
 
+  * Fixes offline DevDocs support - toggling the theme back and forth once should reload the cache
+ -- Matt Harris <matth281@outlook.com>  Sun, 15 Apr 2018 21:00:00 +0000
+
+com.github.mdh34.quickdocs (2.0.0) xenial; urgency=low
+
   * Major update:
   *.Brand new UI for downloading offline docs natively
   * Brand new offline docs UI that allows for searching and easier viewing
