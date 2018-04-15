@@ -373,7 +373,6 @@ public class App : Gtk.Application {
         }
 
         var dev = new WebView.with_context (context);
-        first_run (dev);
         set_appcache (dev, online);
         dev.load_uri (user_settings.get_string ("last-dev"));
         stack.add_titled (dev, "dev", "DevDocs");
@@ -398,7 +397,7 @@ public class App : Gtk.Application {
 
         var theme_button = new Button.from_icon_name ("object-inverse");
         theme_button.clicked.connect(() => {
-            toggle_theme (dev);
+            toggle_theme (dev, online);
         });
 
         var package_list = new ListBox ();
@@ -518,15 +517,6 @@ public class App : Gtk.Application {
         }
     }
 
-    private void first_run (WebView view) {
-        var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
-        if (user_settings.get_int ("first") == 0) {
-            view.load_uri ("https://devdocs.io");
-            user_settings.set_int ("first", 1);
-        }
-    }
-
-
     private void init_theme () {
         var window_settings = Gtk.Settings.get_default ();
         var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
@@ -540,9 +530,10 @@ public class App : Gtk.Application {
     }
 
     private void set_appcache (WebView view, bool online) {
-        var settings = view.get_settings ();
-        if (online) {
-            settings.enable_offline_web_application_cache = false;
+        var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
+        var dark = user_settings.get_int ("dark");
+        if (dark == 1 && online) {
+            view.get_settings ().enable_offline_web_application_cache = false;
         }
     }
 
@@ -569,19 +560,23 @@ public class App : Gtk.Application {
         stack.set_visible_child_name (tab);
     }
 
-    private void toggle_theme (WebView view) {
+    private void toggle_theme (WebView view, bool online) {
         var window_settings = Gtk.Settings.get_default ();
         var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
         var dark = user_settings.get_int ("dark");
         if (dark == 1) {
             window_settings.set ("gtk-application-prefer-dark-theme", false);
-            user_settings.set_int ("dark", 0);
             view.run_javascript.begin ("document.cookie = 'dark=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';", null);
+            user_settings.set_int ("dark", 0);
+            view.get_settings ().enable_offline_web_application_cache = true;
             view.reload_bypass_cache ();
         } else {
             window_settings.set ("gtk-application-prefer-dark-theme", true);
-            user_settings.set_int ("dark", 1);
             view.run_javascript.begin ("document.cookie = 'dark=1; expires=01 Jan 2100 00:00:00 UTC';", null);
+            user_settings.set_int ("dark", 1);
+            if (online) {
+                view.get_settings ().enable_offline_web_application_cache = false;
+            }
             view.reload_bypass_cache ();
         }
     }
