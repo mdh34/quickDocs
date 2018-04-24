@@ -395,7 +395,13 @@ public class App : Gtk.Application {
             }
         });
 
-        var theme_button = new Button.from_icon_name ("object-inverse");
+        var current_icons = Gtk.IconTheme.get_default ();
+        string icon_name = "object-inverse";
+        if (current_icons.lookup_icon (icon_name, 16, Gtk.IconLookupFlags.FORCE_SIZE) == null) {
+            icon_name = "weather-few-clouds-symbolic";
+        }
+
+        var theme_button = new Button.from_icon_name (icon_name);
         theme_button.clicked.connect(() => {
             toggle_theme (dev, online);
         });
