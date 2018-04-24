@@ -130,7 +130,7 @@ namespace Downloader {
 
         if (name in installed) {
             remove (name, false);
-            button.image = new Gtk.Image.from_icon_name ("browser-download-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
+            button.image = new Gtk.Image.from_icon_name ("folder-download-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
             button.get_style_context ().remove_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
             for (int i =0; i < installed.length; i++) {
@@ -165,7 +165,7 @@ namespace Downloader {
                 button.image = new Gtk.Image.from_icon_name ("edit-delete-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
                 button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
             } else {
-                button.image = new Gtk.Image.from_icon_name ("browser-download-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
+                button.image = new Gtk.Image.from_icon_name ("folder-download-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
             }
 
             button.clicked.connect (() => {
