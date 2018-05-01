@@ -63,8 +63,8 @@ namespace Downloader {
             try {
                 folder.make_directory ();
             } catch (Error e) {
-                warning ("Unable to create download directory");
-                warning (e.message);
+                warning ("Unable to create devhelp directory: %s", e.message);
+                return;
             }
         }
 
@@ -73,8 +73,8 @@ namespace Downloader {
             try {
                 folder.make_directory ();
             } catch (Error e) {
-                warning ("Unable to create download directory");
-                warning (e.message);
+                warning ("Unable to create books directory: %s", e.message);
+                return;
             }
         }
 
@@ -86,7 +86,7 @@ namespace Downloader {
             try {
                 target.copy_async.end (res);
             } catch (Error e) {
-                warning (e.message);
+                warning ("Error downloading %s: %s", item, e.message);
             }
             loop.quit ();
         });
@@ -104,7 +104,7 @@ namespace Downloader {
                 try {
                     folder.trash_async.end (res);
                 } catch (Error e) {
-                    warning (e.message);
+                    warning ("Error deleting %s: %s", item, e.message);
                 }
                 loop.quit ();
             });
@@ -117,7 +117,7 @@ namespace Downloader {
                 try {
                     file.delete_async.end (res);
                 } catch (Error e) {
-                    warning (e.message);
+                    warning ("Error deleting archive for %s: %s", item, e.message);
                 }
                 loop.quit ();
             });

@@ -552,8 +552,7 @@ public class App : Gtk.Application {
             try {
                 file.make_directory ();
             } catch (Error e) {
-                warning ("Unable to create config directory");
-                warning (e.message);
+                warning ("Unable to create config directory: %s", e.message);
             }
         }
         cookies.set_accept_policy (CookieAcceptPolicy.ALWAYS);
