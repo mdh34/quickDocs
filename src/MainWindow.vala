@@ -319,13 +319,17 @@ const string[] PACKAGES = {
 };
 
 public class MainWindow : Gtk.Window {
-    GLib.Settings settings;
+    static GLib.Settings settings;
     Stack stack;
     public MainWindow (Gtk.Application application) {
          Object (application: application,
          icon_name: "com.github.mdh34.quickdocs",
          title: "quickDocs");
-     }
+    }
+
+    static construct {
+        settings = new GLib.Settings ("com.github.mdh34.quickdocs");
+    }
 
     construct {
         set_position (WindowPosition.CENTER);
@@ -338,7 +342,6 @@ public class MainWindow : Gtk.Window {
         stack = new Stack ();
         stack.set_transition_type (StackTransitionType.SLIDE_LEFT_RIGHT);
 
-        settings = new GLib.Settings ("com.github.mdh34.quickdocs");
         var window_width = settings.get_int ("width");
         var window_height = settings.get_int ("height");
         set_default_size (window_width, window_height);
@@ -481,14 +484,14 @@ public class MainWindow : Gtk.Window {
 
     }
 
-     public void change_tab () {
+    public void change_tab () {
         var current = stack.get_visible_child_name ();
         if (current == "vala") {
             stack.set_visible_child_name ("dev");
         } else {
             stack.set_visible_child_name ("vala");
         }
-     }
+    }
 
     private bool check_online () {
         var host = "valadoc.org";
