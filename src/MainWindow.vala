@@ -405,7 +405,7 @@ public class MainWindow : Gtk.Window {
         });
 
         var current_icons = Gtk.IconTheme.get_default ();
-        string icon_name = "object-inverse";
+        string icon_name = "object-inverse-symbolic";
         if (current_icons.lookup_icon (icon_name, 16, Gtk.IconLookupFlags.FORCE_SIZE) == null) {
             icon_name = "weather-few-clouds-symbolic";
         }
