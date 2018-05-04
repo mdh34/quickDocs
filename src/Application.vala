@@ -32,9 +32,6 @@ public class Docs : Gtk.Application {
         }
 
         var window = new MainWindow (this);
-
-
-
         window.show ();
 
         var quit_action = new SimpleAction ("quit", null);
