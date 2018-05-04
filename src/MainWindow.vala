@@ -319,7 +319,7 @@ const string[] PACKAGES = {
 };
 
 public class MainWindow : Gtk.Window {
-    private static GLib.Settings? settings = null;
+    GLib.Settings settings;
     Stack stack;
     public MainWindow (Gtk.Application application) {
          Object (application: application,
@@ -338,7 +338,7 @@ public class MainWindow : Gtk.Window {
         stack = new Stack ();
         stack.set_transition_type (StackTransitionType.SLIDE_LEFT_RIGHT);
 
-        var settings = new GLib.Settings ("com.github.mdh34.quickdocs");
+        settings = new GLib.Settings ("com.github.mdh34.quickdocs");
         var window_width = settings.get_int ("width");
         var window_height = settings.get_int ("height");
         set_default_size (window_width, window_height);
@@ -517,7 +517,6 @@ public class MainWindow : Gtk.Window {
 
     private void init_theme () {
         var window_settings = Gtk.Settings.get_default ();
-        var settings = settings_single ();
         var dark = settings.get_int ("dark");
 
         if (dark == 1) {
@@ -528,7 +527,6 @@ public class MainWindow : Gtk.Window {
     }
 
     private void set_appcache (WebView view, bool online) {
-        var settings = settings_single ();
         var dark = settings.get_int ("dark");
         if (dark == 1 && online) {
             view.get_settings ().enable_offline_web_application_cache = false;
@@ -552,21 +550,12 @@ public class MainWindow : Gtk.Window {
     }
 
     private void set_tab () {
-        var settings = settings_single ();
         var tab = settings.get_string ("tab");
         stack.set_visible_child_name (tab);
     }
 
-    static unowned GLib.Settings settings_single () {
-        if (settings == null) {
-            settings = new GLib.Settings ("com.github.mdh34.quickdocs");
-        }
-        return settings;
-    }
-
     private void toggle_theme (WebView view, bool online) {
         var window_settings = Gtk.Settings.get_default ();
-        var settings = settings_single ();
         var dark = settings.get_int ("dark");
         if (dark == 1) {
             window_settings.set ("gtk-application-prefer-dark-theme", false);
