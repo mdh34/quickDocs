@@ -11,8 +11,9 @@ add_global_arguments('-DGETTEXT_PACKAGE="@0@"'.format (meson.project_name()), la
 # Create a new executable, list the files we want to compile, list the dependencies we need, and install
 executable(
     meson.project_name(),
-    'src/quickDocs.vala',
+    'src/Application.vala',
     'src/Downloader.vala',
+    'src/MainWindow.vala',
     dependencies: [
         dependency('gtk+-3.0'),
         dependency('libarchive'),

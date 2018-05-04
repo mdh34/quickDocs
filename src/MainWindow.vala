@@ -318,30 +318,32 @@ const string[] PACKAGES = {
     "xcb-xv"
 };
 
-public class App : Gtk.Application {
+public class MainWindow : Gtk.Window {
+    private static GLib.Settings? settings = null;
+    private static Stack? stack = null;
+    public MainWindow (Gtk.Application application) {
+         Object (application: application,
+         icon_name: "com.github.mdh34.quickdocs",
+         title: "quickDocs");
+     }
 
-    public App () {
-        Object (
-            application_id: "com.github.mdh34.quickdocs",
-            flags: ApplicationFlags.FLAGS_NONE
-        );
-    }
-
-    protected override void activate () {
-        var window = new ApplicationWindow (this);
-        window.set_position (WindowPosition.CENTER);
+    construct {
+        set_position (WindowPosition.CENTER);
         var header = new HeaderBar ();
         header.set_show_close_button (true);
         var header_context = header.get_style_context ();
         header_context.add_class ("default-decoration");
-        window.set_titlebar (header);
+        set_titlebar (header);
 
-        var stack = new Stack ();
+        var stack = get_stack ();
         stack.set_transition_type (StackTransitionType.SLIDE_LEFT_RIGHT);
 
-        var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
-        window.destroy.connect (() => {
-            user_settings.set_string ("tab", stack.get_visible_child_name ());
+        var settings = new GLib.Settings ("com.github.mdh34.quickdocs");
+        var window_width = settings.get_int ("width");
+        var window_height = settings.get_int ("height");
+        set_default_size (window_width, window_height);
+        this.destroy.connect (() => {
+            settings.set_string ("tab", stack.get_visible_child_name ());
         });
 
         var stack_switcher = new StackSwitcher ();
@@ -356,7 +358,7 @@ public class App : Gtk.Application {
         var vala = new WebView();
 
         if (online) {
-            vala.load_uri (user_settings.get_string ("last-vala"));
+            vala.load_uri (settings.get_string ("last-vala"));
             stack.add_titled (vala, "vala", "Valadoc");
         } else {
             var manager = new Dh.BookManager ();
@@ -374,7 +376,7 @@ public class App : Gtk.Application {
 
         var dev = new WebView.with_context (context);
         set_appcache (dev, online);
-        dev.load_uri (user_settings.get_string ("last-dev"));
+        dev.load_uri (settings.get_string ("last-dev"));
         stack.add_titled (dev, "dev", "DevDocs");
 
         var back = new Button.from_icon_name ("go-previous-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
@@ -432,7 +434,7 @@ public class App : Gtk.Application {
         header.pack_end (theme_button);
         header.pack_end (offline_button);
 
-        window.add (stack);
+        add (stack);
         init_theme ();
 
         string style = "@define-color colorPrimary #403757;";
@@ -448,55 +450,39 @@ public class App : Gtk.Application {
             stack_change(stack, provider, theme_button, offline_button);
         });
 
-        var window_x = user_settings.get_int ("window-x");
-        var window_y = user_settings.get_int ("window-y");
-        if (window_x != -1 ||  window_y != -1) {
-            window.move (window_x, window_y);
-        }
-
-        var window_width = user_settings.get_int ("width");
-        var window_height = user_settings.get_int ("height");
-        window.set_default_size (window_width, window_height);
-
-        window.show_all ();
+        show_all ();
 
         theme_button.set_visible (false);
         set_tab (stack);
 
-        window.delete_event.connect (() => {
+        this.delete_event.connect (() => {
             int current_x, current_y, width, height;
-            window.get_position (out current_x, out current_y);
-            window.get_size (out width, out height);
-            user_settings.set_int ("window-x", current_x);
-            user_settings.set_int ("window-y", current_y);
-            user_settings.set_int ("width", width);
-            user_settings.set_int ("height", height);
-            user_settings.set_string ("last-dev", dev.uri);
+            get_position (out current_x, out current_y);
+            get_size (out width, out height);
+            settings.set_int ("window-x", current_x);
+            settings.set_int ("window-y", current_y);
+            settings.set_int ("width", width);
+            settings.set_int ("height", height);
+            settings.set_string ("last-dev", dev.uri);
 
             if (online) {
-                user_settings.set_string ("last-vala", vala.uri);
+                settings.set_string ("last-vala", vala.uri);
             }
 
             return false;
         });
 
-        var tab_switch = new SimpleAction ("switch", null);
-        add_action (tab_switch);
-        set_accels_for_action ("app.switch", {"<Control>Tab"});
-
-        tab_switch.activate.connect (() => {
-            change_tab (stack);
-        });
     }
 
-    private void change_tab (Stack stack) {
+     public void change_tab () {
+        var stack = get_stack ();
         var current = stack.get_visible_child_name ();
         if (current == "vala") {
             stack.set_visible_child_name ("dev");
         } else {
             stack.set_visible_child_name ("vala");
         }
-    }
+     }
 
     private bool check_online () {
         var host = "valadoc.org";
@@ -507,6 +493,12 @@ public class App : Gtk.Application {
         } catch {
             return false;
         }
+    }
+    static unowned Stack get_stack () {
+        if (stack == null) {
+            stack = new Stack ();
+        }
+        return stack;
     }
 
     private void stack_change (Stack stack, CssProvider provider, Button theme_button, Button offline_button) {
@@ -525,8 +517,8 @@ public class App : Gtk.Application {
 
     private void init_theme () {
         var window_settings = Gtk.Settings.get_default ();
-        var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
-        var dark = user_settings.get_int ("dark");
+        var settings = settings_single ();
+        var dark = settings.get_int ("dark");
 
         if (dark == 1) {
             window_settings.set ("gtk-application-prefer-dark-theme", true);
@@ -536,8 +528,8 @@ public class App : Gtk.Application {
     }
 
     private void set_appcache (WebView view, bool online) {
-        var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
-        var dark = user_settings.get_int ("dark");
+        var settings = settings_single ();
+        var dark = settings.get_int ("dark");
         if (dark == 1 && online) {
             view.get_settings ().enable_offline_web_application_cache = false;
         }
@@ -560,34 +552,36 @@ public class App : Gtk.Application {
     }
 
     private void set_tab (Stack stack) {
-        var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
-        var tab = user_settings.get_string ("tab");
+        var settings = settings_single ();
+        var tab = settings.get_string ("tab");
         stack.set_visible_child_name (tab);
+    }
+
+    static unowned GLib.Settings settings_single () {
+        if (settings == null) {
+            settings = new GLib.Settings ("com.github.mdh34.quickdocs");
+        }
+        return settings;
     }
 
     private void toggle_theme (WebView view, bool online) {
         var window_settings = Gtk.Settings.get_default ();
-        var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
-        var dark = user_settings.get_int ("dark");
+        var settings = settings_single ();
+        var dark = settings.get_int ("dark");
         if (dark == 1) {
             window_settings.set ("gtk-application-prefer-dark-theme", false);
             view.run_javascript.begin ("document.cookie = 'dark=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';", null);
-            user_settings.set_int ("dark", 0);
+            settings.set_int ("dark", 0);
             view.get_settings ().enable_offline_web_application_cache = true;
             view.reload_bypass_cache ();
         } else {
             window_settings.set ("gtk-application-prefer-dark-theme", true);
             view.run_javascript.begin ("document.cookie = 'dark=1; expires=01 Jan 2100 00:00:00 UTC';", null);
-            user_settings.set_int ("dark", 1);
+            settings.set_int ("dark", 1);
             if (online) {
                 view.get_settings ().enable_offline_web_application_cache = false;
             }
             view.reload_bypass_cache ();
         }
-    }
-
-    public static int main (string[] args) {
-        var app = new App ();
-        return app.run (args);
     }
 }
