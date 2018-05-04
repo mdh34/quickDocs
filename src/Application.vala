@@ -32,14 +32,8 @@ public class Docs : Gtk.Application {
         }
 
         var window = new MainWindow (this);
-        var settings = new Settings ("com.github.mdh34.quickdocs");
 
-        var x = settings.get_int ("window-x");
-        var y = settings.get_int ("window-y");
 
-        if (x != -1 || y != -1) {
-            window.move (x, y);
-        }
 
         window.show ();
 

@@ -342,6 +342,13 @@ public class MainWindow : Gtk.Window {
         var window_width = settings.get_int ("width");
         var window_height = settings.get_int ("height");
         set_default_size (window_width, window_height);
+        var x = settings.get_int ("window-x");
+        var y = settings.get_int ("window-y");
+
+        if (x != -1 || y != -1) {
+            move (x, y);
+        }
+
         this.destroy.connect (() => {
             settings.set_string ("tab", stack.get_visible_child_name ());
         });
