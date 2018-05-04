@@ -26,11 +26,6 @@ public class Docs : Gtk.Application {
     }
 
     public override void activate () {
-        if (get_windows ().length () > 0) {
-            get_windows ().data.present ();
-            return;
-        }
-
         var window = new MainWindow (this);
         window.show ();
 

@@ -320,7 +320,7 @@ const string[] PACKAGES = {
 
 public class MainWindow : Gtk.Window {
     private static GLib.Settings? settings = null;
-    private static Stack? stack = null;
+    Stack stack;
     public MainWindow (Gtk.Application application) {
          Object (application: application,
          icon_name: "com.github.mdh34.quickdocs",
@@ -335,7 +335,7 @@ public class MainWindow : Gtk.Window {
         header_context.add_class ("default-decoration");
         set_titlebar (header);
 
-        var stack = get_stack ();
+        stack = new Stack ();
         stack.set_transition_type (StackTransitionType.SLIDE_LEFT_RIGHT);
 
         var settings = new GLib.Settings ("com.github.mdh34.quickdocs");
@@ -454,13 +454,13 @@ public class MainWindow : Gtk.Window {
         }
 
         stack.notify["visible-child"].connect (() => {
-            stack_change(stack, provider, theme_button, offline_button);
+            stack_change(provider, theme_button, offline_button);
         });
 
         show_all ();
 
         theme_button.set_visible (false);
-        set_tab (stack);
+        set_tab ();
 
         this.delete_event.connect (() => {
             int current_x, current_y, width, height;
@@ -482,7 +482,6 @@ public class MainWindow : Gtk.Window {
     }
 
      public void change_tab () {
-        var stack = get_stack ();
         var current = stack.get_visible_child_name ();
         if (current == "vala") {
             stack.set_visible_child_name ("dev");
@@ -501,14 +500,8 @@ public class MainWindow : Gtk.Window {
             return false;
         }
     }
-    static unowned Stack get_stack () {
-        if (stack == null) {
-            stack = new Stack ();
-        }
-        return stack;
-    }
 
-    private void stack_change (Stack stack, CssProvider provider, Button theme_button, Button offline_button) {
+    private void stack_change (CssProvider provider, Button theme_button, Button offline_button) {
         if (stack.get_visible_child_name () == "vala") {
             Gtk.Settings.get_default ().set ("gtk-application-prefer-dark-theme", true);
             Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
@@ -558,7 +551,7 @@ public class MainWindow : Gtk.Window {
         cookies.set_persistent_storage (path, CookiePersistentStorage.SQLITE);
     }
 
-    private void set_tab (Stack stack) {
+    private void set_tab () {
         var settings = settings_single ();
         var tab = settings.get_string ("tab");
         stack.set_visible_child_name (tab);
