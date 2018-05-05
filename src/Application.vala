@@ -27,7 +27,6 @@ public class Docs : Gtk.Application {
 
     public override void activate () {
         var window = new MainWindow (this);
-        window.show ();
 
         var quit_action = new SimpleAction ("quit", null);
         add_action (quit_action);

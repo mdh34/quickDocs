@@ -439,6 +439,7 @@ public class MainWindow : Gtk.Window {
         offline_button.popover = offline_popover;
         offline_button.sensitive = online;
         offline_button.valign = Gtk.Align.CENTER;
+
         header.add (back);
         header.add (forward);
         header.pack_end (theme_button);
