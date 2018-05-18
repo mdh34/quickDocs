@@ -397,7 +397,7 @@ public class MainWindow : Gtk.Window {
                 vala.load_uri (link.get_uri ());
             });
             var pane = new Paned(Gtk.Orientation.HORIZONTAL);
-            pane.add1 (sidebar);
+            pane.pack1 (sidebar, false, false);
             pane.add2 (vala);
             pane.set_position (300);
             stack.add_titled (pane, "vala", "Valadoc");
