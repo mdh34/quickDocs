@@ -7,5 +7,5 @@ Exec=com.github.mdh34.quickdocs
 Icon=com.github.mdh34.quickdocs
 Terminal=false
 Type=Application
-X-GNOME-Gettext-Domain=quickDocs
+X-GNOME-Gettext-Domain=com.github.mdh34.quickdocs
 Keywords=docs;quickDocs;dev;

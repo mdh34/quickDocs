@@ -433,6 +433,7 @@ public class MainWindow : Gtk.Window {
         }
 
         var theme_button = new Button.from_icon_name (icon_name);
+        theme_button.set_tooltip_text (_("Change theme"));
         theme_button.clicked.connect(() => {
             toggle_theme (dev, online);
         });
@@ -458,6 +459,7 @@ public class MainWindow : Gtk.Window {
         offline_button.popover = offline_popover;
         offline_button.sensitive = online;
         offline_button.valign = Gtk.Align.CENTER;
+        offline_button.set_tooltip_text (_("Download offline documentation"));
 
         header.add (back);
         header.add (forward);

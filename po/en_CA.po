@@ -1,0 +1,80 @@
+# English translations for com.github.mdh34.quickdocs package.
+# Copyright (C) 2018 THE com.github.mdh34.quickdocs'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.mdh34.quickdocs package.
+# Automatically generated, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: com.github.mdh34.quickdocs\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-20 11:51+0100\n"
+"PO-Revision-Date: 2018-05-20 11:51+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en_CA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:7
+#: data/com.github.mdh34.quickdocs.desktop.in:3
+#: data/com.github.mdh34.quickdocs.desktop.in:4
+msgid "quickDocs"
+msgstr "quickDocs"
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:8
+msgid "Quickly Read Developer Docs"
+msgstr "Quickly Read Developer Docs"
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:10
+msgid "A fast developer docs reader"
+msgstr "A fast developer docs reader"
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:11
+msgid "Read developer docs from:"
+msgstr "Read developer docs from:"
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:13
+msgid "Valadoc"
+msgstr "Valadoc"
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:14
+msgid "DevDocs"
+msgstr "DevDocs"
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:16
+msgid "Includes:"
+msgstr "Includes:"
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:18
+msgid "Offline support for both Valadoc and Devdocs"
+msgstr "Offline support for both Valadoc and Devdocs"
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:19
+msgid "Dark mode toggle to suit your workflow"
+msgstr "Dark mode toggle to suit your workflow"
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:25
+msgid "Matt Harris"
+msgstr "Matt Harris"
+
+#: data/com.github.mdh34.quickdocs.desktop.in:5
+msgid "A fast developer docs reader that supports Valadoc and DevDocs"
+msgstr "A fast developer docs reader that supports Valadoc and DevDocs"
+
+#: data/com.github.mdh34.quickdocs.desktop.in:8
+msgid "com.github.mdh34.quickdocs"
+msgstr "com.github.mdh34.quickdocs"
+
+#: data/com.github.mdh34.quickdocs.desktop.in:12
+msgid "docs;quickDocs;dev;"
+msgstr "docs;quickDocs;dev;"
+
+#: src/MainWindow.vala:436
+msgid "Change theme"
+msgstr "Change theme"
+
+#: src/MainWindow.vala:462
+msgid "Download offline documentation"
+msgstr "Download offline documentation"

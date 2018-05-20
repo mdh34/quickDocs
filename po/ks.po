@@ -1,0 +1,79 @@
+# Kashmiri translations for com.github.mdh34.quickdocs package.
+# Copyright (C) 2018 THE com.github.mdh34.quickdocs'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.mdh34.quickdocs package.
+# Automatically generated, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: com.github.mdh34.quickdocs\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-20 11:51+0100\n"
+"PO-Revision-Date: 2018-05-20 11:51+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ks\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:7
+#: data/com.github.mdh34.quickdocs.desktop.in:3
+#: data/com.github.mdh34.quickdocs.desktop.in:4
+msgid "quickDocs"
+msgstr ""
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:8
+msgid "Quickly Read Developer Docs"
+msgstr ""
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:10
+msgid "A fast developer docs reader"
+msgstr ""
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:11
+msgid "Read developer docs from:"
+msgstr ""
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:13
+msgid "Valadoc"
+msgstr ""
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:14
+msgid "DevDocs"
+msgstr ""
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:16
+msgid "Includes:"
+msgstr ""
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:18
+msgid "Offline support for both Valadoc and Devdocs"
+msgstr ""
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:19
+msgid "Dark mode toggle to suit your workflow"
+msgstr ""
+
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:25
+msgid "Matt Harris"
+msgstr ""
+
+#: data/com.github.mdh34.quickdocs.desktop.in:5
+msgid "A fast developer docs reader that supports Valadoc and DevDocs"
+msgstr ""
+
+#: data/com.github.mdh34.quickdocs.desktop.in:8
+msgid "com.github.mdh34.quickdocs"
+msgstr ""
+
+#: data/com.github.mdh34.quickdocs.desktop.in:12
+msgid "docs;quickDocs;dev;"
+msgstr ""
+
+#: src/MainWindow.vala:436
+msgid "Change theme"
+msgstr ""
+
+#: src/MainWindow.vala:462
+msgid "Download offline documentation"
+msgstr ""
