@@ -26,6 +26,16 @@
   <url type="homepage">https://github.com/mdh34/quickDocs</url>
   <url type="bugtracker">https://github.com/mdh34/quickDocs/issues</url>
   <releases>
+  <release version="2.0.2" date="2018-05-31">
+      <description>
+        <ul>
+          <li>Better offline sidebar resizing</li>
+          <li>Support for translations</li>
+          <li>GNOME-friendly icons</li>
+          <li>Misc patches</li>
+        </ul>
+      </description>
+  </release>
   <release version="2.0.1" date="2018-04-15">
       <description>
         <ul>

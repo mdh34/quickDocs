@@ -1,3 +1,11 @@
+com.github.mdh34.quickdocs (2.0.2) bionic; urgency=low
+
+  * Bettter offline sidebar resizing
+  * Support for translations
+  * GNOME-friendly icons
+  * Misc patches
+ -- Matt Harris <matth281@outlook.com>  Thu, 31 May 2018 10:40:44 +0100
+
 com.github.mdh34.quickdocs (2.0.1) xenial; urgency=low
 
   * Fixes offline DevDocs support - toggling the theme back and forth once should reload the cache
