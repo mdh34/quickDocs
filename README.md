@@ -28,9 +28,15 @@ A fast developer docs reader
  - libwebkit2gtk-4.0
 
 ## Install:
+### Flatpak:
+ quickDocs is avaliable on Flathub, install it by running:
+ ```
+ flatpak install flathub com.github.mdh34.quickdocs
+ ```
+### Distro Packages:
  - For Debian / Ubuntu based systems, install the latest .deb from [here](https://github.com/mdh34/quickDocs/releases) (64-bit only)
  - For Arch Linux based systems, install the AUR package from [here](https://aur.archlinux.org/packages/quickdocs/)
- - For OpenSUSE Leap/Tumbleweed, add the following [repo](https://build.opensuse.org/package/show/home:MichaelAquilina/quickdocs)
+ - For OpenSUSE Leap / Tumbleweed, add the following [repo](https://build.opensuse.org/package/show/home:MichaelAquilina/quickdocs)
 
 ## Install From Source:
 The following instructions should work on most debian-based systems:
