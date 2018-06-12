@@ -476,9 +476,12 @@ public class MainWindow : Gtk.Window {
             settings.set_int ("window-y", current_y);
             settings.set_int ("width", width);
             settings.set_int ("height", height);
-            settings.set_string ("last-dev", dev.uri);
 
-            if (online) {
+            if (dev.uri.contains ("devdocs.io")) {
+                settings.set_string ("last-dev", dev.uri);
+            }
+
+            if (online && vala.uri.contains ("valadoc.org")) {
                 settings.set_string ("last-vala", vala.uri);
             }
 
