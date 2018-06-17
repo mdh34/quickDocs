@@ -360,12 +360,8 @@ public class MainWindow : Gtk.Window {
         stack_switcher.set_stack (stack);
         header.set_custom_title (stack_switcher);
 
-        var context = new WebContext ();
-        var cookies = context.get_cookie_manager ();
-        set_cookies (cookies);
-
         var online = check_online ();
-        var vala = new WebView();
+        var vala = new View();
 
         if (online) {
             vala.load_uri (settings.get_string ("last-vala"));
@@ -384,8 +380,9 @@ public class MainWindow : Gtk.Window {
             stack.add_titled (pane, "vala", "Valadoc");
         }
 
-        var dev = new WebView.with_context (context);
-        set_appcache (dev, online);
+        var dev = new View ();
+        dev.set_cookies ();
+        dev.appcache_init (online);
         dev.load_uri (settings.get_string ("last-dev"));
         stack.add_titled (dev, "dev", "DevDocs");
 
@@ -535,35 +532,12 @@ public class MainWindow : Gtk.Window {
         }
     }
 
-    private void set_appcache (WebView view, bool online) {
-        var dark = settings.get_int ("dark");
-        if (dark == 1 && online) {
-            view.get_settings ().enable_offline_web_application_cache = false;
-        }
-    }
-
-    private void set_cookies (CookieManager cookies) {
-        string path = Path.build_filename (Environment.get_user_config_dir (), "com.github.mdh34.quickdocs", "cookies");
-        string folder = Path.build_filename (Environment.get_user_config_dir (), "com.github.mdh34.quickdocs");
-
-        if (!GLib.FileUtils.test (folder, GLib.FileTest.IS_DIR)) {
-            var file = File.new_for_path (folder);
-            try {
-                file.make_directory ();
-            } catch (Error e) {
-                warning ("Unable to create config directory: %s", e.message);
-            }
-        }
-        cookies.set_accept_policy (CookieAcceptPolicy.ALWAYS);
-        cookies.set_persistent_storage (path, CookiePersistentStorage.SQLITE);
-    }
-
     private void set_tab () {
         var tab = settings.get_string ("tab");
         stack.set_visible_child_name (tab);
     }
 
-    private void toggle_theme (WebView view, bool online) {
+    private void toggle_theme (View view, bool online) {
         var window_settings = Gtk.Settings.get_default ();
         var dark = settings.get_int ("dark");
         if (dark == 1) {

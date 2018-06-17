@@ -14,6 +14,7 @@ executable(
     'src/Application.vala',
     'src/Downloader.vala',
     'src/MainWindow.vala',
+    'src/View.vala',
     dependencies: [
         dependency('gtk+-3.0'),
         dependency('libarchive'),
