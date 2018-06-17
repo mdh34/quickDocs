@@ -20,6 +20,12 @@
  */
 
 public class View : WebKit.WebView {
+    public View () {
+        this.create.connect (() => {
+            return this;
+        });
+    }
+
     public void appcache_init (bool online) {
         var dark = new GLib.Settings ("com.github.mdh34.quickdocs").get_int ("dark");
         if (dark == 1 && online) {
