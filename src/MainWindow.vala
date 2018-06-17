@@ -316,16 +316,11 @@ const string[] PACKAGES = {
 };
 
 public class MainWindow : Gtk.Window {
-    static GLib.Settings settings;
     Gtk.Stack stack;
     public MainWindow (Gtk.Application application) {
          Object (application: application,
          icon_name: "com.github.mdh34.quickdocs",
          title: "quickDocs");
-    }
-
-    static construct {
-        settings = new GLib.Settings ("com.github.mdh34.quickdocs");
     }
 
     construct {
@@ -339,18 +334,18 @@ public class MainWindow : Gtk.Window {
         stack = new Gtk.Stack ();
         stack.set_transition_type (Gtk.StackTransitionType.SLIDE_LEFT_RIGHT);
 
-        var window_width = settings.get_int ("width");
-        var window_height = settings.get_int ("height");
+        var window_width = Docs.settings.get_int ("width");
+        var window_height = Docs.settings.get_int ("height");
         set_default_size (window_width, window_height);
-        var x = settings.get_int ("window-x");
-        var y = settings.get_int ("window-y");
+        var x = Docs.settings.get_int ("window-x");
+        var y = Docs.settings.get_int ("window-y");
 
         if (x != -1 || y != -1) {
             move (x, y);
         }
 
         this.destroy.connect (() => {
-            settings.set_string ("tab", stack.get_visible_child_name ());
+            Docs.settings.set_string ("tab", stack.get_visible_child_name ());
         });
 
         var stack_switcher = new Gtk.StackSwitcher ();
@@ -361,7 +356,7 @@ public class MainWindow : Gtk.Window {
         var vala = new View();
 
         if (online) {
-            vala.load_uri (settings.get_string ("last-vala"));
+            vala.load_uri (Docs.settings.get_string ("last-vala"));
             stack.add_titled (vala, "vala", "Valadoc");
         } else {
             var manager = new Dh.BookManager ();
@@ -380,7 +375,7 @@ public class MainWindow : Gtk.Window {
         var dev = new View ();
         dev.set_cookies ();
         dev.appcache_init (online);
-        dev.load_uri (settings.get_string ("last-dev"));
+        dev.load_uri (Docs.settings.get_string ("last-dev"));
         stack.add_titled (dev, "dev", "DevDocs");
 
         var back = new Gtk.Button.from_icon_name ("go-previous-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
@@ -454,17 +449,17 @@ public class MainWindow : Gtk.Window {
             int current_x, current_y, width, height;
             get_position (out current_x, out current_y);
             get_size (out width, out height);
-            settings.set_int ("window-x", current_x);
-            settings.set_int ("window-y", current_y);
-            settings.set_int ("width", width);
-            settings.set_int ("height", height);
+            Docs.settings.set_int ("window-x", current_x);
+            Docs.settings.set_int ("window-y", current_y);
+            Docs.settings.set_int ("width", width);
+            Docs.settings.set_int ("height", height);
 
             if (dev.uri.contains ("devdocs.io")) {
-                settings.set_string ("last-dev", dev.uri);
+                Docs.settings.set_string ("last-dev", dev.uri);
             }
 
             if (online && vala.uri.contains ("valadoc.org")) {
-                settings.set_string ("last-vala", vala.uri);
+                Docs.settings.set_string ("last-vala", vala.uri);
             }
 
             return false;
@@ -507,7 +502,7 @@ public class MainWindow : Gtk.Window {
 
     private void init_theme () {
         var window_settings = Gtk.Settings.get_default ();
-        var dark = settings.get_int ("dark");
+        var dark = Docs.settings.get_int ("dark");
 
         if (dark == 1) {
             window_settings.set ("gtk-application-prefer-dark-theme", true);
@@ -517,23 +512,23 @@ public class MainWindow : Gtk.Window {
     }
 
     private void set_tab () {
-        var tab = settings.get_string ("tab");
+        var tab = Docs.settings.get_string ("tab");
         stack.set_visible_child_name (tab);
     }
 
     private void toggle_theme (View view, bool online) {
         var window_settings = Gtk.Settings.get_default ();
-        var dark = settings.get_int ("dark");
+        var dark = Docs.settings.get_int ("dark");
         if (dark == 1) {
             window_settings.set ("gtk-application-prefer-dark-theme", false);
             view.run_javascript.begin ("document.cookie = 'dark=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';", null);
-            settings.set_int ("dark", 0);
+            Docs.settings.set_int ("dark", 0);
             view.get_settings ().enable_offline_web_application_cache = true;
             view.reload_bypass_cache ();
         } else {
             window_settings.set ("gtk-application-prefer-dark-theme", true);
             view.run_javascript.begin ("document.cookie = 'dark=1; expires=01 Jan 2100 00:00:00 UTC';", null);
-            settings.set_int ("dark", 1);
+            Docs.settings.set_int ("dark", 1);
             if (online) {
                 view.get_settings ().enable_offline_web_application_cache = false;
             }

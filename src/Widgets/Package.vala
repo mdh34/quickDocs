@@ -25,8 +25,7 @@ public class Package : Gtk.ListBoxRow {
         box.border_width = 10;
         var button = new Gtk.Button ();
 
-        var user_settings = new GLib.Settings ("com.github.mdh34.quickdocs");
-        string[] installed = user_settings.get_strv("packages");
+        string[] installed = Docs.settings.get_strv("packages");
 
         if (name in installed) {
             button.image = new Gtk.Image.from_icon_name ("edit-delete-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
@@ -36,7 +35,7 @@ public class Package : Gtk.ListBoxRow {
         }
 
         button.clicked.connect (() => {
-            Downloader.toggled (button, name, user_settings);
+            Downloader.toggled (button, name);
         });
 
         var label = new Gtk.Label (name);

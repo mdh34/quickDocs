@@ -125,8 +125,8 @@ namespace Downloader {
         }
     }
 
-    public void toggled (Gtk.Button button, string name, GLib.Settings user_settings) {
-        string [] installed = user_settings.get_strv ("packages");
+    public void toggled (Gtk.Button button, string name) {
+        string [] installed = Docs.settings.get_strv ("packages");
 
         if (name in installed) {
             remove (name, false);
@@ -138,7 +138,7 @@ namespace Downloader {
                     installed[i] = null;
                 }
             }
-            user_settings.set_strv ("packages", installed);
+            Docs.settings.set_strv ("packages", installed);
         } else {
             download (name);
             decompress (name);
@@ -148,7 +148,7 @@ namespace Downloader {
             button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
             installed += name;
-            user_settings.set_strv ("packages", installed);
+            Docs.settings.set_strv ("packages", installed);
         }
     }
 

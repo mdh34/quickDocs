@@ -20,6 +20,11 @@
  */
 
 public class Docs : Gtk.Application {
+    public static GLib.Settings settings;
+    static construct {
+        settings = new GLib.Settings ("com.github.mdh34.quickdocs");
+    }
+
     public Docs () {
         Object (application_id: "com.github.mdh34.quickdocs",
         flags: ApplicationFlags.FLAGS_NONE);
