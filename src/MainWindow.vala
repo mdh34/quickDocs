@@ -19,9 +19,6 @@
  * Authored by: Matt Harris <matth281@outlook.com>
  */
 
-using Gtk;
-using WebKit;
-
 const string[] PACKAGES = {
     "gee-0.8",
     "gio-2.0",
@@ -320,7 +317,7 @@ const string[] PACKAGES = {
 
 public class MainWindow : Gtk.Window {
     static GLib.Settings settings;
-    Stack stack;
+    Gtk.Stack stack;
     public MainWindow (Gtk.Application application) {
          Object (application: application,
          icon_name: "com.github.mdh34.quickdocs",
@@ -332,15 +329,15 @@ public class MainWindow : Gtk.Window {
     }
 
     construct {
-        set_position (WindowPosition.CENTER);
-        var header = new HeaderBar ();
+        set_position (Gtk.WindowPosition.CENTER);
+        var header = new Gtk.HeaderBar ();
         header.set_show_close_button (true);
         var header_context = header.get_style_context ();
         header_context.add_class ("default-decoration");
         set_titlebar (header);
 
-        stack = new Stack ();
-        stack.set_transition_type (StackTransitionType.SLIDE_LEFT_RIGHT);
+        stack = new Gtk.Stack ();
+        stack.set_transition_type (Gtk.StackTransitionType.SLIDE_LEFT_RIGHT);
 
         var window_width = settings.get_int ("width");
         var window_height = settings.get_int ("height");
@@ -356,7 +353,7 @@ public class MainWindow : Gtk.Window {
             settings.set_string ("tab", stack.get_visible_child_name ());
         });
 
-        var stack_switcher = new StackSwitcher ();
+        var stack_switcher = new Gtk.StackSwitcher ();
         stack_switcher.set_stack (stack);
         header.set_custom_title (stack_switcher);
 
@@ -373,7 +370,7 @@ public class MainWindow : Gtk.Window {
             sidebar.link_selected.connect ((source, link) => {
                 vala.load_uri (link.get_uri ());
             });
-            var pane = new Paned(Gtk.Orientation.HORIZONTAL);
+            var pane = new Gtk.Paned(Gtk.Orientation.HORIZONTAL);
             pane.pack1 (sidebar, false, false);
             pane.add2 (vala);
             pane.set_position (300);
@@ -386,7 +383,7 @@ public class MainWindow : Gtk.Window {
         dev.load_uri (settings.get_string ("last-dev"));
         stack.add_titled (dev, "dev", "DevDocs");
 
-        var back = new Button.from_icon_name ("go-previous-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
+        var back = new Gtk.Button.from_icon_name ("go-previous-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         back.clicked.connect (() => {
             if (stack.get_visible_child_name () == "vala") {
                 vala.go_back ();
@@ -395,7 +392,7 @@ public class MainWindow : Gtk.Window {
             }
         });
 
-        var forward = new Button.from_icon_name ("go-next-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
+        var forward = new Gtk.Button.from_icon_name ("go-next-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         forward.clicked.connect (() => {
             if (stack.get_visible_child_name () == "vala") {
                 vala.go_forward ();
@@ -410,29 +407,17 @@ public class MainWindow : Gtk.Window {
             icon_name = "weather-few-clouds-symbolic";
         }
 
-        var theme_button = new Button.from_icon_name (icon_name);
+        var theme_button = new Gtk.Button.from_icon_name (icon_name);
         theme_button.set_tooltip_text (_("Change theme"));
         theme_button.clicked.connect(() => {
             toggle_theme (dev, online);
         });
 
-        var package_list = new ListBox ();
-        package_list.set_selection_mode(Gtk.SelectionMode.NONE);
-        var group = new SizeGroup (Gtk.SizeGroupMode.BOTH);
-        foreach (string item in PACKAGES) {
-            package_list.add(new Downloader.Package (item, group));
-        }
+        var offline_popover = new Gtk.Popover (null);
+        var package_list = new PackageList ();
+        offline_popover.add (package_list);
 
-        var package_view = new ScrolledWindow (null,null);
-        package_view.hscrollbar_policy = Gtk.PolicyType.NEVER;
-        package_view.min_content_height = 512;
-        package_view.add (package_list);
-        package_view.show_all ();
-
-        var offline_popover = new Popover (null);
-        offline_popover.add (package_view);
-
-        var offline_button = new MenuButton ();
+        var offline_button = new Gtk.MenuButton ();
         offline_button.image = new Gtk.Image.from_icon_name ("folder-download-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         offline_button.popover = offline_popover;
         offline_button.sensitive = online;
@@ -484,7 +469,6 @@ public class MainWindow : Gtk.Window {
 
             return false;
         });
-
     }
 
     public void change_tab () {
@@ -507,7 +491,7 @@ public class MainWindow : Gtk.Window {
         }
     }
 
-    private void stack_change (CssProvider provider, Button theme_button, Button offline_button) {
+    private void stack_change (Gtk.CssProvider provider, Gtk.Button theme_button, Gtk.Button offline_button) {
         if (stack.get_visible_child_name () == "vala") {
             Gtk.Settings.get_default ().set ("gtk-application-prefer-dark-theme", true);
             Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
