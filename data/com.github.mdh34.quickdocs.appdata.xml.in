@@ -26,21 +26,28 @@
   <url type="homepage">https://github.com/mdh34/quickDocs</url>
   <url type="bugtracker">https://github.com/mdh34/quickDocs/issues</url>
   <releases>
-  <release version="2.0.4" date="2018-06-08">
+    <release version="2.0.5" date="2018-06-17">
+      <description>
+        <ul>
+          <li>Fix a bug in opening some links</li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.0.4" date="2018-06-08">
       <description>
         <ul>
           <li>Loki bugfixes</li>
         </ul>
       </description>
-  </release>
-  <release version="2.0.3" date="2018-05-31">
+    </release>
+    <release version="2.0.3" date="2018-05-31">
       <description>
         <ul>
           <li>Flatpak-friendly tweaks</li>
         </ul>
       </description>
-  </release>
-  <release version="2.0.2" date="2018-05-31">
+    </release>
+    <release version="2.0.2" date="2018-05-31">
       <description>
         <ul>
           <li>Better offline sidebar resizing</li>
@@ -49,15 +56,15 @@
           <li>Misc patches</li>
         </ul>
       </description>
-  </release>
-  <release version="2.0.1" date="2018-04-15">
+    </release>
+    <release version="2.0.1" date="2018-04-15">
       <description>
         <ul>
           <li>Fixes offline DevDocs support - toggling the theme back and forth once should reload the cache</li>
         </ul>
       </description>
-  </release>
-  <release version="2.0.0" date="2018-04-10">
+    </release>
+    <release version="2.0.0" date="2018-04-10">
       <description>
         <p>Major update:</p>
         <ul>
@@ -65,22 +72,22 @@
           <li>Brand new offline docs UI that allows for searching and easier viewing</li>
         </ul>
       </description>
-  </release>
-  <release version="1.2.2" date="2018-03-23">
+    </release>
+    <release version="1.2.2" date="2018-03-23">
       <description>
         <ul>
           <li>Simplify UI</li>
         </ul>
       </description>
-  </release>
-  <release version="1.2.1" date="2018-03-09">
+    </release>
+    <release version="1.2.1" date="2018-03-09">
       <description>
         <ul>
           <li>UI Updates</li>
         </ul>
       </description>
-  </release>
-  <release version="1.2.0" date="2018-03-04">
+    </release>
+    <release version="1.2.0" date="2018-03-04">
       <description>
         <ul>
           <li>Added the ability to use Valadoc offline</li>
