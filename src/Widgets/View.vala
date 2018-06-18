@@ -21,8 +21,15 @@
 
 public class View : WebKit.WebView {
     public View () {
-        this.create.connect (() => {
-            return this;
+        this.create.connect ((action) => {
+            var uri = action.get_request ().uri;
+            try {
+                Process.spawn_command_line_async ("xdg-open " + uri);
+                return null;
+            } catch (Error e) {
+                warning ("Error opening browser: %s", e.message);
+                return this;
+            }
         });
     }
 
