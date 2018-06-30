@@ -43,7 +43,7 @@ public class View : WebKit.WebView {
     public void set_cookies () {
         string path = Path.build_filename (Environment.get_user_config_dir (), "com.github.mdh34.quickdocs", "cookies");
         string folder = Path.build_filename (Environment.get_user_config_dir (), "com.github.mdh34.quickdocs");
-        var cookies = get_context ().get_cookie_manager ();
+
         if (!GLib.FileUtils.test (folder, GLib.FileTest.IS_DIR)) {
             var file = File.new_for_path (folder);
             try {
@@ -52,6 +52,7 @@ public class View : WebKit.WebView {
                 warning ("Unable to create config directory: %s", e.message);
             }
         }
+        var cookies = get_context ().get_cookie_manager ();
         cookies.set_accept_policy (WebKit.CookieAcceptPolicy.ALWAYS);
         cookies.set_persistent_storage (path, WebKit.CookiePersistentStorage.SQLITE);
     }

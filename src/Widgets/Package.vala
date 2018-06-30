@@ -24,8 +24,6 @@ public class Package : Gtk.ListBoxRow {
     public Package (string name, Gtk.SizeGroup group) {
         package_name = name;
 
-        var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL,10);
-        box.border_width = 10;
         var button = new Gtk.Button ();
 
         string[] installed = Docs.settings.get_strv("packages");
@@ -43,8 +41,12 @@ public class Package : Gtk.ListBoxRow {
 
         var label = new Gtk.Label (name);
         label.xalign = 0;
+
+        var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL,10);
+        box.border_width = 10;
         box.pack_start (label);
         box.pack_start (button);
+
         group.add_widget (label);
         this.add (box);
         show_all ();

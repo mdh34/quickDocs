@@ -325,10 +325,13 @@ public class MainWindow : Gtk.Window {
 
     construct {
         set_position (Gtk.WindowPosition.CENTER);
+
         var header = new Gtk.HeaderBar ();
         header.set_show_close_button (true);
+
         var header_context = header.get_style_context ();
         header_context.add_class ("default-decoration");
+
         set_titlebar (header);
 
         stack = new Gtk.Stack ();
@@ -352,23 +355,26 @@ public class MainWindow : Gtk.Window {
         stack_switcher.set_stack (stack);
         header.set_custom_title (stack_switcher);
 
-        var online = check_online ();
         var vala = new View();
 
+        var online = check_online ();
         if (online) {
             vala.load_uri (Docs.settings.get_string ("last-vala"));
             stack.add_titled (vala, "vala", "Valadoc");
         } else {
             var manager = new Dh.BookManager ();
             manager.populate ();
+
             var sidebar = new Dh.Sidebar (manager);
             sidebar.link_selected.connect ((source, link) => {
                 vala.load_uri (link.get_uri ());
             });
+
             var pane = new Gtk.Paned(Gtk.Orientation.HORIZONTAL);
             pane.pack1 (sidebar, false, false);
             pane.add2 (vala);
             pane.set_position (300);
+
             stack.add_titled (pane, "vala", "Valadoc");
         }
 
@@ -376,6 +382,7 @@ public class MainWindow : Gtk.Window {
         dev.set_cookies ();
         dev.appcache_init (online);
         dev.load_uri (Docs.settings.get_string ("last-dev"));
+
         stack.add_titled (dev, "dev", "DevDocs");
 
         var back = new Gtk.Button.from_icon_name ("go-previous-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
@@ -447,6 +454,7 @@ public class MainWindow : Gtk.Window {
             int current_x, current_y, width, height;
             get_position (out current_x, out current_y);
             get_size (out width, out height);
+
             Docs.settings.set_int ("window-x", current_x);
             Docs.settings.set_int ("window-y", current_y);
             Docs.settings.set_int ("width", width);
@@ -488,11 +496,13 @@ public class MainWindow : Gtk.Window {
         if (stack.get_visible_child_name () == "vala") {
             Gtk.Settings.get_default ().set ("gtk-application-prefer-dark-theme", true);
             Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+
             theme_button.set_visible (false);
             offline_button.set_visible (true);
         } else {
             Gtk.StyleContext.remove_provider_for_screen (Gdk.Screen.get_default (), provider);
             init_theme ();
+
             theme_button.set_visible (true);
             offline_button.set_visible (false);
         }
