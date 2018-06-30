@@ -59,7 +59,7 @@ public class MainWindow : Gtk.Window {
         stack_switcher.set_stack (stack);
         header.set_custom_title (stack_switcher);
 
-        var vala = new View();
+        var vala = new View ();
 
         var online = check_online ();
         if (online) {
@@ -74,7 +74,7 @@ public class MainWindow : Gtk.Window {
                 vala.load_uri (link.get_uri ());
             });
 
-            var pane = new Gtk.Paned(Gtk.Orientation.HORIZONTAL);
+            var pane = new Gtk.Paned (Gtk.Orientation.HORIZONTAL);
             pane.pack1 (sidebar, false, false);
             pane.add2 (vala);
             pane.set_position (300);
@@ -115,7 +115,7 @@ public class MainWindow : Gtk.Window {
 
         var theme_button = new Gtk.Button.from_icon_name (icon_name);
         theme_button.set_tooltip_text (_("Change theme"));
-        theme_button.clicked.connect(() => {
+        theme_button.clicked.connect (() => {
             toggle_theme (dev, online);
         });
 
@@ -146,7 +146,7 @@ public class MainWindow : Gtk.Window {
         }
 
         stack.notify["visible-child"].connect (() => {
-            stack_change(provider, theme_button, offline_button);
+            stack_change (provider, theme_button, offline_button);
         });
 
         show_all ();

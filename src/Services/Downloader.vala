@@ -37,7 +37,7 @@ namespace Downloader {
         while (reader.next_header (out entry) == Archive.Result.OK) {
             entry.set_pathname (destination + entry.pathname ());
 
-            if(disk.write_header (entry) != Archive.Result.OK) {
+            if (disk.write_header (entry) != Archive.Result.OK) {
                 continue;
             };
 
@@ -46,8 +46,8 @@ namespace Downloader {
             Posix.off_t offset;
 
             if (entry.size () > 0) {
-                while (reader.read_data_block(out buffer, out buffer_length, out offset) != Archive.Result.EOF) {
-                    disk.write_data_block(buffer, buffer_length, offset);
+                while (reader.read_data_block (out buffer, out buffer_length, out offset) != Archive.Result.EOF) {
+                    disk.write_data_block (buffer, buffer_length, offset);
                 }
             }
         }

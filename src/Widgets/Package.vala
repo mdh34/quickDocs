@@ -26,7 +26,7 @@ public class Package : Gtk.ListBoxRow {
 
         var button = new Gtk.Button ();
 
-        string[] installed = Docs.settings.get_strv("packages");
+        string[] installed = Docs.settings.get_strv ("packages");
 
         if (name in installed) {
             button.image = new Gtk.Image.from_icon_name ("edit-delete-symbolic", Gtk.IconSize.SMALL_TOOLBAR);

@@ -27,11 +27,11 @@ public class PackageList : Gtk.Popover {
         entry.search_changed.connect (on_search);
 
         package_list = new Gtk.ListBox ();
-        package_list.set_selection_mode(Gtk.SelectionMode.NONE);
+        package_list.set_selection_mode (Gtk.SelectionMode.NONE);
         package_list.set_filter_func (filter_func);
         var group = new Gtk.SizeGroup (Gtk.SizeGroupMode.BOTH);
         foreach (string item in PACKAGES) {
-            package_list.add(new Package (item, group));
+            package_list.add (new Package (item, group));
         }
 
         var scroller = new Gtk.ScrolledWindow (null, null);
