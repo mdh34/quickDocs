@@ -1,6 +1,7 @@
 executable(
     meson.project_name(),
     'Application.vala',
+    'Constants.vala',
     'MainWindow.vala',
     'Services/Downloader.vala',
     'Widgets/Package.vala',
@@ -11,7 +12,6 @@ executable(
         dependency('libarchive'),
         dependency('libdevhelp-3.0'),
         dependency('webkit2gtk-4.0'),
-
     ],
     install: true
 )
