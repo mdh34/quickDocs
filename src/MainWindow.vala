@@ -408,9 +408,7 @@ public class MainWindow : Gtk.Window {
             toggle_theme (dev, online);
         });
 
-        var offline_popover = new Gtk.Popover (null);
-        var package_list = new PackageList ();
-        offline_popover.add (package_list);
+        var offline_popover = new PackageList ();
 
         var offline_button = new Gtk.MenuButton ();
         offline_button.image = new Gtk.Image.from_icon_name ("folder-download-symbolic", Gtk.IconSize.SMALL_TOOLBAR);

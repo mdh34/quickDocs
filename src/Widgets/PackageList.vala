@@ -19,10 +19,11 @@
  * Authored by: Matt Harris <matth281@outlook.com>
  */
 
-public class PackageList : Gtk.ScrolledWindow {
+public class PackageList : Gtk.Popover {
     public PackageList () {
-        hscrollbar_policy = Gtk.PolicyType.NEVER;
-        min_content_height = 512;
+        var scroller = new Gtk.ScrolledWindow (null, null);
+        scroller.hscrollbar_policy = Gtk.PolicyType.NEVER;
+        scroller.min_content_height = 512;
 
         var package_list = new Gtk.ListBox ();
         package_list.set_selection_mode(Gtk.SelectionMode.NONE);
@@ -30,8 +31,8 @@ public class PackageList : Gtk.ScrolledWindow {
         foreach (string item in PACKAGES) {
             package_list.add(new Package (item, group));
         }
-        add (package_list);
-
-        show_all ();
+        scroller.add (package_list);
+        scroller.show_all ();
+        add (scroller);
     }
 }
