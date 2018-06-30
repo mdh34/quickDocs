@@ -20,7 +20,10 @@
  */
 
 public class Package : Gtk.ListBoxRow {
+    public string package_name;
     public Package (string name, Gtk.SizeGroup group) {
+        package_name = name;
+
         var box = new Gtk.Box (Gtk.Orientation.HORIZONTAL,10);
         box.border_width = 10;
         var button = new Gtk.Button ();
