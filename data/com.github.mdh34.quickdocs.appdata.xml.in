@@ -26,6 +26,13 @@
   <url type="homepage">https://github.com/mdh34/quickDocs</url>
   <url type="bugtracker">https://github.com/mdh34/quickDocs/issues</url>
   <releases>
+    <release version="2.1.0" date="2018-06-30">
+      <description>
+        <ul>
+          <li>Offline packages can now be easily searched through</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.0.5" date="2018-06-17">
       <description>
         <ul>
@@ -162,9 +169,6 @@
     </screenshot>
     <screenshot>
       <image>https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-4.png</image>
-    </screenshot>
-    <screenshot>
-      <image>https://raw.githubusercontent.com/mdh34/quickDocs/master/data/images/screenshot-5.png</image>
     </screenshot>
   </screenshots>
   <custom>
