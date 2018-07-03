@@ -26,6 +26,13 @@
   <url type="homepage">https://github.com/mdh34/quickDocs</url>
   <url type="bugtracker">https://github.com/mdh34/quickDocs/issues</url>
   <releases>
+    <release version="2.1.1" date="2018-07-03">
+      <description>
+        <ul>
+          <li>Juno AppCenter release</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.1.0" date="2018-06-30">
       <description>
         <ul>
