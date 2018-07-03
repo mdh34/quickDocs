@@ -19,15 +19,9 @@ cache:
   directories:
     - /tmp/liftoff
 
-matrix:
-  include:
-    - env: DIST=juno
-    - env: DIST=loki
-
 install:
   - npm install @elementaryos/houston
 
 script:
   - houston ci
-    --distribution $DIST
     --name-domain com.github.mdh34.quickdocs
