@@ -7,12 +7,7 @@
   <name>quickDocs</name>
   <summary>Quickly Read Developer Docs</summary>
   <description>
-    <p>A fast developer docs reader</p>
-    <p>Read developer docs from:</p>
-    <ul>
-      <li>Valadoc</li>
-      <li>DevDocs</li>
-    </ul>
+    <p>A fast developer docs reader that supports Valadoc and DevDocs</p>
     <p>Includes:</p>
     <ul>
       <li>Offline support for both Valadoc and Devdocs</li>
