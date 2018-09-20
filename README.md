@@ -17,6 +17,7 @@ A fast developer docs reader
 ## Build Dependencies:
  - libarchive-dev
  - libdevhelp-dev
+ - libgee-0.8-dev
  - libgtk-3-dev
  - libwebkit2gtk-4.0-dev
  - meson
@@ -25,6 +26,7 @@ A fast developer docs reader
 ## Run Dependencies:
  - libarchive
  - libdevhelp
+ - libgee-0.8
  - libwebkit2gtk-4.0
 
 ## Install:
