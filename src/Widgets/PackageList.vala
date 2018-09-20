@@ -23,6 +23,29 @@ public class PackageList : Gtk.Popover {
     private string search_text;
     private Gtk.ListBox package_list;
     public PackageList () {
+        var constants = new Constants ();
+        var installed = Docs.settings.get_strv ("packages");
+        var installed_list = new Gee.ArrayList<string> ();
+        installed_list.add_all_array (installed);
+        installed_list.sort ();
+
+        var install_all = new Gtk.Button.with_label (_("Install all"));
+        install_all.get_style_context ().add_class (Gtk.STYLE_CLASS_SUGGESTED_ACTION);
+        install_all.no_show_all = compare_lists (constants.package_list, installed_list);
+        install_all.clicked.connect (() => {
+            foreach (string package in constants.package_list) {
+                if (!installed_list.contains (package)) {
+                    Downloader.download (package);
+                    Downloader.decompress (package);
+                    Downloader.remove (package, true);
+                    installed += package;
+                }
+            }
+
+            Docs.settings.set_strv ("packages", installed);
+            install_all.sensitive = false;
+        });
+
         var entry = new Gtk.SearchEntry ();
         entry.search_changed.connect (on_search);
 
@@ -30,7 +53,7 @@ public class PackageList : Gtk.Popover {
         package_list.set_selection_mode (Gtk.SelectionMode.NONE);
         package_list.set_filter_func (filter_func);
         var group = new Gtk.SizeGroup (Gtk.SizeGroupMode.BOTH);
-        foreach (string item in PACKAGES) {
+        foreach (string item in constants.package_list) {
             package_list.add (new Package (item, group));
         }
 
@@ -41,6 +64,7 @@ public class PackageList : Gtk.Popover {
 
         var container = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
         container.pack_start (entry);
+        container.pack_start (install_all);
         container.pack_start (scroller);
         container.show_all ();
         add (container);
@@ -62,4 +86,19 @@ public class PackageList : Gtk.Popover {
         search_text = searchentry.get_text ().down ();
         package_list.invalidate_filter ();
     }
+}
+
+// Vala compares array pointers rather than content so we have to iterate through
+private bool compare_lists (Gee.ArrayList<string> a, Gee.ArrayList<string> b ) {
+    a.sort ();
+    b.sort ();
+    var array_one = a.to_array ();
+    var array_two = b.to_array ();
+    if (array_one.length != array_two.length) return false;
+    for (int i=0; i< array_one.length; i++) {
+        if (array_one[i] != array_two[i]) {
+            return false;
+        }
+    }
+    return true;
 }

@@ -8,6 +8,7 @@ executable(
     'Widgets/PackageList.vala',
     'Widgets/View.vala',
     dependencies: [
+        dependency('gee-0.8'),
         dependency('gtk+-3.0'),
         dependency('libarchive'),
         dependency('libdevhelp-3.0'),

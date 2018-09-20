@@ -127,18 +127,20 @@ namespace Downloader {
 
     public void toggled (Gtk.Button button, string name) {
         string [] installed = Docs.settings.get_strv ("packages");
+        var installed_list = new Gee.ArrayList<string> ();
+        installed_list.add_all_array (installed);
 
         if (name in installed) {
             remove (name, false);
             button.image = new Gtk.Image.from_icon_name ("folder-download-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
             button.get_style_context ().remove_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
-            for (int i =0; i < installed.length; i++) {
-                if (installed[i] == name) {
-                    installed[i] = null;
-                }
+            installed_list.remove (name);
+            string[] validated = {};
+            foreach (string item in installed_list) {
+                validated += item.make_valid ();
             }
-            Docs.settings.set_strv ("packages", installed);
+            Docs.settings.set_strv ("packages", validated);
         } else {
             download (name);
             decompress (name);
@@ -147,8 +149,8 @@ namespace Downloader {
             button.image = new Gtk.Image.from_icon_name ("edit-delete-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
             button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
-            installed += name;
-            Docs.settings.set_strv ("packages", installed);
+            installed_list.add (name);
+            Docs.settings.set_strv ("packages", installed_list.to_array ());
         }
     }
 
