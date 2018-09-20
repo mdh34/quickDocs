@@ -18,6 +18,7 @@ A fast developer docs reader
  - libarchive-dev
  - libdevhelp-dev
  - libgee-0.8-dev
+ - libgranite-dev
  - libgtk-3-dev
  - libwebkit2gtk-4.0-dev
  - meson
@@ -27,6 +28,7 @@ A fast developer docs reader
  - libarchive
  - libdevhelp
  - libgee-0.8
+ - libgranite
  - libwebkit2gtk-4.0
 
 ## Install:
