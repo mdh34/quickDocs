@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2018 Matt Harris <matth281@outlook.com> -->
 <component type="desktop">
-  <id>com.github.mdh34.quickdocs.desktop</id>
+  <id>com.github.mdh34.quickdocs</id>
   <metadata_license>CC0</metadata_license>
   <project_license>GPL-3.0+</project_license>
   <name>quickDocs</name>
