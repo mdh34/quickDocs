@@ -1,3 +1,4 @@
 data/com.github.mdh34.quickdocs.appdata.xml.in
 data/com.github.mdh34.quickdocs.desktop.in
 src/MainWindow.vala
+src/Widgets/PackageList.vala

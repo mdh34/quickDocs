@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.mdh34.quickdocs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-20 11:51+0100\n"
+"POT-Creation-Date: 2018-09-20 17:15+0100\n"
 "PO-Revision-Date: 2018-05-20 11:51+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -28,39 +28,20 @@ msgid "Quickly Read Developer Docs"
 msgstr ""
 
 #: data/com.github.mdh34.quickdocs.appdata.xml.in:10
-msgid "A fast developer docs reader"
+#: data/com.github.mdh34.quickdocs.desktop.in:5
+msgid "A fast developer docs reader that supports Valadoc and DevDocs"
 msgstr ""
 
 #: data/com.github.mdh34.quickdocs.appdata.xml.in:11
-msgid "Read developer docs from:"
-msgstr ""
-
-#: data/com.github.mdh34.quickdocs.appdata.xml.in:13
-msgid "Valadoc"
-msgstr ""
-
-#: data/com.github.mdh34.quickdocs.appdata.xml.in:14
-msgid "DevDocs"
-msgstr ""
-
-#: data/com.github.mdh34.quickdocs.appdata.xml.in:16
 msgid "Includes:"
 msgstr ""
 
-#: data/com.github.mdh34.quickdocs.appdata.xml.in:18
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:13
 msgid "Offline support for both Valadoc and Devdocs"
 msgstr ""
 
-#: data/com.github.mdh34.quickdocs.appdata.xml.in:19
+#: data/com.github.mdh34.quickdocs.appdata.xml.in:14
 msgid "Dark mode toggle to suit your workflow"
-msgstr ""
-
-#: data/com.github.mdh34.quickdocs.appdata.xml.in:25
-msgid "Matt Harris"
-msgstr ""
-
-#: data/com.github.mdh34.quickdocs.desktop.in:5
-msgid "A fast developer docs reader that supports Valadoc and DevDocs"
 msgstr ""
 
 #: data/com.github.mdh34.quickdocs.desktop.in:8
@@ -71,10 +52,10 @@ msgstr ""
 msgid "docs;quickDocs;dev;"
 msgstr ""
 
-#: src/MainWindow.vala:436
-msgid "Change theme"
+#: src/MainWindow.vala:131
+msgid "Download offline documentation"
 msgstr ""
 
-#: src/MainWindow.vala:462
-msgid "Download offline documentation"
+#: src/Widgets/PackageList.vala:32
+msgid "Install all"
 msgstr ""
