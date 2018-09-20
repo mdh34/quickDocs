@@ -115,6 +115,7 @@ public class MainWindow : Gtk.Window {
         var gtk_settings = Gtk.Settings.get_default ();
         var theme_switch = new Granite.ModeSwitch.from_icon_name ("display-brightness-symbolic", "weather-clear-night-symbolic");
         theme_switch.active = Docs.settings.get_boolean ("dark");
+        theme_switch.row_homogeneous = true;
         theme_switch.bind_property ("active", gtk_settings, "gtk_application_prefer_dark_theme");
 
         theme_switch.notify["active"].connect (()=> {
