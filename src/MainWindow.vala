@@ -112,13 +112,14 @@ public class MainWindow : Gtk.Window {
         if (current_icons.lookup_icon (icon_name, 16, Gtk.IconLookupFlags.FORCE_SIZE) == null) {
             icon_name = "weather-few-clouds-symbolic";
         }
+        var gtk_settings = Gtk.Settings.get_default ();
+        var theme_switch = new Granite.ModeSwitch.from_icon_name ("display-brightness-symbolic", "weather-clear-night-symbolic");
+        theme_switch.active = Docs.settings.get_boolean ("dark");
+        theme_switch.bind_property ("active", gtk_settings, "gtk_application_prefer_dark_theme");
 
-        var theme_button = new Gtk.Button.from_icon_name (icon_name);
-        theme_button.set_tooltip_text (_("Change theme"));
-        theme_button.clicked.connect (() => {
-            toggle_theme (dev, online);
+        theme_switch.notify["active"].connect (()=> {
+            toggle_theme (dev, online, gtk_settings);
         });
-
         var offline_popover = new PackageList ();
 
         var offline_button = new Gtk.MenuButton ();
@@ -130,7 +131,7 @@ public class MainWindow : Gtk.Window {
 
         header.add (back);
         header.add (forward);
-        header.pack_end (theme_button);
+        header.pack_end (theme_switch);
         header.pack_end (offline_button);
 
         add (stack);
@@ -146,12 +147,12 @@ public class MainWindow : Gtk.Window {
         }
 
         stack.notify["visible-child"].connect (() => {
-            stack_change (provider, theme_button, offline_button);
+            stack_change (provider, theme_switch, offline_button);
         });
 
         show_all ();
 
-        theme_button.set_visible (false);
+        theme_switch.set_visible (false);
         set_tab ();
 
         this.delete_event.connect (() => {
@@ -196,18 +197,18 @@ public class MainWindow : Gtk.Window {
         }
     }
 
-    private void stack_change (Gtk.CssProvider provider, Gtk.Button theme_button, Gtk.Button offline_button) {
+    private void stack_change (Gtk.CssProvider provider, Granite.ModeSwitch theme_switch, Gtk.Button offline_button) {
         if (stack.get_visible_child_name () == "vala") {
             Gtk.Settings.get_default ().set ("gtk-application-prefer-dark-theme", true);
             Gtk.StyleContext.add_provider_for_screen (Gdk.Screen.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-            theme_button.set_visible (false);
+            theme_switch.set_visible (false);
             offline_button.set_visible (true);
         } else {
             Gtk.StyleContext.remove_provider_for_screen (Gdk.Screen.get_default (), provider);
             init_theme ();
 
-            theme_button.set_visible (true);
+            theme_switch.set_visible (true);
             offline_button.set_visible (false);
         }
     }
@@ -228,17 +229,13 @@ public class MainWindow : Gtk.Window {
         stack.set_visible_child_name (tab);
     }
 
-    private void toggle_theme (View view, bool online) {
-        var window_settings = Gtk.Settings.get_default ();
-        var dark = Docs.settings.get_int ("dark");
-        if (dark == 1) {
-            window_settings.set ("gtk-application-prefer-dark-theme", false);
+    private void toggle_theme (View view, bool online, Gtk.Settings gtk_settings) {
+        if (!gtk_settings.gtk_application_prefer_dark_theme) {
             view.run_javascript.begin ("document.cookie = 'dark=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';", null);
             Docs.settings.set_int ("dark", 0);
             view.get_settings ().enable_offline_web_application_cache = true;
             view.reload_bypass_cache ();
         } else {
-            window_settings.set ("gtk-application-prefer-dark-theme", true);
             view.run_javascript.begin ("document.cookie = 'dark=1; expires=01 Jan 2100 00:00:00 UTC';", null);
             Docs.settings.set_int ("dark", 1);
             if (online) {

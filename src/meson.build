@@ -10,6 +10,7 @@ executable(
     dependencies: [
         dependency('gee-0.8'),
         dependency('gtk+-3.0'),
+        dependency('granite'),
         dependency('libarchive'),
         dependency('libdevhelp-3.0'),
         dependency('webkit2gtk-4.0'),
