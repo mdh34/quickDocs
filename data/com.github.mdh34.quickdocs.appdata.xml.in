@@ -21,6 +21,15 @@
   <url type="homepage">https://github.com/mdh34/quickDocs</url>
   <url type="bugtracker">https://github.com/mdh34/quickDocs/issues</url>
   <releases>
+    <release version="2.2.1" date="2018-09-21">
+      <description>
+        <ul>
+          <li>Fix some bugs with the offline package list</li>
+          <li>Add an 'install all' button and alphabetical ordering to the offline package list</li>
+          <li>Updated theme changer to use the new Granite ModeSwitch</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.2.0" date="2018-09-20">
       <description>
         <ul>
