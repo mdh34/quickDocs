@@ -1,3 +1,6 @@
+if dependency('libarchive').version().version_compare('>=3.3.2')
+    add_project_arguments('-ARCHIVE_332')
+endif
 executable(
     meson.project_name(),
     'Application.vala',
