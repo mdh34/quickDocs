@@ -41,16 +41,17 @@ namespace Downloader {
                 continue;
             };
 
-            void* buffer = null;
             Posix.off_t offset;
 
 #if ARCHIVE_332
+            uint8[] buffer;
             if (entry.size () > 0) {
                 while (reader.read_data_block (out buffer, out offset) != Archive.Result.EOF) {
                     disk.write_data_block (buffer, offset);
                 }
             }
 #else
+            void* buffer = null;
             size_t buffer_length;
             if (entry.size () > 0) {
                 while (reader.read_data_block (out buffer, out buffer_length, out offset) != Archive.Result.EOF) {
