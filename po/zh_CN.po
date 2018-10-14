@@ -20,41 +20,41 @@ msgstr ""
 #: data/com.github.mdh34.quickdocs.desktop.in:3
 #: data/com.github.mdh34.quickdocs.desktop.in:4
 msgid "quickDocs"
-msgstr ""
+msgstr "quickDocs"
 
 #: data/com.github.mdh34.quickdocs.appdata.xml.in:8
 msgid "Quickly Read Developer Docs"
-msgstr ""
+msgstr "快速阅读开发者文档"
 
 #: data/com.github.mdh34.quickdocs.appdata.xml.in:10
 #: data/com.github.mdh34.quickdocs.desktop.in:5
 msgid "A fast developer docs reader that supports Valadoc and DevDocs"
-msgstr ""
+msgstr "支持 Valadoc 和 DevDocs 的高速浏览器"
 
 #: data/com.github.mdh34.quickdocs.appdata.xml.in:11
 msgid "Includes:"
-msgstr ""
+msgstr "包含："
 
 #: data/com.github.mdh34.quickdocs.appdata.xml.in:13
 msgid "Offline support for both Valadoc and Devdocs"
-msgstr ""
+msgstr "对 Valadoc 以及 Devdocs 的离线支持"
 
 #: data/com.github.mdh34.quickdocs.appdata.xml.in:14
 msgid "Dark mode toggle to suit your workflow"
-msgstr ""
+msgstr "得你适应工作的黑暗模式"
 
 #: data/com.github.mdh34.quickdocs.desktop.in:8
 msgid "com.github.mdh34.quickdocs"
-msgstr ""
+msgstr "com.github.mdh34.quickdocs"
 
 #: data/com.github.mdh34.quickdocs.desktop.in:12
 msgid "docs;quickDocs;dev;"
-msgstr ""
+msgstr "docs;quickDocs;dev;"
 
 #: src/MainWindow.vala:131
 msgid "Download offline documentation"
-msgstr ""
+msgstr "下载离线文档"
 
 #: src/Widgets/PackageList.vala:32
 msgid "Install all"
-msgstr ""
+msgstr "全部安装"
