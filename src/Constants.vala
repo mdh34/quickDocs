@@ -266,7 +266,7 @@ class Constants {
       "libzmq",
       "magic",
       "oniguruma",
-      "OpenCL",
+      "opencl",
       "opencv",
       "pa_ringbuffer",
       "portaudio",
