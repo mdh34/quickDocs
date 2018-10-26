@@ -145,11 +145,9 @@ namespace Downloader {
             button.get_style_context ().remove_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
             installed_list.remove (name);
-            string[] validated = {};
-            foreach (string item in installed_list) {
-                validated += item.make_valid ();
-            }
-            Docs.settings.set_strv ("packages", validated);
+            string[] packages = installed_list.to_array ();
+            packages += null;
+            Docs.settings.set_strv ("packages", packages);
         } else {
             download (name);
             decompress (name);
@@ -159,7 +157,9 @@ namespace Downloader {
             button.get_style_context ().add_class (Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION);
 
             installed_list.add (name);
-            Docs.settings.set_strv ("packages", installed_list.to_array ());
+            string[] packages = installed_list.to_array ();
+            packages += null;
+            Docs.settings.set_strv ("packages", packages);
         }
     }
 
