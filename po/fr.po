@@ -1,61 +1,60 @@
 # French translations for com.github.mdh34.quickdocs package.
-# Copyright (C) 2018 THE com.github.mdh34.quickdocs'S COPYRIGHT HOLDER
+# Copyright (C) 2019 THE com.github.mdh34.quickdocs'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.mdh34.quickdocs package.
-# Automatically generated, 2018.
+# NathanBnm, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.mdh34.quickdocs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-14 15:05+0100\n"
-"PO-Revision-Date: 2018-05-20 11:51+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"POT-Creation-Date: 2018-10-29 21:15+0900\n"
+"PO-Revision-Date: 2019-01-18 16:23+0100\n"
+"Last-Translator: NathanBnm\n"
+"Language-Team: Français\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: data/com.github.mdh34.quickdocs.appdata.xml.in:7
 #: data/com.github.mdh34.quickdocs.desktop.in:3
 #: data/com.github.mdh34.quickdocs.desktop.in:4
 msgid "quickDocs"
-msgstr ""
+msgstr "quickDocs"
 
 #: data/com.github.mdh34.quickdocs.appdata.xml.in:8
 msgid "Quickly Read Developer Docs"
-msgstr ""
+msgstr "Lisez rapidement la documentation des développeurs"
 
 #: data/com.github.mdh34.quickdocs.appdata.xml.in:10
 #: data/com.github.mdh34.quickdocs.desktop.in:5
 msgid "A fast developer docs reader that supports Valadoc and DevDocs"
-msgstr ""
+msgstr "Un lecteur de documentation des dévelopeurs rapide qui supporte Valadoc et DevDocs"
 
 #: data/com.github.mdh34.quickdocs.appdata.xml.in:11
 msgid "Includes:"
-msgstr ""
+msgstr "Inclut :"
 
 #: data/com.github.mdh34.quickdocs.appdata.xml.in:13
 msgid "Offline support for both Valadoc and Devdocs"
-msgstr ""
+msgstr "Support hors-ligne pour Valadoc et Devdocs"
 
 #: data/com.github.mdh34.quickdocs.appdata.xml.in:14
 msgid "Dark mode toggle to suit your workflow"
-msgstr ""
+msgstr "Thème sombre pour correspondre à votre à votre façon de travailler"
 
 #: data/com.github.mdh34.quickdocs.desktop.in:8
 msgid "com.github.mdh34.quickdocs"
-msgstr ""
+msgstr "com.github.mdh34.quickdocs"
 
 #: data/com.github.mdh34.quickdocs.desktop.in:12
 msgid "docs;quickDocs;dev;"
-msgstr ""
+msgstr "docs;quickDocs;dev;"
 
 #: src/MainWindow.vala:131
 msgid "Download offline documentation"
-msgstr ""
+msgstr "Télécharger la documentation hors-ligne"
 
 #: src/Widgets/PackageList.vala:32
 msgid "Install all"
-msgstr ""
+msgstr "Tout installer"
