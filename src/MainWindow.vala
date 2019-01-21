@@ -218,7 +218,7 @@ public class MainWindow : Gtk.Window {
         var window_settings = Gtk.Settings.get_default ();
         var dark = Docs.settings.get_boolean ("dark");
 
-        if (dark == true) {
+        if (dark) {
             window_settings.set ("gtk-application-prefer-dark-theme", true);
         } else {
             window_settings.set ("gtk-application-prefer-dark-theme", false);
