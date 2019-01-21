@@ -216,9 +216,9 @@ public class MainWindow : Gtk.Window {
 
     private void init_theme () {
         var window_settings = Gtk.Settings.get_default ();
-        var dark = Docs.settings.get_int ("dark");
+        var dark = Docs.settings.get_boolean ("dark");
 
-        if (dark == 1) {
+        if (dark == true) {
             window_settings.set ("gtk-application-prefer-dark-theme", true);
         } else {
             window_settings.set ("gtk-application-prefer-dark-theme", false);
@@ -233,12 +233,12 @@ public class MainWindow : Gtk.Window {
     private void toggle_theme (View view, bool online, Gtk.Settings gtk_settings) {
         if (!gtk_settings.gtk_application_prefer_dark_theme) {
             view.run_javascript.begin ("document.cookie = 'dark=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';", null);
-            Docs.settings.set_int ("dark", 0);
+            Docs.settings.set_boolean ("dark", false);
             view.get_settings ().enable_offline_web_application_cache = true;
             view.reload_bypass_cache ();
         } else {
             view.run_javascript.begin ("document.cookie = 'dark=1; expires=01 Jan 2100 00:00:00 UTC';", null);
-            Docs.settings.set_int ("dark", 1);
+            Docs.settings.set_boolean ("dark", true);
             if (online) {
                 view.get_settings ().enable_offline_web_application_cache = false;
             }
