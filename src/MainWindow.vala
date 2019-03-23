@@ -21,6 +21,7 @@
 
 public class MainWindow : Gtk.Window {
     Gtk.Stack stack;
+    Gtk.SearchBar search_bar;
     public MainWindow (Gtk.Application application) {
          Object (application: application,
          icon_name: "com.github.mdh34.quickdocs",
@@ -135,7 +136,13 @@ public class MainWindow : Gtk.Window {
         header.pack_end (theme_switch);
         header.pack_end (offline_button);
 
-        add (stack);
+        search_bar = create_search_bar ();
+
+        var vbox = new Gtk.Box (Gtk.Orientation.VERTICAL, 0);
+        vbox.pack_start (stack, true, true, 0);
+        vbox.pack_start (search_bar, false, true, 0);
+
+        add (vbox);
         init_theme ();
 
         string style = "@define-color colorPrimary #403757;";
@@ -185,6 +192,74 @@ public class MainWindow : Gtk.Window {
         } else {
             stack.set_visible_child_name ("vala");
         }
+    }
+
+    public void toggle_search () {
+        var disabled = !search_bar.search_mode_enabled;
+        search_bar.search_mode_enabled = disabled;
+        if (disabled) {
+            var view = get_current_view ();
+            view.search_finish ();
+        }
+    }
+
+    private View? get_current_view () {
+        var v = stack.get_visible_child ();
+        return (v is View)
+                ? v as View
+                : null;
+    }
+
+    private Gtk.SearchBar create_search_bar () {
+        var search_entry = new Gtk.SearchEntry();
+        search_entry.placeholder_text = _("Find in page...");
+        search_entry.set_width_chars(60);
+
+        search_entry.search_changed.connect (() => {
+            var v = get_current_view ();
+            if (v != null) {
+                v.search (search_entry.text);
+            }
+        });
+
+        search_entry.activate.connect (() => {
+            var v = get_current_view ();
+            if (v != null ) {
+                v.search_next ();
+            }
+        });
+        search_entry.show();
+
+        var next_search = new Gtk.Button.from_icon_name ("go-down-symbolic", Gtk.IconSize.MENU);
+        next_search.clicked.connect (() => {
+            var v = get_current_view ();
+            if (v != null ) {
+                v.search_next ();
+            }
+        });
+
+        next_search.show();
+
+        var previous_search = new Gtk.Button.from_icon_name ("go-up-symbolic", Gtk.IconSize.MENU);
+        previous_search.clicked.connect (() => {
+            var v = get_current_view ();
+            if (v != null ) {
+                v.search_previous ();
+            }
+        });
+        previous_search.show();
+
+        var hbox = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 5);
+        hbox.pack_start (search_entry, false, false, 0);
+        hbox.pack_start (previous_search, false, false, 0);
+        hbox.pack_start (next_search, false, false, 0);
+        hbox.show();
+
+        var search_bar = new Gtk.SearchBar();
+        search_bar.connect_entry(search_entry);
+        search_bar.add(hbox);
+
+        return search_bar;
     }
 
     private bool check_online () {

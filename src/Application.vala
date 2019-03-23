@@ -48,6 +48,12 @@ public class Docs : Gtk.Application {
         tab_switch.activate.connect (() => {
             window.change_tab ();
         });
+
+        var search_action = new SimpleAction ("find", null);
+        add_action (search_action);
+        set_accels_for_action ("app.find", {"<Control>F"});
+
+        search_action.activate.connect (window.toggle_search);
     }
 
     public static int main (string[] args) {
