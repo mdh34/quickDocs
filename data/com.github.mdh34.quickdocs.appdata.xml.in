@@ -21,6 +21,13 @@
   <url type="homepage">https://github.com/mdh34/quickDocs</url>
   <url type="bugtracker">https://github.com/mdh34/quickDocs/issues</url>
   <releases>
+    <release version="2.2.6" date="2019-05-28">
+        <description>
+          <ul>
+            <li>Added a 'find in page' searchbar</li>
+          </ul>
+        </description>
+    </release>
     <release version="2.2.5" date="2019-01-21">
         <description>
           <ul>
