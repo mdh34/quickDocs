@@ -56,4 +56,21 @@ public class View : WebKit.WebView {
         cookies.set_accept_policy (WebKit.CookieAcceptPolicy.ALWAYS);
         cookies.set_persistent_storage (path, WebKit.CookiePersistentStorage.SQLITE);
     }
+
+    public void search (string text) {
+        var fc = get_find_controller ();
+        fc.search (text, WebKit.FindOptions.CASE_INSENSITIVE, 100);
+    }
+
+    public void search_next () {
+        get_find_controller ().search_next ();
+    }
+
+    public void search_previous () {
+        get_find_controller ().search_previous ();
+    }
+
+    public void search_finish () {
+        get_find_controller () .search_finish ();
+    }
 }
