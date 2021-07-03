@@ -22,6 +22,8 @@
 public class MainWindow : Gtk.Window {
     Gtk.Stack stack;
     Gtk.SearchBar search_bar;
+    View vala;
+    View dev;
     public MainWindow (Gtk.Application application) {
          Object (application: application,
          icon_name: "com.github.mdh34.quickdocs",
@@ -60,7 +62,7 @@ public class MainWindow : Gtk.Window {
         stack_switcher.set_stack (stack);
         header.set_custom_title (stack_switcher);
 
-        var vala = new View ();
+        vala = new View ();
 
         var online = check_online ();
         if (online) {
@@ -83,7 +85,7 @@ public class MainWindow : Gtk.Window {
             stack.add_titled (pane, "vala", "Valadoc");
         }
 
-        var dev = new View ();
+        dev = new View ();
         dev.set_cookies ();
         dev.appcache_init (online);
         dev.load_uri (Docs.settings.get_string ("last-dev"));
@@ -92,20 +94,12 @@ public class MainWindow : Gtk.Window {
 
         var back = new Gtk.Button.from_icon_name ("go-previous-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         back.clicked.connect (() => {
-            if (stack.get_visible_child_name () == "vala") {
-                vala.go_back ();
-            } else if (stack.get_visible_child_name () == "dev") {
-                dev.go_back ();
-            }
+            backwards();
         });
 
         var forward = new Gtk.Button.from_icon_name ("go-next-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         forward.clicked.connect (() => {
-            if (stack.get_visible_child_name () == "vala") {
-                vala.go_forward ();
-            } else if (stack.get_visible_child_name () == "dev") {
-                dev.go_forward ();
-            }
+            forwards();
         });
 
         var current_icons = Gtk.IconTheme.get_default ();
@@ -200,6 +194,22 @@ public class MainWindow : Gtk.Window {
         if (disabled) {
             var view = get_current_view ();
             view.search_finish ();
+        }
+    }
+
+    public void forwards () {
+        if (stack.get_visible_child_name () == "vala") {
+            vala.go_forward ();
+        } else if (stack.get_visible_child_name () == "dev") {
+            dev.go_forward ();
+        }
+    }
+
+    public void backwards () {
+        if (stack.get_visible_child_name () == "vala") {
+            vala.go_back ();
+        } else if (stack.get_visible_child_name () == "dev") {
+            dev.go_back ();
         }
     }
 
