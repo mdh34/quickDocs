@@ -54,6 +54,16 @@ public class Docs : Gtk.Application {
         set_accels_for_action ("app.find", {"<Control>F"});
 
         search_action.activate.connect (window.toggle_search);
+
+        var forwards_action = new SimpleAction ("forwards", null);
+        add_action (forwards_action);
+        set_accels_for_action ("app.forwards", {"<Control>D"});
+        forwards_action.activate.connect (window.forwards);
+
+        var backwards_action = new SimpleAction ("backwards", null);
+        add_action (backwards_action);
+        set_accels_for_action ("app.backwards", {"<Control>A"});
+        backwards_action.activate.connect (window.backwards);
     }
 
     public static int main (string[] args) {
